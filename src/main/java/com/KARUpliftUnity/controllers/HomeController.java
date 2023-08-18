@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-class HelloController {
+public class HomeController {
 
-    @GetMapping("/hello")
+    @GetMapping("/")
     @ResponseBody
-    public String hello() {
-        return "Hello from Spring!";
+    public String returnHomePage(){
+        return "This is the landing page!";
     }
 }
