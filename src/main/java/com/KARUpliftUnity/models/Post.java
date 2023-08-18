@@ -21,7 +21,9 @@ public class Post {
     @Column(nullable = false)
     private String solution;
     @Column
-    private int archive;
+    private boolean flagged;
+    @Column
+    private boolean archive;
     @ManyToOne
     @JoinColumn (name = "user_id")
     private User user;
@@ -45,7 +47,7 @@ public class Post {
     private List<Category> categories;
 
 
-    public Post(long id, Date date, String title, String story, String solution, int archive, User user) {
+    public Post(long id, Date date, String title, String story, String solution, boolean archive, User user) {
         this.id = id;
         this.date = date;
         this.title = title;
@@ -117,11 +119,11 @@ public class Post {
         this.solution = solution;
     }
 
-    public int getArchive() {
+    public boolean getArchive() {
         return archive;
     }
 
-    public void setArchive(int archive) {
+    public void setArchive(boolean archive) {
         this.archive = archive;
     }
 
@@ -131,6 +133,14 @@ public class Post {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public boolean isFlagged() {
+        return flagged;
+    }
+
+    public void setFlagged(boolean flagged) {
+        this.flagged = flagged;
     }
 }
 
