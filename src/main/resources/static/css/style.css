@@ -108,12 +108,12 @@ div.hero-section a.btn.btn-primary.custom-btn:active {
 }
 
 .right-panel {
-    background-color: var(--off-white-color);
+    background-color: #f0f3f7;
 }
 
 .form-background {
-    background-color: #FEF9F4;
-    border-radius: 20px;
+    background-color: white;
+    border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1),
     0 6px 20px rgba(0, 0, 0, 0.07);
 }
@@ -160,7 +160,7 @@ button.btn.btn-primary.custom-btn:active {
     padding-top: 1.7em;
 }
 
-.sign-up h3 {
+.signup-h3 {
     font-family: var(--poppins-font);
     font-weight: var(--weight-light);
 }
@@ -188,15 +188,24 @@ button.btn.btn-primary.custom-btn:active {
 /*LOGIN PAGE START*/
 
 .login-background {
-    background-color: var(--tan-color);
+    background-color: #f0f3f7;
 }
 
 .login-form-background {
-    background-color: #FEF9F4;
-    border-radius: 20px;
+    background-color: white;
+    border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1),
     0 6px 20px rgba(0, 0, 0, 0.07);
-    height: 55%;
+}
+
+.login-form-background h1 {
+    font-family: var(--logo-font);
+    color: var(--logo-color);
+}
+
+.login-form-background h2 {
+    font-family: var(--poppins-font);
+    font-weight: var(--weight-light);
 }
 
 .login-form .form-control:focus {
