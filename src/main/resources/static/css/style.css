@@ -1,0 +1,97 @@
+:root {
+    --logo-font: 'DM Serif Display', serif;
+    --poppins-font: 'Poppins', sans-serif;
+
+    /* Font weights for Poppins */
+    --weight-extra-light: 100;
+    --weight-light: 200;
+    --weight-regular: 400;
+    --weight-medium: 500;
+    --weight-bold: 700;
+
+    --tan-color: #FCECDC;
+    --off-white-color: #FAF8F6;
+    --primary-button-color: #EE9949;
+    --logo-color: #444444;
+    --on-click-color: #DD8840;
+}
+
+/*NAVBAR START*/
+
+nav {
+    background-color: var(--tan-color);
+}
+
+.navbar-brand {
+    font-family: var(--logo-font);
+    color: var(--logo-color);
+}
+
+.navbar.navbar-expand-lg .navbar-nav .nav-item .nav-link {
+    font-family: var(--poppins-font);
+    color: var(--logo-color);
+}
+
+.navbar.navbar-expand-lg .navbar-nav .nav-item .btn.btn-primary,
+.navbar.navbar-expand-lg .navbar-nav .nav-item .btn.btn-primary:hover,
+.navbar.navbar-expand-lg .navbar-nav .nav-item .btn.btn-primary:focus {
+    background-color: var(--primary-button-color);
+    border: none;
+    color: white;
+    border-radius: 14px;
+    width: 120px;
+    box-shadow: none;
+    outline: none;
+    height: 30px;
+
+}
+
+.navbar.navbar-expand-lg .navbar-nav .nav-item .btn.btn-primary:active {
+    background-color: var(--on-click-color);
+}
+
+/*NAVBAR END*/
+
+/*HERO SECTION START*/
+
+.hero-section {
+    background-color: var(--tan-color);
+}
+
+.hero-section h1 {
+    font-family: var(--logo-font);
+    color: var(--logo-color);
+}
+
+.hero-section p {
+    font-family: var(--poppins-font);
+    font-weight: var(--weight-light);
+    font-size: 2rem;
+}
+
+.hero-section-image {
+    width: 85%;
+}
+
+div.hero-section a.btn.btn-primary.custom-btn,
+div.hero-section a.btn.btn-primary.custom-btn:hover,
+div.hero-section a.btn.btn-primary.custom-btn:focus {
+    background-color: var(--primary-button-color);
+    border: none;
+    color: white;
+    border-radius: 14px;
+    width: 200px;
+    box-shadow: none;
+    outline: none;
+    height: 40px;
+}
+
+div.hero-section a.btn.btn-primary.custom-btn:active {
+    background-color: var(--on-click-color);
+}
+
+/*HERO SECTION END*/
+
+
+
+
