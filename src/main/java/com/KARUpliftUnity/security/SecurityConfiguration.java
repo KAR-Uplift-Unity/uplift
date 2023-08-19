@@ -41,15 +41,15 @@ public class SecurityConfiguration {
                         .requestMatchers("/posts/create", "/posts/*/edit").authenticated()
                         /* Pages that do not require authentication
                          * anyone can visit the home page, register, login, and view ads */
-                        .requestMatchers("/", "/posts", "/posts/*", "/sign-up", "/login", "/contact_us", "/mission").permitAll()
+                        .requestMatchers("/", "/posts", "/posts/*", "/signup", "/login", "/contact_us", "/mission").permitAll()
                         // allow loading of static resources
                         .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
                 )
                 /* Login configuration */
-                .formLogin((login) -> login.loginPage("/login").defaultSuccessUrl("/posts"))
+                .formLogin((login) -> login.loginPage("/login").defaultSuccessUrl("/"))
 
                 /* Logout configuration */
-                .logout((logout) -> logout.logoutSuccessUrl("/posts"))
+                .logout((logout) -> logout.logoutSuccessUrl("/"))
                 .httpBasic(withDefaults());
         return http.build();
     }
