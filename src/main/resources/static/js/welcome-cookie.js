@@ -12,17 +12,17 @@ function GetCookie(name) {
     }
     return null;
 }
-function testFirstCookie(){
-    var visit=GetCookie("FirstTimeVisitCookie");
-    if (visit==null){
-        var expire=new Date();
-        expire=new Date(expire.getTime()+7776000000);
-        document.cookie="FirstTimeVisitCookie=here; expires="+expire + ";path=/";
-        document.getElementById("firstVisit").innerHTML = "Welcome! You are here for the first time!";	// New visitor
-    } else {
-        document.getElementById("firstVisit").innerHTML = "Welcome back!";	// Returning visitor
+function testFirstCookie() {
+    var visit = GetCookie("FirstTimeVisitCookie");
+    if (visit == null) {
+        var expire = new Date();
+        expire = new Date(expire.getTime() + 7776000000);
+        document.cookie = "FirstTimeVisitCookie=here; expires=" + expire + ";path=/";
+
+        $('#firstTimeVisitorModal').modal('show');
     }
 }
+
 $(document).ready(function(){
     testFirstCookie();
 });
