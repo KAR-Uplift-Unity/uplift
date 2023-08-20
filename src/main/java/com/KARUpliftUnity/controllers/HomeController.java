@@ -9,8 +9,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class HomeController {
 
     @GetMapping("/")
-    public String returnHomePage(Model model){
-        model.addAttribute("pageTitle", "UpliftUnity");
+    public String returnHomePage(){
         return "index";
+    }
+
+    @GetMapping("/mission")
+    public String showMissionPage() {
+        return "mission"; // Assuming you have a Thymeleaf template named "mission.html"
+    }
+
+    @GetMapping("/contact_us")
+    public String showContactUsPage() {
+        return "contact_us"; // Assuming you have a Thymeleaf template named "contact_us.html"
     }
 }
