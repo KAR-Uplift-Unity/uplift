@@ -16,7 +16,7 @@ public class AdminController {
         if (isAdmin) {
             return "admin/index";
         }
-        return "/";
+        return "index";
     }
 
 }
