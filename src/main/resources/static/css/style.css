@@ -334,6 +334,17 @@ footer .footer-background {
 
 /*FOOTER END*/
 
+/*WELCOME MODAL START*/
+
+#firstTimeVisitorModal {
+    font-family: 'Poppins', sans-serif;
+}
+
+.logo-span {
+    font-family: var(--logo-font);
+}
+/*WELCOME MODAL END*/
+
 
 /*MEDIA QUERIES START*/
 
