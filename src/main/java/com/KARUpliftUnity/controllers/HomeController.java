@@ -35,6 +35,6 @@ public class HomeController {
     @PostMapping("/contact_us")
     public String handleContactUsForm(@ModelAttribute ContactForm form) {
         emailService.sendContactFormEmail(form);
-        return "/contact_us";
+        return "redirect:/contact_us?messageSent=true";
     }
 }
