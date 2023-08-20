@@ -264,14 +264,57 @@ button.btn.btn-primary.custom-btn:active {
 }
 
 .team-member-image {
-    width: 150px;  /* Adjust as needed */
-    height: auto;  /* This will maintain the aspect ratio */
-    display: block;  /* Center the image */
+    width: 150px;
+    height: auto;
+    display: block;
     margin: 0 auto;
 }
 
 
 /*ABOUT US PAGE END*/
+
+/*CONTACT US PAGE START*/
+
+.contact-bg {
+    background-color: var(--off-white-color);
+    font-family: var(--poppins-font);
+}
+
+.contact-bg h1 {
+    font-family: var(--logo-font);
+    color: var(--logo-color);
+}
+
+.contact-background {
+    background-color: white;
+    border-radius: 8px;
+}
+
+.contact-background {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1),
+    0 6px 20px rgba(0, 0, 0, 0.07);
+}
+
+.contact-bg .contact-background form input,
+.contact-bg .contact-background form textarea {
+    background-color: transparent;
+    border-radius: 15px;
+}
+
+.contact-bg .contact-background form .form-control:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: lightgrey;
+}
+
+.contact-bg h3 {
+    font-family: var(--poppins-font);
+    font-weight: var(--weight-light);
+}
+
+/*CONTACT US PAGE END*/
 
 /*FOOTER START*/
 
