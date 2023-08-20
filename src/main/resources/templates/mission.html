@@ -5,8 +5,8 @@
     <title>Contact Us</title>
 </head>
 <body class="about-us-background">
-<div th:replace="partials/header :: header"></div>
-<div th:replace="partials/navbar :: navbar"></div>
+<div th:replace="~{partials/header :: header}"></div>
+<div th:replace="~{partials/navbar :: navbar}"></div>
 <div class="container mission-content">
 
     <h2 class="text-center pt-4 pb-3">Our Mission</h2>
@@ -63,6 +63,6 @@
         </div>
     </div>
 </div>
-<div th:replace="partials/footer :: footer"></div>
+<div th:replace="~{partials/footer :: footer}"></div>
 </body>
 </html>

@@ -7,8 +7,8 @@
 
 <body class="index-body">
 <div class="content-wrapper">
-    <div th:replace="partials/header :: header"></div>
-    <div th:replace="partials/navbar :: navbar"></div>
+    <div th:replace="~{partials/header :: header}"></div>
+    <div th:replace="~{partials/navbar :: navbar}"></div>
     <div class="hero-section">
         <div class="container">
             <div class="row">
@@ -30,6 +30,6 @@
         <h3 class="text-center">Browse By Category</h3>
     </div>
 </div>
-<div th:replace="partials/footer :: footer"></div>
+<div th:replace="~{partials/footer :: footer}"></div>
 </body>
 </html>
