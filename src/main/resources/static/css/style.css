@@ -18,6 +18,10 @@
 
 .index-body {
     background-color: var(--off-white-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    flex: 1;
 }
 
 /*NAVBAR START*/
@@ -97,6 +101,10 @@ div.hero-section a.btn.btn-primary.custom-btn:focus {
 
 div.hero-section a.btn.btn-primary.custom-btn:active {
     background-color: var(--on-click-color);
+}
+
+.card-content h3 {
+    font-family: var(--logo-font);
 }
 
 /*HERO SECTION END*/
@@ -235,6 +243,53 @@ button.btn.btn-primary.custom-btn:active {
 }
 
 /*LOGIN PAGE END*/
+
+/*ABOUT US PAGE START*/
+
+.about-us-background {
+    background-color: var(--off-white-color);
+}
+
+.mission-content {
+    font-family: var(--poppins-font);
+}
+
+.mission-content p {
+    font-size: 18px;
+    line-height: 30px;
+}
+
+.mission-content h2 {
+    font-family: var(--logo-font);
+}
+
+.team-member-image {
+    width: 150px;  /* Adjust as needed */
+    height: auto;  /* This will maintain the aspect ratio */
+    display: block;  /* Center the image */
+    margin: 0 auto;
+}
+
+
+/*ABOUT US PAGE END*/
+
+/*FOOTER START*/
+
+.content-wrapper {
+    flex: 1;
+}
+
+footer .footer-logo {
+    font-family: var(--logo-font);
+}
+
+footer .footer-background {
+    background-color: var(--tan-color);
+    padding-top: 40px;
+    font-family: var(--poppins-font);
+}
+
+/*FOOTER END*/
 
 
 /*MEDIA QUERIES START*/
