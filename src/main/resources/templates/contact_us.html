@@ -4,12 +4,61 @@
     <meta charset="UTF-8">
     <title>Contact Us</title>
 </head>
-<body>
+<body class="contact-bg">
 <div th:replace="~{partials/header :: header}"></div>
 <div th:replace="~{partials/navbar :: navbar}"></div>
 
+<div class="container">
+    <h1 class="text-center mt-4 mb-2">Contact Us</h1>
+    <h3 class="text-center mb-4">Reach out to the UpliftUnity team</h3>
+    <div class="contact-background px-5 py-5 col-5 mx-auto mb-4">
+        <form th:action="@{/contact_us}" method="POST" th:object="${contactForm}">
+            <!-- Name -->
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input id="name" th:field="*{name}" class="form-control" placeholder="Enter your name" required/>
+            </div>
 
+            <!-- Email -->
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input id="email" type="email" th:field="*{email}" class="form-control" placeholder="Enter your email"
+                       required/>
+            </div>
+
+            <!-- Message -->
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" th:field="*{message}" class="form-control" rows="7"
+                          placeholder="Type your message here" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 custom-btn mt-3">Send</button>
+        </form>
+    </div>
+</div>
+
+<!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Success!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Your message was successfully sent!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary custom-btn" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div th:replace="~{partials/footer :: footer}"></div>
+<script src="/js/modal-messages.js"></script>
 </body>
 </html>
