@@ -20,7 +20,7 @@ public class User {
     @Column(nullable = false)
     private String password;
     @Column
-    private int archive;
+    private boolean archive;
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
     private List<Post> posts;
 
@@ -33,21 +33,28 @@ public class User {
     public User() {
     }
 
-    public User(long id, String username, String email, String password, List<Post> posts, List<Like> likes, List<Comment> comments) {
+    public User(long id, boolean admin, String username, String email, String password, boolean archive, List<Post> posts, List<Like> likes, List<Comment> comments) {
         this.id = id;
+        this.admin = admin;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.archive = archive;
         this.posts = posts;
         this.likes = likes;
         this.comments = comments;
     }
 
     public User(User copy) {
-        id = copy.id; // This line is SUPER important! Many things won't work if it's absent
-        email = copy.email;
+        id = copy.id;
+        admin = copy.admin;
         username = copy.username;
+        email = copy.email;
         password = copy.password;
+        archive = copy.archive;
+        posts = copy.posts;
+        likes = copy.likes;
+        comments = copy.comments;
     }
 
     @Override
@@ -94,11 +101,11 @@ public class User {
         this.password = password;
     }
 
-    public int getArchive() {
+    public boolean getArchive() {
         return archive;
     }
 
-    public void setArchive(int archive) {
+    public void setArchive(boolean archive) {
         this.archive = archive;
     }
 
@@ -110,7 +117,7 @@ public class User {
         this.posts = posts;
     }
 
-    public boolean isAdmin() {
+    public boolean getAdmin() {
         return admin;
     }
 
