@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
 
+    <meta charset="UTF-8">
+    <title>Post Details</title>
+</head>
+<body class="individual-post">
+<div th:replace="~{partials/header :: header}"></div>
+<div th:replace="~{partials/navbar :: navbar}"></div>
+
+<h1>Post Details</h1>
+<div th:if="${post}">
+    <h2 th:text="${post.title}"></h2>
+    <p th:text="${post.story}"></p>
+    <p th:text="${post.solution}"></p>
+</div>
+
+<div th:unless="${post}">
+    <p>Post not found.</p>
+</div>
+<a href="/">Back to Posts</a>
+<div th:replace="~{partials/footer :: footer}"></div>
 </body>
 </html>
