@@ -142,5 +142,9 @@ public class Post {
     public void setFlagged(boolean flagged) {
         this.flagged = flagged;
     }
+
+    public long getIdByTitle(String title){
+        return id;
+    }
 }
 

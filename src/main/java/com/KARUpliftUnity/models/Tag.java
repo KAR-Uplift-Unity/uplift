@@ -24,6 +24,11 @@ public class Tag {
         this.post = post;
     }
 
+    public Tag(String tag, Post post) {
+        this.tag = tag;
+        this.post = post;
+    }
+
     @Override
     public String toString() {
         return "Tag{" +
