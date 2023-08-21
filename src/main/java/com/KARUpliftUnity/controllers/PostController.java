@@ -1,14 +1,19 @@
 package com.KARUpliftUnity.controllers;
 
 import com.KARUpliftUnity.models.*;
+import com.KARUpliftUnity.repositories.CategoryRepository;
 import com.KARUpliftUnity.repositories.PostRepository;
 import com.KARUpliftUnity.repositories.TagRepository;
 import com.KARUpliftUnity.repositories.UserRepository;
 import com.KARUpliftUnity.services.EmailService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
+import java.util.List;
 
 @Controller
 public class PostController {
@@ -21,6 +26,9 @@ public class PostController {
 
     private final EmailService emailService;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     public PostController(PostRepository postDao, UserRepository userDao, TagRepository tagDao, EmailService emailService) {
         this.postDao = postDao;
         this.userDao = userDao;
@@ -31,7 +39,7 @@ public class PostController {
     @GetMapping("/posts")
     public String index(Model model) {
         model.addAttribute("posts", postDao.findAll());
-        return "posts/index";
+        return "/feed";
     }
 
 
@@ -51,13 +59,19 @@ public class PostController {
     @GetMapping("/posts/create")
     public String postsCreate(Model model) {
         model.addAttribute("post", new Post());
+        List<Category> allCategories = categoryRepository.findAll();
+        model.addAttribute("allCategories", allCategories);
         return "posts/create";
     }
 
     @PostMapping("/posts/create")
     public String createPost(@ModelAttribute Post post, @RequestParam(name = "tags") String[] tags){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
         post.setUser(user);
+
+        post.setDate(new Date());
+
         postDao.save(post);
         long postId = postDao.getIdByTitle(post.getTitle()).getId();
         Post postInfo = postDao.getById(postId);
