@@ -79,6 +79,14 @@ public class Post {
                 '}';
     }
 
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
+
     public long getId() {
         return id;
     }
