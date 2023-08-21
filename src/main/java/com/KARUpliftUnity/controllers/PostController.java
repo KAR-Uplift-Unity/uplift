@@ -39,6 +39,11 @@ public class PostController {
 
     @GetMapping("/posts")
     public String index(Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        boolean admin  = user.getAdmin();
+        if (admin) {
+            model.addAttribute("admin", 1);
+        }
         model.addAttribute("posts", postDao.findAll());
         return "/feed";
     }
@@ -46,12 +51,22 @@ public class PostController {
 
     @GetMapping("/posts/{id}")
     public String postId(@PathVariable long id, Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        boolean admin  = user.getAdmin();
+        if (admin) {
+            model.addAttribute("admin", 1);
+        }
         model.addAttribute("post", postDao.getById(id));
         return "posts/show";
     }
 
     @GetMapping("/posts/{id}/edit")
     public String postEdit(@PathVariable long id, Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        boolean admin  = user.getAdmin();
+        if (admin) {
+            model.addAttribute("admin", 1);
+        }
         model.addAttribute("post", postDao.getById(id));
         return "posts/edit";
     }
@@ -59,6 +74,11 @@ public class PostController {
 
     @GetMapping("/posts/create")
     public String postsCreate(Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        boolean admin  = user.getAdmin();
+        if (admin) {
+            model.addAttribute("admin", 1);
+        }
         model.addAttribute("post", new Post());
         List<Category> allCategories = categoryRepository.findAll();
         model.addAttribute("allCategories", allCategories);

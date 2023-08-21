@@ -1,8 +1,10 @@
 package com.KARUpliftUnity.controllers;
 
 import com.KARUpliftUnity.models.ContactForm;
+import com.KARUpliftUnity.models.User;
 import com.KARUpliftUnity.services.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,17 +19,32 @@ public class HomeController {
     private EmailService emailService;
 
     @GetMapping("/")
-    public String returnHomePage(){
+    public String returnHomePage(Model model){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        boolean admin  = user.getAdmin();
+        if (admin) {
+            model.addAttribute("admin", 1);
+        }
         return "index";
     }
 
     @GetMapping("/mission")
-    public String showMissionPage() {
+    public String showMissionPage(Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        boolean admin  = user.getAdmin();
+        if (admin) {
+            model.addAttribute("admin", 1);
+        }
         return "mission";
     }
 
     @GetMapping("/contact_us")
     public String showContactUsPage(Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        boolean admin  = user.getAdmin();
+        if (admin) {
+            model.addAttribute("admin", 1);
+        }
         model.addAttribute("contactForm", new ContactForm());
         return "contact_us";
     }
