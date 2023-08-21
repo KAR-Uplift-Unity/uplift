@@ -29,6 +29,7 @@ public class PostController {
     @Autowired
     private CategoryRepository categoryRepository;
 
+
     public PostController(PostRepository postDao, UserRepository userDao, TagRepository tagDao, EmailService emailService) {
         this.postDao = postDao;
         this.userDao = userDao;
@@ -65,12 +66,17 @@ public class PostController {
     }
 
     @PostMapping("/posts/create")
-    public String createPost(@ModelAttribute Post post, @RequestParam(name = "tags") String[] tags){
+    public String createPost(@ModelAttribute Post post,
+                             @RequestParam(name = "tags") String[] tags,
+                             @RequestParam(name = "selectedCategories") List<Long> selectedCategories){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         post.setUser(user);
 
         post.setDate(new Date());
+
+        List<Category> categories = categoryRepository.findAllById(selectedCategories);
+        post.setCategories(categories);
 
         postDao.save(post);
         long postId = postDao.getIdByTitle(post.getTitle()).getId();
