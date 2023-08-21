@@ -4,9 +4,9 @@ let tags_list =[]
 
 input_tag.addEventListener("keyup", (e) => {
     const val = input_tag.value
-    if (e.key == "Enter") {
-        if (tags_list.some(e => e.text == val)) return alert('Duplicate Tag')
-        if (val == "") return
+    if (e.key === "Enter") {
+        if (tags_list.some(e => e.text === val)) return alert('Duplicate Tag')
+        if (val === "") return
 
         const tags = val.split(',').map(e => e.trim()).filter(e => e !== "")
 
@@ -37,6 +37,15 @@ function RenderTags (){
     tags_length.textContent = `${tags_list.length} Tags`
 }
 
-// function HandleRmTags(){
-//     const btns = document.
-// }
+function HandleRmTags(){
+    const btns = document.querySelectorAll(".btn-rm-tag");
+    if (btns.length > 0) {
+        btns.forEach((e) => {
+            e.onclick = function () {
+                const data_id = Number(e.getAttribute("data-id"));
+                tags_list = tags_list.filter((x) => x.id !== data_id);
+                RenderTags();
+            };
+        });
+    }
+}

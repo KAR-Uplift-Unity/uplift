@@ -12,6 +12,7 @@
     --tan-color: #FCECDC;
     --off-white-color: #FAF8F6;
     --primary-button-color: #EE9949;
+    --secondary-button-color: #FFBA7A;
     --logo-color: #444444;
     --on-click-color: #DD8840;
 }
@@ -333,6 +334,65 @@ footer .footer-background {
 }
 
 /*FOOTER END*/
+
+/*TAGS START*/
+
+.parent-tags {
+    padding: 10px 20px;
+    border-radius: 4px;
+    background-color: var(--secondary-button-color);
+    width: 385px;
+    margin-bottom: 10px;
+}
+
+.wrapper-tags {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    border: 1px solid #E0E0E0;
+}
+
+.input-tag {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    padding: 4px 0;
+    flex: 1;
+}
+
+.item-tag {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    width: max-content;
+    padding: 6px;
+    background-color: var(--secondary-button-color);
+    color: #fff;
+    border-radius: 15px;
+    font-size: 16px;
+    cursor: default;
+}
+
+.btn-rm-tag {
+    width: 18px;
+    height: 18px;
+    border: none;
+    border-radius: 50%;
+    display: grid;
+    place-content: center;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.tags-length {
+    display: block;
+    text-align: right;
+    padding: 10px 5px;
+    font-size: 14px;
+}
+
+/*TAGS END*/
 
 /*WELCOME MODAL START*/
 
