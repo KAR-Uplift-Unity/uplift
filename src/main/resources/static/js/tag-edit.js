@@ -1,3 +1,7 @@
+$(document).ready(function(){
+    RenderTagsEdit();
+});
+
 const input_tag = document.querySelector('.input-tag')
 const tags_length = document.querySelector('.tags-length')
 let tags_list =[]
@@ -17,10 +21,25 @@ input_tag.addEventListener("keydown", (e) => {
             })
         }
         input_tag.value = ""
+        console.log(tags_list)
         RenderTags()
     }
 })
 
+function RenderTagsEdit (){
+    let attVal = document.getElementById("tagString1")
+    let valStr = attVal.value
+    let tags = valStr.split(',').map(e => e.trim()).filter(e => e !== "")
+
+    for (let i of tags) {
+        tags_list.push({
+            id: Math.random().toString(10).substring(2,10),
+            text: i,
+        })
+    }
+    input_tag.value = ""
+    RenderTags()
+}
 function RenderTags (){
     const wrapper_tags = document.querySelector(".wrapper-tags")
     const tagString = document.getElementById("tagStringTest")
