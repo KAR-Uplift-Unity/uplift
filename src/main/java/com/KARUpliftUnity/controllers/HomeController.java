@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.regex.Pattern;
+
 @Controller
 public class HomeController {
 
@@ -33,7 +35,14 @@ public class HomeController {
     }
 
     @PostMapping("/contact_us")
-    public String handleContactUsForm(@ModelAttribute ContactForm form) {
+    public String handleContactUsForm(@ModelAttribute ContactForm form, Model model) {
+        // Email validation
+        Pattern emailPattern = Pattern.compile("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$");
+        if (!emailPattern.matcher(form.getEmail()).matches()) {
+            model.addAttribute("emailError", "Please provide a valid email address");
+            return "contact_us";
+        }
+
         emailService.sendContactFormEmail(form);
         return "redirect:/contact_us?messageSent=true";
     }
