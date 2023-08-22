@@ -33,7 +33,7 @@ public class ProfileController {
         return "/users/profile";
     }
 
-    @GetMapping("/profile/settings")
+    @GetMapping("/settings")
     public String showProfileSettings(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         boolean admin  = user.getAdmin();
