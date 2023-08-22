@@ -2,17 +2,19 @@ package com.KARUpliftUnity.controllers;
 
 import com.KARUpliftUnity.models.ContactForm;
 import com.KARUpliftUnity.models.Post;
-import com.KARUpliftUnity.repositories.PostRepository;
-import com.KARUpliftUnity.repositories.TagRepository;
-import com.KARUpliftUnity.repositories.UserRepository;
+import com.KARUpliftUnity.repositories.*;
+import com.KARUpliftUnity.models.User;
 import com.KARUpliftUnity.services.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+
+
+import java.util.regex.Pattern;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -43,7 +45,7 @@ public class HomeController {
         List<Post> allPosts = postDao.findAll();
         Collections.shuffle(allPosts);
         int maxPosts = 6;
-       int numPosts = Math.min(maxPosts, allPosts.size());
+        int numPosts = Math.min(maxPosts, allPosts.size());
         List<Integer> randomIndices = new ArrayList<>();
         for (int i = 0; i < numPosts; i++) {
             int randomIndex = new Random().nextInt(allPosts.size());
@@ -61,7 +63,7 @@ public class HomeController {
     }
 
     @GetMapping("/mission")
-    public String showMissionPage() {
+    public String showMissionPage(Model model) {
         return "mission";
     }
 
@@ -72,7 +74,14 @@ public class HomeController {
     }
 
     @PostMapping("/contact_us")
-    public String handleContactUsForm(@ModelAttribute ContactForm form) {
+    public String handleContactUsForm(@ModelAttribute ContactForm form, Model model) {
+        // Email validation
+        Pattern emailPattern = Pattern.compile("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$");
+        if (!emailPattern.matcher(form.getEmail()).matches()) {
+            model.addAttribute("emailError", "Please provide a valid email address");
+            return "contact_us";
+        }
+
         emailService.sendContactFormEmail(form);
         return "redirect:/contact_us?messageSent=true";
     }

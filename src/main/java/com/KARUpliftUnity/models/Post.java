@@ -38,6 +38,9 @@ public class Post {
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "post")
     private List<Tag> tags;
 
+    @Transient
+    private String tagString;
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name="post_categories",
@@ -77,6 +80,22 @@ public class Post {
                 ", archive=" + archive +
                 ", user=" + user +
                 '}';
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 
     public long getId() {
@@ -145,6 +164,14 @@ public class Post {
 
     public long getIdByTitle(String title){
         return id;
+    }
+
+    public String getTagString() {
+        return tagString;
+    }
+
+    public void setTagString(String tagString) {
+        this.tagString = tagString;
     }
 }
 
