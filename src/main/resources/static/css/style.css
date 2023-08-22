@@ -270,6 +270,13 @@ button.btn.btn-primary.custom-btn:active {
     display: block;
     margin: 0 auto;
 }
+/* Carousel for images */
+.home .home-slider img{
+    height: 25rem;
+    width:35rem;
+    border-radius: .5rem;
+    object-fit: cover;
+}
 
 
 /*ABOUT US PAGE END*/
