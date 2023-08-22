@@ -1,10 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Edit Post</title>
 </head>
-<body>
+<body class="create-page-bg">
+<div th:replace="~{partials/header :: header}"></div>
+<div th:replace="~{partials/navbar :: navbar}"></div>
+<div class="container">
+    <h1 class="text-center mt-4">Create A Post</h1>
+    <form th:action="@{/posts/{id}/edit(id=${post.id})}" th:object="${post}" method="post" enctype="multipart/form-data"
+          class="w-50 mx-auto">
+        <h5 class="mt-4 text-center mb-4">Select the categories that best describe your post:</h5>
 
+        <!-- Categories -->
+        <div class="btn-group-toggle" data-toggle="buttons">
+            <div th:each="category : ${allCategories}">
+                <label class="btn btn-outline-primary custom-checkbox-label">
+                    <input type="checkbox" th:value="${category.id}" name="selectedCategories"
+                           th:checked="${selectedCategories.contains(category.id)}"
+                           th:id="${'category' + category.id}" autocomplete="off" class="custom-checkbox-input">
+                    <span th:text="${category.cat}"></span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Title -->
+        <div class="form-group mt-4">
+            <label for="title">Title:</label>
+            <input type="text" id="title" th:field="*{title}" class="form-control" required/>
+        </div>
+
+        <!-- Story -->
+        <div class="form-group">
+            <label for="story">Tell us your story:</label>
+            <textarea id="story" th:field="*{story}" rows="5" class="form-control" required></textarea>
+        </div>
+
+        <!-- Solution/Help -->
+        <div class="form-group">
+            <label for="solution">How can the UpliftUnity community help?</label>
+            <textarea id="solution" th:field="*{solution}" rows="5" class="form-control" required></textarea>
+        </div>
+
+        <!-- Tags -->
+        <div class="form-group">
+            <label for="tags">Tags (comma separated):</label>
+            <input type="text" id="tags" name="tagString" th:value="${tagString}" class="form-control"/>
+        </div>
+
+        <!-- Images -->
+        <h4>Images</h4>
+        <div class="form-group">
+            <label for="images">Upload:</label>
+            <input type="file" name="images" id="images" class="form-control-file" multiple>
+        </div>
+
+        <!-- Submit -->
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary custom-btn w-100 mt-4">Save</button>
+        </div>
+    </form>
+</div>
+
+<div th:replace="~{partials/footer :: footer}"></div>
 </body>
 </html>
