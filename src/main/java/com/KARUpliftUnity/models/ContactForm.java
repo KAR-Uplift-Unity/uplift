@@ -38,12 +38,4 @@ public class ContactForm {
         this.message = message;
     }
 
-    @Override
-    public String toString() {
-        return "ContactForm{" +
-                "name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", message='" + message + '\'' +
-                '}';
-    }
 }

@@ -29,14 +29,6 @@ public class Tag {
         this.post = post;
     }
 
-    @Override
-    public String toString() {
-        return "Tag{" +
-                "id=" + id +
-                ", tag='" + tag + '\'' +
-                ", post=" + post +
-                '}';
-    }
 
     public long getId() {
         return id;

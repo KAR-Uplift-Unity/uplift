@@ -27,15 +27,6 @@ public class Update {
         this.post = post;
     }
 
-    @Override
-    public String toString() {
-        return "Update{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", post=" + post +
-                '}';
-    }
 
     public long getId() {
         return id;

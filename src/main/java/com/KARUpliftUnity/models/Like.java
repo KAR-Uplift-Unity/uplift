@@ -29,15 +29,6 @@ public class Like {
         this.post = post;
     }
 
-    @Override
-    public String toString() {
-        return "Like{" +
-                "id=" + id +
-                ", heart=" + heart +
-                ", user=" + user +
-                ", post=" + post +
-                '}';
-    }
 
     public long getId() {
         return id;

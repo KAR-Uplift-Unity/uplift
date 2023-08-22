@@ -69,18 +69,6 @@ public class Post {
         this.solution = post.solution;
     }
 
-    @Override
-    public String toString() {
-        return "Post{" +
-                "id=" + id +
-                ", date=" + date +
-                ", title='" + title + '\'' +
-                ", story='" + story + '\'' +
-                ", solution='" + solution + '\'' +
-                ", archive=" + archive +
-                ", user=" + user +
-                '}';
-    }
 
     public List<Category> getCategories() {
         return categories;

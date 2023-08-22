@@ -57,17 +57,6 @@ public class User {
         comments = copy.comments;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", archive=" + archive +
-                ", posts=" + posts +
-                '}';
-    }
 
     public long getId() {
         return id;

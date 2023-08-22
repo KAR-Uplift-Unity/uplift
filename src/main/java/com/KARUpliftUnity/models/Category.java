@@ -25,14 +25,6 @@ public class Category {
         this.post = post;
     }
 
-    @Override
-    public String toString() {
-        return "Category{" +
-                "id=" + id +
-                ", cat='" + cat + '\'' +
-                ", postCat=" + post +
-                '}';
-    }
 
     public long getId() {
         return id;
