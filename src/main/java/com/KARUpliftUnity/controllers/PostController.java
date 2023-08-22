@@ -34,6 +34,11 @@ public class PostController {
         return "posts/index";
     }
 
+    @GetMapping("/feed")
+    public String showFeed(Model model) {
+        model.addAttribute("posts", postDao.findAll());
+        return "feed";
+    }
 
     @GetMapping("/posts/{id}")
     public String postId(@PathVariable long id, Model model) {
