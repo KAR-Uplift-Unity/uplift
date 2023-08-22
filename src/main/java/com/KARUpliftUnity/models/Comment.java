@@ -28,15 +28,6 @@ public class Comment {
         this.post = post;
     }
 
-    @Override
-    public String toString() {
-        return "Comment{" +
-                "id=" + id +
-                ", comment='" + comment + '\'' +
-                ", user=" + user +
-                ", post=" + post +
-                '}';
-    }
 
     public long getId() {
         return id;

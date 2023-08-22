@@ -24,14 +24,6 @@ public class Image {
         this.post = post;
     }
 
-    @Override
-    public String toString() {
-        return "Image{" +
-                "id=" + id +
-                ", image='" + image + '\'' +
-                ", post=" + post +
-                '}';
-    }
 
     public long getId() {
         return id;
