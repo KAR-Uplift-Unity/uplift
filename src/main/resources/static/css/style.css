@@ -414,27 +414,32 @@ footer .footer-background {
 /*TAGS START*/
 
 .parent-tags {
-    padding: 10px 20px;
     border-radius: 4px;
-    background-color: var(--secondary-button-color);
-    width: 385px;
+    background-color: transparent;
+    width: 100%;
     margin-bottom: 10px;
 }
 
 .wrapper-tags {
+    padding: 4px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     flex-wrap: wrap;
-    border: 1px solid #E0E0E0;
+    gap: 10px;
+    border: 1px solid black;
+    border-radius: 12px;
 }
 
 .input-tag {
+    background-color: transparent;
+    padding: 6px 12px;
+    flex: 1;
+}
+
+#tagString1 {
     border: none;
     outline: none;
-    background-color: transparent;
-    padding: 4px 0;
-    flex: 1;
 }
 
 .item-tag {

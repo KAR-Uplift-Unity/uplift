@@ -42,9 +42,10 @@
 
         <!-- Tags -->
         <div class="form-group">
-            <label for="tagString">Tags (comma-separated):</label>
-            <input type="text" id="tagString" name="tagString" placeholder="e.g. tag1, tag2, tag3" class="form-control"/>
+            <input type="hidden" id="tagStringTest" name="tagString" placeholder="e.g. tag1, tag2, tag3" class="form-control"/>
         </div>
+
+        <div th:replace="~{partials/tags :: tags}"></div>
 
         <!-- Images -->
         <h4>Images</h4>
@@ -60,5 +61,6 @@
     </form>
 </div>
 <div th:replace="~{partials/footer :: footer}"></div>
+<script th:src="@{/js/tag.js}" type="text/javascript"></script>
 </body>
 </html>
