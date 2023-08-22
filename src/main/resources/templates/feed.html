@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="Eng">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Feed</title>
 </head>
 <body>
+<h1>Feed</h1>
+<div th:replace="~{partials/navbar :: navbar}"></div>
 
+<div th:each="post : ${posts}" id="Latest posts">
+    <a th:href="@{/posts/{id} (id= ${post.getId()})}" ></a>
+    <h2 th:text="${post.getTitle()}"></h2>
+    <p th:text="${post.getStory()}"></p>
+    <p th:text="${post.getSolution()}"></p>
+    <hr>
+</div>
+<div th:replace="~{partials/footer :: footer}"></div>
 </body>
 </html>
