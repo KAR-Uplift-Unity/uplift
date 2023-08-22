@@ -44,10 +44,10 @@
                     <small id="passwordMismatch" class="form-text text-danger signup-span text-center d-block my-3"></small>
 
                     <!-- Serverside error messages-->
-                    <small th:if="${usernameError}" th:text="${usernameError}" class="form-text text-danger text-center"></small>
-                    <small th:if="${emailError}" th:text="${emailError}" class="form-text text-danger text-center"></small>
-                    <small th:if="${passwordError}" th:text="${passwordError}" class="form-text text-danger text-center"></small>
-                    <small th:if="${passwordMismatch}" th:text="${passwordMismatch}" class="form-text text-danger text-center"></small>
+                    <small th:if="${usernameError}" th:text="${usernameError}" class="form-text alert alert-danger text-center mt-3"></small>
+                    <small th:if="${emailError}" th:text="${emailError}" class="form-text alert alert-danger text-center mt-3"></small>
+                    <small th:if="${passwordError}" th:text="${passwordError}" class="form-text alert alert-danger text-center mt-3"></small>
+                    <small th:if="${passwordMismatch}" th:text="${passwordMismatch}" class="form-text alert alert-danger text-center mt-3"></small>
 
                 </form>
             </div>

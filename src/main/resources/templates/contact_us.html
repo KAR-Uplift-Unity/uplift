@@ -22,8 +22,8 @@
             <!-- Email -->
             <div class="form-group">
                 <label for="email">Email</label>
-                <input id="email" type="email" th:field="*{email}" class="form-control" placeholder="Enter your email"
-                       required/>
+                <input id="email" th:field="*{email}" class="form-control" placeholder="Enter your email"
+                       />
             </div>
 
             <!-- Message -->
@@ -34,6 +34,8 @@
             </div>
 
             <button type="submit" class="btn btn-primary w-100 custom-btn mt-3">Send</button>
+            <!-- Error message -->
+            <small th:if="${emailError}" th:text="${emailError}" class="form-text alert alert-danger text-center mt-3"></small>
         </form>
     </div>
 </div>

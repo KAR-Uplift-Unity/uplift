@@ -319,6 +319,20 @@ button.btn.btn-primary.custom-btn:active {
 
 /*CREATE A POST START */
 
+.create-page-bg {
+    background-color: var(--off-white-color);
+    font-family: var(--poppins-font);
+}
+
+.create-page-bg h1 {
+    font-family: var(--logo-font);
+    color: var(--logo-color);
+}
+
+.create-page-bg h5 {
+    font-weight: var(--weight-regular);
+}
+
 .custom-checkbox-input {
     opacity: 0;
     position: absolute;
@@ -333,7 +347,7 @@ button.btn.btn-primary.custom-btn:active {
 
 .btn-group-toggle .btn {
     width: 125px;
-    height: 50px;
+    height: 42px;
     text-align: center;
     display: flex;
     align-items: center;
@@ -360,6 +374,22 @@ button.btn.btn-primary.custom-btn:active {
     box-shadow: none;
 }
 
+.create-page-bg input, .create-page-bg textarea {
+    background-color: transparent;
+    border-radius: 10px;
+    border: 1px solid var(--logo-color);
+}
+
+.create-page-bg input:hover, .create-page-bg textarea:hover {
+    background-color: transparent;
+}
+
+.create-page-bg input:focus, .create-page-bg textarea:focus {
+    background-color: transparent;
+    border-color: var(--logo-color);
+    outline: none;
+    box-shadow: none;
+}
 
 /*CREATE A POST END*/
 

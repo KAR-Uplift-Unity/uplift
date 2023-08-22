@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <title>Create A Post</title>
 </head>
-<body>
+<body class="create-page-bg">
 <div th:replace="~{partials/header :: header}"></div>
 <div th:replace="~{partials/navbar :: navbar}"></div>
 <div class="container">
     <h1 class="text-center mt-4">Create A Post</h1>
     <form th:action="@{/posts/create}" method="post" th:object="${post}" class="w-50 mx-auto">
+        <h5 class="mt-4 text-center mb-4">Select the categories that best describe your post:</h5>
 
         <!-- Categories -->
         <div class="btn-group-toggle" data-toggle="buttons">
-            <h4 class="mt-4">Select the categories that best describe your post:</h4>
             <div th:each="category : ${allCategories}">
                 <label class="btn btn-outline-primary custom-checkbox-label">
                     <input type="checkbox" th:value="${category.id}" name="selectedCategories" th:id="${'category' + category.id}" autocomplete="off" class="custom-checkbox-input">
@@ -42,8 +42,8 @@
 
         <!-- Tags -->
         <div class="form-group">
-            <label for="tags">Tags (comma-separated):</label>
-            <input type="text" id="tags" name="tags" placeholder="e.g. tag1, tag2, tag3" class="form-control"/>
+            <label for="tagString">Tags (comma-separated):</label>
+            <input type="text" id="tagString" name="tagString" placeholder="e.g. tag1, tag2, tag3" class="form-control"/>
         </div>
 
         <!-- Images -->
@@ -55,7 +55,7 @@
 
         <!-- Submit -->
         <div class="form-group">
-            <button type="submit" class="btn btn-primary custom-btn w-100">Save</button>
+            <button type="submit" class="btn btn-primary custom-btn w-100 mt-4">Save</button>
         </div>
     </form>
 </div>
