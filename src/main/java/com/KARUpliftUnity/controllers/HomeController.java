@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+
 
 @Controller
 public class HomeController {
@@ -20,31 +20,16 @@ public class HomeController {
 
     @GetMapping("/")
     public String returnHomePage(Model model){
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        boolean admin  = user.getAdmin();
-        if (admin) {
-            model.addAttribute("admin", 1);
-        }
         return "index";
     }
 
     @GetMapping("/mission")
     public String showMissionPage(Model model) {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        boolean admin  = user.getAdmin();
-        if (admin) {
-            model.addAttribute("admin", 1);
-        }
         return "mission";
     }
 
     @GetMapping("/contact_us")
     public String showContactUsPage(Model model) {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        boolean admin  = user.getAdmin();
-        if (admin) {
-            model.addAttribute("admin", 1);
-        }
         model.addAttribute("contactForm", new ContactForm());
         return "contact_us";
     }
