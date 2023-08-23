@@ -1,23 +1,16 @@
 package com.KARUpliftUnity.controllers;
 
 import com.KARUpliftUnity.models.*;
-import com.KARUpliftUnity.repositories.CategoryRepository;
-import com.KARUpliftUnity.repositories.PostRepository;
-import com.KARUpliftUnity.repositories.TagRepository;
-import com.KARUpliftUnity.repositories.UserRepository;
+import com.KARUpliftUnity.repositories.*;
 import com.KARUpliftUnity.services.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.*;
 
 @Controller
 public class PostController {
@@ -30,15 +23,21 @@ public class PostController {
 
     private final EmailService emailService;
 
+    private final CommentRepository commentDao;
+
     @Autowired
-    private CategoryRepository categoryRepository;
+    private  CategoryRepository categoryRepository;
+
+    @Autowired
+    private LikeRepository likeDao;
 
 
-    public PostController(PostRepository postDao, UserRepository userDao, TagRepository tagDao, EmailService emailService) {
+    public PostController(PostRepository postDao, UserRepository userDao, TagRepository tagDao, EmailService emailService, CommentRepository commentDao) {
         this.postDao = postDao;
         this.userDao = userDao;
         this.tagDao = tagDao;
         this.emailService = emailService;
+        this.commentDao = commentDao;
     }
 
     @GetMapping("/posts")
@@ -55,8 +54,58 @@ public class PostController {
 
     @GetMapping("/posts/{id}")
     public String postId(@PathVariable long id, Model model) {
-        model.addAttribute("post", postDao.getById(id));
+        Post post = postDao.getById(id);
+        List<Comment> comments = commentDao.findByPostOrderByIdAsc(post);
+
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        Like existingLike = likeDao.findByUserAndPost(loggedInUser, post);
+
+        boolean hasLiked = existingLike != null;
+
+        int likeCount = likeDao.countByPost(post);
+
+        model.addAttribute("post", post);
+        model.addAttribute("comments", comments);
+        model.addAttribute("hasLiked", hasLiked);
+        model.addAttribute("likeCount", likeCount);
         return "posts/show";
+    }
+
+    @PostMapping("/posts/{id}/comments")
+    public String addComment(@PathVariable long id, @RequestParam String comment) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Post post = postDao.getById(id);
+
+        Comment newComment = new Comment();
+        newComment.setComment(comment);
+        newComment.setUser(user);
+        newComment.setPost(post);
+
+        commentDao.save(newComment);
+
+        return "redirect:/posts/" + id;
+    }
+
+    @PostMapping("/posts/{postId}/toggle-like")
+    public ResponseEntity<Integer> toggleLike(@PathVariable long postId) {
+
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        Like existingLike = likeDao.findByUserAndPost(loggedInUser, postDao.getOne(postId));
+
+        if (existingLike != null) {
+            likeDao.delete(existingLike);
+        } else {
+            Like newLike = new Like();
+            newLike.setUser(loggedInUser);
+            newLike.setPost(postDao.getOne(postId));
+            likeDao.save(newLike);
+        }
+
+        int updatedLikeCount = likeDao.countByPost(postDao.getOne(postId));
+
+        return ResponseEntity.ok(updatedLikeCount);
     }
 
     @GetMapping("/posts/{id}/edit")
