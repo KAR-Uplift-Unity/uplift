@@ -42,7 +42,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String returnHomePage(Model model) {
-        List<Post> allPosts = postDao.findAll();
+        List<Post> allPosts = postDao.findByArchiveFalse();
         Collections.shuffle(allPosts);
         int maxPosts = 6;
         int numPosts = Math.min(maxPosts, allPosts.size());
