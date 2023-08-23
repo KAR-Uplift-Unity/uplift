@@ -8,6 +8,7 @@ $(document).ready(function() {
     });
 
     const heartBtn = $('#heart-btn');
+    const heart = $('.fa-heart');
     const likeCountEl = $('#like-count');
 
     const postId = $('#postId').val();
@@ -15,9 +16,10 @@ $(document).ready(function() {
     heartBtn.click(function() {
         $.post(`/posts/${postId}/toggle-like`, function(updatedLikeCount) {
             likeCountEl.text(updatedLikeCount);
-            heartBtn.toggleClass('liked');
+            heart.toggleClass('fa-regular');
+            heart.toggleClass('fa-solid');
         }).fail(function(jqXHR, textStatus, errorThrown) {
-            console.error("Error with AJAX request:", textStatus, errorThrown);
+            window.location.href = "/login";
         });
     });
 });
