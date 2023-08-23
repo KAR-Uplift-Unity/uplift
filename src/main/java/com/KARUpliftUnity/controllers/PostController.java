@@ -3,8 +3,13 @@ package com.KARUpliftUnity.controllers;
 import com.KARUpliftUnity.models.*;
 import com.KARUpliftUnity.repositories.*;
 import com.KARUpliftUnity.services.EmailService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
+import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,9 +29,7 @@ public class PostController {
 
     private final CommentRepository commentDao;
 
-
     private final CategoryRepository categoryRepository;
-
 
     private final LikeRepository likeDao;
 
@@ -55,24 +58,35 @@ public class PostController {
 
     @GetMapping("/posts/{id}")
     public String postId(@PathVariable long id, Model model) {
-        Post post = postDao.getById(id);
-        List<Comment> comments = commentDao.findByPostOrderByIdAsc(post);
+        try{
+            Post post = postDao.getById(id);
+            List<Comment> comments = commentDao.findByPostOrderByIdAsc(post);
 
-        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        Like existingLike = likeDao.findByUserAndPost(loggedInUser, post);
+            Like existingLike = likeDao.findByUserAndPost(loggedInUser, post);
 
-        boolean hasLiked = existingLike != null;
+            boolean hasLiked = existingLike != null;
 
-        int likeCount = likeDao.countByPost(post);
+            int likeCount = likeDao.countByPost(post);
 
-        model.addAttribute("post", post);
-        model.addAttribute("comments", comments);
-        model.addAttribute("hasLiked", hasLiked);
-        model.addAttribute("likeCount", likeCount);
+            model.addAttribute("post", post);
+            model.addAttribute("comments", comments);
+            model.addAttribute("hasLiked", hasLiked);
+            model.addAttribute("likeCount", likeCount);
+        }catch (Exception e){
+            Post post = postDao.getById(id);
+            List<Comment> comments = commentDao.findByPostOrderByIdAsc(post);
+
+            int likeCount = likeDao.countByPost(post);
+
+            model.addAttribute("post", post);
+            model.addAttribute("comments", comments);
+            model.addAttribute("hasLiked", false);
+            model.addAttribute("likeCount", likeCount);
+        }
         return "posts/show";
     }
-
     @PostMapping("/posts/{id}/comments")
     public String addComment(@PathVariable long id, @RequestParam String comment) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

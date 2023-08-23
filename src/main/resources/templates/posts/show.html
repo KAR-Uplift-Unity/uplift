@@ -28,7 +28,7 @@
     </div>
     <div class="like-container">
         <input type="hidden" id="postId" th:value="${post.id}"/>
-        <button id="heart-btn" class="heart-btn" th:classappend="${hasLiked ? 'liked' : ''}">❤️
+        <button id="heart-btn" class="heart-btn"><i class="fa-solid fa-heart" th:if="${hasLiked}"></i><i class="fa-regular fa-heart" th:if="${!hasLiked}"></i>
             <span id="like-count" th:text="${likeCount}"></span>
         </button>
     </div>
