@@ -7,7 +7,74 @@
 </head>
 <body>
 <div th:replace="~{partials/navbar :: navbar}"></div>
+<div class="container">
+    <div class="d-flex justify-content-between my-4">
+    <h2 th:text="${username}"></h2>
+        <a href="/settings">Profile Settings</a>
+    </div>
 
+    <div>
+        <h3>Your active posts</h3>
+        <div class="row">
+            <div th:each="post : ${activePosts}" class="col-md-3 mb-4">
+                <div class="card">
+                    <!-- <img class="card-img-top" th:src="${post.imageURL}" alt="Post Image"> -->
+                    <div class="card-body">
+                        <h4 class="card-title" th:text="${post.title}"></h4>
+                        <p class="card-text" th:text="${post.story}"></p>
+                        <a th:href="@{/posts/{id}/edit(id=${post.id})}" class="btn btn-primary">Edit</a>
+
+                        <button type="button" class="btn btn-secondary" data-toggle="modal" th:attr="data-target='#archiveModal' + ${post.id}">Archive</button>
+                    </div>
+                </div>
+
+                <!-- Archive Confirmation Modal -->
+                <div class="modal fade" th:id="'archiveModal' + ${post.id}" tabindex="-1" role="dialog" aria-labelledby="archiveModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="archiveModalLabel">Confirm Archive</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Are you sure you want to archive this post?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <form th:action="@{/posts/{id}/archive(id=${post.id})}" method="post">
+                                    <input type="submit" class="btn btn-danger" value="Confirm Archive">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div>
+        <h3>Your archived posts</h3>
+        <div class="row">
+            <div th:each="post : ${archivedPosts}" class="col-md-3 mb-4">
+                <div class="card">
+                    <!-- <img class="card-img-top" th:src="${post.imageURL}" alt="Post Image"> -->
+                    <div class="card-body">
+                        <h4 class="card-title" th:text="${post.title}"></h4>
+                        <p class="card-text" th:text="${post.story}"></p>
+
+                        <form th:action="@{/posts/{id}/unarchive(id=${post.id})}" method="post">
+                            <input type="submit" class="btn btn-secondary mt-2" value="Restore">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
 <div th:replace="~{partials/footer :: footer}"></div>
 </body>
 </html>
