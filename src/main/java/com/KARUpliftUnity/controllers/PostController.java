@@ -3,7 +3,6 @@ package com.KARUpliftUnity.controllers;
 import com.KARUpliftUnity.models.*;
 import com.KARUpliftUnity.repositories.*;
 import com.KARUpliftUnity.services.EmailService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -25,19 +24,21 @@ public class PostController {
 
     private final CommentRepository commentDao;
 
-    @Autowired
-    private  CategoryRepository categoryRepository;
 
-    @Autowired
-    private LikeRepository likeDao;
+    private final CategoryRepository categoryRepository;
 
 
-    public PostController(PostRepository postDao, UserRepository userDao, TagRepository tagDao, EmailService emailService, CommentRepository commentDao) {
+    private final LikeRepository likeDao;
+
+
+    public PostController(PostRepository postDao, UserRepository userDao, TagRepository tagDao, EmailService emailService, CommentRepository commentDao, CategoryRepository categoryRepository, LikeRepository likeDao) {
         this.postDao = postDao;
         this.userDao = userDao;
         this.tagDao = tagDao;
         this.emailService = emailService;
         this.commentDao = commentDao;
+        this.categoryRepository = categoryRepository;
+        this.likeDao = likeDao;
     }
 
     @GetMapping("/posts")
@@ -92,18 +93,18 @@ public class PostController {
 
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        Like existingLike = likeDao.findByUserAndPost(loggedInUser, postDao.getOne(postId));
+        Like existingLike = likeDao.findByUserAndPost(loggedInUser, postDao.findPostById(postId));
 
         if (existingLike != null) {
             likeDao.delete(existingLike);
         } else {
             Like newLike = new Like();
             newLike.setUser(loggedInUser);
-            newLike.setPost(postDao.getOne(postId));
+            newLike.setPost(postDao.findPostById(postId));
             likeDao.save(newLike);
         }
 
-        int updatedLikeCount = likeDao.countByPost(postDao.getOne(postId));
+        int updatedLikeCount = likeDao.countByPost(postDao.findPostById(postId));
 
         return ResponseEntity.ok(updatedLikeCount);
     }
