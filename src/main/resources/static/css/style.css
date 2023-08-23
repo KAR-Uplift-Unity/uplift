@@ -400,6 +400,37 @@ button.btn.btn-primary.custom-btn:active {
 
 /*CREATE A POST END*/
 
+/*INDIVIDUAL POST PAGE START*/
+
+.individual-post {
+    background-color: var(--off-white-color);
+    font-family: var(--poppins-font);
+}
+
+/* Normal state */
+.heart-btn {
+    background-color: white;
+    color: red;
+    border: 1px solid #FFC0B7;
+    padding: 5px 10px;
+    cursor: pointer;
+    width: 100px;
+
+}
+
+/* Liked state */
+.heart-btn.liked {
+    background-color: #ffe0d6;
+    color: red;
+    border: 1px solid #ffe0d6;
+    padding: 5px 10px;
+    cursor: pointer;
+    width: 100px;
+}
+
+
+/*INDIVIDUAL POST PAGE END*/
+
 /*FOOTER START*/
 
 .content-wrapper {
