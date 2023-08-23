@@ -46,13 +46,13 @@ public class PostController {
 
     @GetMapping("/posts")
     public String index(Model model) {
-        model.addAttribute("posts", postDao.findAll());
+        model.addAttribute("posts", postDao.findByArchiveFalse());
         return "/feed";
     }
 
     @GetMapping("/feed")
     public String showFeed(Model model) {
-        model.addAttribute("posts", postDao.findAll());
+        model.addAttribute("posts", postDao.findByArchiveFalse());
         return "feed";
     }
 
