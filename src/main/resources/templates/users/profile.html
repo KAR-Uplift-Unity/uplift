@@ -20,7 +20,9 @@
                 <div class="card">
                     <!-- <img class="card-img-top" th:src="${post.imageURL}" alt="Post Image"> -->
                     <div class="card-body">
-                        <h4 class="card-title" th:text="${post.title}"></h4>
+                        <a th:href="@{/posts/{id}(id=${post.id})}">
+                            <h4 class="card-title" th:text="${post.title}"></h4>
+                        </a>
                         <p class="card-text" th:text="${post.story}"></p>
                         <a th:href="@{/posts/{id}/edit(id=${post.id})}" class="btn btn-primary">Edit</a>
 
@@ -62,7 +64,9 @@
                 <div class="card">
                     <!-- <img class="card-img-top" th:src="${post.imageURL}" alt="Post Image"> -->
                     <div class="card-body">
-                        <h4 class="card-title" th:text="${post.title}"></h4>
+                        <a th:href="@{/posts/{id}(id=${post.id})}">
+                            <h4 class="card-title" th:text="${post.title}"></h4>
+                        </a>
                         <p class="card-text" th:text="${post.story}"></p>
 
                         <form th:action="@{/posts/{id}/unarchive(id=${post.id})}" method="post">
@@ -74,6 +78,7 @@
         </div>
 
     </div>
+    <button onclick="window.history.back()" class="btn btn-primary mt-3">Go Back</button>
 </div>
 <div th:replace="~{partials/footer :: footer}"></div>
 </body>

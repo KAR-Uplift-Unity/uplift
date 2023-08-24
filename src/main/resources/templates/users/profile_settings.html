@@ -7,7 +7,104 @@
 </head>
 <body>
 <div th:replace="~{partials/navbar :: navbar}"></div>
+<div class="container">
+    <!-- User Details Section -->
+    <div class="user-details mt-4">
+        <h2 th:text="${username}">Username</h2>
+        <form action="/update-details" method="post" id="userDetailsForm" class="mt-3">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" th:value="${username}" readonly class="form-control">
+            </div>
 
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" th:value="${email}" readonly class="form-control">
+            </div>
+
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editUserDetailsModal">Edit</button>
+        </form>
+    </div>
+
+
+    <!-- Password Change Section -->
+    <div class="password-change mt-5">
+        <h2>Password</h2>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#changePasswordModal">Change Password</button>
+    </div>
+    <div th:if="${successMessage}" class="alert alert-success mt-4" th:text="${successMessage}"></div>
+    <div th:if="${errorMessage}" class="alert alert-danger mt-4" th:text="${errorMessage}"></div>
+</div>
+
+<!-- Edit User Details Modal -->
+<div class="modal fade" id="editUserDetailsModal" tabindex="-1" aria-labelledby="editUserDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editUserDetailsModalLabel">Edit User Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/update-details" method="post" id="editUserDetailsForm">
+                    <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+
+                    <div class="form-group">
+                        <label for="editUsername">Username:</label>
+                        <input type="text" id="editUsername" name="username" th:value="${username}" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editEmail">Email:</label>
+                        <input type="email" id="editEmail" name="email" th:value="${email}" class="form-control" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="document.getElementById('editUserDetailsForm').submit();">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Password Modal -->
+<div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="changePasswordModalLabel">Change Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/update-password" method="post" id="changePasswordForm">
+                    <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+                    <div class="form-group">
+                        <label for="currentPassword">Current Password:</label>
+                        <input type="password" id="currentPassword" name="currentPassword" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newPassword">New Password:</label>
+                        <input type="password" id="newPassword" name="newPassword" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmNewPassword">Confirm New Password:</label>
+                        <input type="password" id="confirmNewPassword" name="confirmNewPassword" class="form-control" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="document.getElementById('changePasswordForm').submit();">Change Password</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div th:replace="~{partials/footer :: footer}"></div>
 </body>
 </html>
