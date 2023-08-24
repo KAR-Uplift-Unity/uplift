@@ -21,6 +21,8 @@ public class User {
     private String password;
     @Column
     private boolean archive;
+    @Column
+    private String profileImageUrl;
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
     private List<Post> posts;
 
@@ -33,13 +35,14 @@ public class User {
     public User() {
     }
 
-    public User(long id, boolean admin, String username, String email, String password, boolean archive, List<Post> posts, List<Like> likes, List<Comment> comments) {
+    public User(long id, boolean admin, String username, String email, String password, boolean archive,String profileImageUrl, List<Post> posts, List<Like> likes, List<Comment> comments) {
         this.id = id;
         this.admin = admin;
         this.username = username;
         this.email = email;
         this.password = password;
         this.archive = archive;
+        this.profileImageUrl = profileImageUrl;
         this.posts = posts;
         this.likes = likes;
         this.comments = comments;
@@ -52,6 +55,7 @@ public class User {
         email = copy.email;
         password = copy.password;
         archive = copy.archive;
+        profileImageUrl = copy.profileImageUrl;
         posts = copy.posts;
         likes = copy.likes;
         comments = copy.comments;
@@ -128,6 +132,14 @@ public class User {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public String getProfileImageUrl() {
+        return profileImageUrl;
+    }
+
+    public void setProfileImageUrl(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
     }
 }
 
