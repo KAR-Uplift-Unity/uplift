@@ -10,9 +10,9 @@
 
 <h1>Users</h1>
 <div th:each="user : ${users}" id="Latest posts">
-    <h4 th:text="${user.getUsername()}"></h4>
-    <button type="submit" th:formaction="@{/admin-panel}" formmethod="post" th:value="${user.getId()}">Delete User</button>
-    <a th:href="@{/posts/{id} (id= ${post.getId()})}" ></a>
+    <h4 th:text="${user.username}"></h4>
+    <form th:action="@{/admin-panel/{id}(id = ${user.id})}" method="DELETE"></form>
+    <button type="submit"  th:value="${user.id}">remove User</button>
 </div>
 
 <div th:replace="~{partials/footer :: footer}"></div>
