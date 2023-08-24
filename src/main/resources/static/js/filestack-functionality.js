@@ -16,7 +16,7 @@ function updateProfileImageUrl(url) {
     let token = document.querySelector('meta[name="_csrf"]').getAttribute('content');
     let header = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
 
-    fetch('/update-image', {
+    fetch('/update-profile-image', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
