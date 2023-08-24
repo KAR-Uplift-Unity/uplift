@@ -6,7 +6,9 @@ import com.KARUpliftUnity.repositories.*;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -53,12 +55,12 @@ public class AdminController {
         return "redirect:/";
     }
 
-    @PostMapping("/admin-panel")
-    public String dropUser(long id){
+    @DeleteMapping ("/admin-panel/{id}")
+    public String dropUser(@PathVariable long id){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         boolean admin  = user.getAdmin();
         if (admin) {
-            userDao.deleteUserById(id);
+            userDao.deleteById(id);
             return "admin/index";
         }
         return "admin/index";
