@@ -41,7 +41,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/posts/create", "/posts/*/edit", "/profile", "/settings", "/admin-panel", "/posts/*/comments", "/posts/*/toggle-like", "/posts/*/archive", "/posts/*/unarchive", "/settings").authenticated()
                         /* Pages that do not require authentication
                          * anyone can visit the home page, register, login, and view ads */
-                        .requestMatchers("/", "/posts", "/posts/*", "/signup", "/login", "/contact_us", "/mission").permitAll()
+                        .requestMatchers("/", "/posts", "/posts/*", "/signup", "/login", "/contact_us", "/mission", "/feed", "/posts/search").permitAll()
                         // allow loading of static resources
                         .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
                 )
