@@ -9,6 +9,7 @@ public class AuthenticationController {
     @GetMapping("/login")
     public String showLoginForm(HttpServletRequest request) {
         String previousUrl = (String) request.getSession().getAttribute("previousUrl");
+        System.out.println("Previous URL: " + previousUrl);
         if (previousUrl != null) {
             request.getSession().removeAttribute("previousUrl");
             return "redirect:" + previousUrl;
