@@ -5,7 +5,7 @@
     <title>Contact Us</title>
 </head>
 <body class="about-us-background">
-<div th:replace="~{partials/header :: header}"></div>
+<div th:replace="~{partials/header :: headerswiper}"></div>
 <div th:replace="~{partials/navbar :: navbar}"></div>
 <div class="container mission-content">
 
@@ -15,6 +15,14 @@
         challenges can share their experiences and link to their fundraising
         campaigns, tapping into a community eager to provide assistance and
         contribute to meaningful causes.</p>
+
+    <div class="swiper home-slider">
+        <div class="swiper-wrapper">
+            <img class="swiper-slide" src="/images/aaron-img.jpeg" alt="" />
+            <img class="swiper-slide" src="/images/kofi-img.png" alt="" />
+            <img class="swiper-slide" src="/images/robert-img.jpeg" alt="" />
+        </div>
+    </div>
 
     <h2 class="text-center pt-4 pb-3">Meet The Team</h2>
     <p class="text-center pb-3">During our time at Codeup's coding BootCamp, we crossed paths and felt

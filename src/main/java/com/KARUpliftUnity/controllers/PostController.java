@@ -3,13 +3,8 @@ package com.KARUpliftUnity.controllers;
 import com.KARUpliftUnity.models.*;
 import com.KARUpliftUnity.repositories.*;
 import com.KARUpliftUnity.services.EmailService;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
-import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -123,6 +118,35 @@ public class PostController {
         return ResponseEntity.ok(updatedLikeCount);
     }
 
+    @PostMapping("/posts/search")
+    public String search(@RequestParam(name = "query") String query, Model model) {
+        String query1 = query;
+
+        List<Post> searchTags = null;
+        List<Post> searchResultsTitle = postDao.getAllByTitleContainsIgnoreCaseOrStoryContainsIgnoreCase(query, query1);
+        List<Tag> searchResultsTags = tagDao.getAllByTagContainsIgnoreCase(query);
+
+        if(searchResultsTitle != null){
+
+            model.addAttribute("searchResultsTitle", searchResultsTitle);
+            
+        } else if (searchResultsTags != null) {
+
+            for (int i = 0; i < searchResultsTags.size(); i++) {
+                searchTags.add(searchResultsTags.get(i).getPost());
+                System.out.println(searchTags.toString());
+            }
+
+            model.addAttribute("searchResultsTags", searchTags);
+        }
+
+//        Category selectedCategory = categoryRepository.getCategoriesById(Integer.parseInt(query));
+//        List<Post> searchResultsCategory = selectedCategory != null ? selectedCategory.getPostCat() : new ArrayList<>();
+
+//        model.addAttribute("searchResultsCategory", searchResultsCategory);
+        return "feed";
+    }
+
     @GetMapping("/posts/{id}/edit")
     public String postEdit(@PathVariable long id, Model model) {
         Post post = postDao.getById(id);
@@ -223,7 +247,7 @@ public class PostController {
     @PostMapping("/posts/create")
     public String createPost(@ModelAttribute Post post,
                              @RequestParam(name = "tagString") String tagString,
-                             @RequestParam(name = "selectedCategories") List<Long> selectedCategories){
+                             @RequestParam(name = "selectedCategories") List<Long> selectedCategories) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         post.setUser(user);
@@ -241,7 +265,7 @@ public class PostController {
                 .distinct()
                 .toArray(String[]::new);
 
-        for (String tag : uniqueTags){
+        for (String tag : uniqueTags) {
             Tag tagEntity = new Tag(tag, postInfo);
             tagDao.save(tagEntity);
         }
