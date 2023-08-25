@@ -2,13 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="Eng">
 <head>
     <meta charset="UTF-8">
-    <title>Feed</title>
+    <title>Search Results</title>
     <div th:replace="~{partials/header :: header}"></div>
 </head>
 <body>
 <div th:replace="~{partials/navbar :: navbar}"></div>
 <div class="container">
-    <h2>Search Results for "<span th:text="${query}">Your Query</span>"</h2>
+    <h2 th:if="${query}">Search Results for "<span th:text="${query}">Your Query</span>"</h2>
 
     <form th:action="@{/posts/search}" method="post">
         <label>
@@ -17,7 +17,7 @@
         <button type="submit">Search</button>
     </form>
 
-    <form th:action="@{/posts/category/1}" method="post">
+    <form th:action="@{/posts/category/{id}(id=1)}" method="post">
         <button type="submit">Search</button>
     </form>
 
@@ -59,15 +59,8 @@
             </div>
         </div>
     </div>
-
-    <div th:each="post : ${posts}" id="Latest posts">
-        <a th:href="@{/posts/{id} (id= ${post.getId()})}"></a>
-        <h2 th:text="${post.getTitle()}"></h2>
-        <p th:text="${post.getStory()}"></p>
-        <p th:text="${post.getSolution()}"></p>
-        <hr>
-    </div>
 </div>
 <div th:replace="~{partials/footer :: footer}"></div>
+</div>
 </body>
 </html>

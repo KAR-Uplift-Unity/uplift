@@ -50,14 +50,22 @@ public class Post {
     private List<Category> categories;
 
 
-    public Post(long id, Date date, String title, String story, String solution, boolean archive, User user) {
+    public Post(long id, Date date, String title, String story, String solution, boolean flagged, boolean archive, User user, List<Like> likes, List<Comment> comment, List<Update> updates, List<Image> images, List<Tag> tags, String tagString, List<Category> categories) {
         this.id = id;
         this.date = date;
         this.title = title;
         this.story = story;
         this.solution = solution;
+        this.flagged = flagged;
         this.archive = archive;
         this.user = user;
+        this.likes = likes;
+        this.comment = comment;
+        this.updates = updates;
+        this.images = images;
+        this.tags = tags;
+        this.tagString = tagString;
+        this.categories = categories;
     }
 
     public Post() {
