@@ -77,7 +77,7 @@ public class SecurityConfiguration {
                                 "/update-details", "/update-profile-image", "/admin-panel/*").authenticated()
                         /* Pages that do not require authentication
                          * anyone can visit the home page, register, login, and view ads */
-                        .requestMatchers("/", "/posts", "/posts/*", "/signup", "/login", "/contact_us", "/mission", "/feed", "/posts/search").permitAll()
+                        .requestMatchers("/", "/posts", "/posts/*", "/signup", "/login", "/contact_us", "/mission", "/feed", "/posts/search", "/posts/category/*").permitAll()
                         // allow loading of static resources
                         .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
                 )

@@ -10,4 +10,7 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
     Category deleteByPostId (long id);
 
     List<Category> findAllByPost(Post post);
+  
+    List<Category> findAllById(long id);
+
 }
