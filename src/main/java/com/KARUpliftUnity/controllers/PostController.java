@@ -3,11 +3,13 @@ package com.KARUpliftUnity.controllers;
 import com.KARUpliftUnity.models.*;
 import com.KARUpliftUnity.repositories.*;
 import com.KARUpliftUnity.services.EmailService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.*;
 
@@ -17,6 +19,8 @@ public class PostController {
     private final PostRepository postDao;
 
     private final UserRepository userDao;
+
+    private final ImageRepository imageDao;
 
     private final TagRepository tagDao;
 
@@ -29,9 +33,10 @@ public class PostController {
     private final LikeRepository likeDao;
 
 
-    public PostController(PostRepository postDao, UserRepository userDao, TagRepository tagDao, EmailService emailService, CommentRepository commentDao, CategoryRepository categoryRepository, LikeRepository likeDao) {
+    public PostController(PostRepository postDao, UserRepository userDao, ImageRepository imageDao, TagRepository tagDao, EmailService emailService, CommentRepository commentDao, CategoryRepository categoryRepository, LikeRepository likeDao) {
         this.postDao = postDao;
         this.userDao = userDao;
+        this.imageDao = imageDao;
         this.tagDao = tagDao;
         this.emailService = emailService;
         this.commentDao = commentDao;
@@ -55,33 +60,51 @@ public class PostController {
     public String postId(@PathVariable long id, Model model) {
         try{
             Post post = postDao.getById(id);
+            User postAuthor = post.getUser();
             List<Comment> comments = commentDao.findByPostOrderByIdAsc(post);
+            List<Image> images = post.getImages();
 
-            User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            Like existingLike = null;
+            User loggedInUser = null;
 
-            Like existingLike = likeDao.findByUserAndPost(loggedInUser, post);
+            try {
+                loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                existingLike = likeDao.findByUserAndPost(loggedInUser, post);
+            } catch (Exception e) {
+
+            }
 
             boolean hasLiked = existingLike != null;
 
             int likeCount = likeDao.countByPost(post);
 
+            String imageUrl = postAuthor.getProfileImageUrl();
+            if (imageUrl == null || imageUrl.isEmpty()) {
+                imageUrl = "/images/default-image.png";
+            }
+
             model.addAttribute("post", post);
             model.addAttribute("comments", comments);
             model.addAttribute("hasLiked", hasLiked);
             model.addAttribute("likeCount", likeCount);
+            model.addAttribute("images", images);
+            model.addAttribute("profileImage", imageUrl);
+
         }catch (Exception e){
             Post post = postDao.getById(id);
             List<Comment> comments = commentDao.findByPostOrderByIdAsc(post);
-
+            List<Image> images = post.getImages();
             int likeCount = likeDao.countByPost(post);
 
             model.addAttribute("post", post);
             model.addAttribute("comments", comments);
             model.addAttribute("hasLiked", false);
             model.addAttribute("likeCount", likeCount);
+            model.addAttribute("images", images);
         }
         return "posts/show";
     }
+
     @PostMapping("/posts/{id}/comments")
     public String addComment(@PathVariable long id, @RequestParam String comment) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -117,33 +140,22 @@ public class PostController {
 
         return ResponseEntity.ok(updatedLikeCount);
     }
-
     @PostMapping("/posts/search")
-    public String search(@RequestParam(name = "query") String query, Model model) {
-        String query1 = query;
+    public String searchByStory(@RequestParam(name = "query") String query, Model model) {
+        List<Post> searchResultsTitle = postDao.findAllByTitleContainingIgnoreCaseOrStoryContainingIgnoreCase(query, query);
+        List<Tag> searchResultsTags = tagDao.findAllByTagContainsIgnoreCase(query);
 
-        List<Post> searchTags = null;
-        List<Post> searchResultsTitle = postDao.getAllByTitleContainsIgnoreCaseOrStoryContainsIgnoreCase(query, query1);
-        List<Tag> searchResultsTags = tagDao.getAllByTagContainsIgnoreCase(query);
+        model.addAttribute("searchResultsTitle", searchResultsTitle);
+        model.addAttribute("searchResultsTags", searchResultsTags);
+        model.addAttribute("query", query);
 
-        if(searchResultsTitle != null){
+        return "feed";
+    }
 
-            model.addAttribute("searchResultsTitle", searchResultsTitle);
-            
-        } else if (searchResultsTags != null) {
-
-            for (int i = 0; i < searchResultsTags.size(); i++) {
-                searchTags.add(searchResultsTags.get(i).getPost());
-                System.out.println(searchTags.toString());
-            }
-
-            model.addAttribute("searchResultsTags", searchTags);
-        }
-
-//        Category selectedCategory = categoryRepository.getCategoriesById(Integer.parseInt(query));
-//        List<Post> searchResultsCategory = selectedCategory != null ? selectedCategory.getPostCat() : new ArrayList<>();
-
-//        model.addAttribute("searchResultsCategory", searchResultsCategory);
+    @PostMapping("/posts/category/{id}")
+    public String searchByCategory(@PathVariable(name = "id") String id, Model model) {
+        List<Category> category = categoryRepository.findAllById(Long.parseLong(id));
+        model.addAttribute("category", category);
         return "feed";
     }
 
@@ -151,6 +163,7 @@ public class PostController {
     public String postEdit(@PathVariable long id, Model model) {
         Post post = postDao.getById(id);
         model.addAttribute("post", post);
+        model.addAttribute("images", post.getImages());
 
         List<Category> allCategories = categoryRepository.findAll();
         model.addAttribute("allCategories", allCategories);
@@ -237,9 +250,16 @@ public class PostController {
 
     @GetMapping("/posts/create")
     public String postsCreate(Model model) {
-        model.addAttribute("post", new Post());
+        if (!model.containsAttribute("postForm")) {
+            model.addAttribute("postForm", new Post());
+        }
+
         List<Category> allCategories = categoryRepository.findAll();
         model.addAttribute("allCategories", allCategories);
+
+        if (!model.containsAttribute("selectedCategoriesForm")) {
+            model.addAttribute("selectedCategoriesForm", new ArrayList<Long>());
+        }
         return "posts/create";
     }
 
@@ -247,7 +267,16 @@ public class PostController {
     @PostMapping("/posts/create")
     public String createPost(@ModelAttribute Post post,
                              @RequestParam(name = "tagString") String tagString,
-                             @RequestParam(name = "selectedCategories") List<Long> selectedCategories) {
+                             @RequestParam(name = "selectedCategories") List<Long> selectedCategories,
+                             @RequestParam(name = "imageUrls", required = false) String imageUrls,
+                             RedirectAttributes redirectAttributes) {
+
+        if (imageUrls.equals("")) {
+            redirectAttributes.addFlashAttribute("errorMessage", "You must upload an image to save the post.");
+            redirectAttributes.addFlashAttribute("postForm", post);
+            redirectAttributes.addFlashAttribute("selectedCategoriesForm", selectedCategories);
+            return "redirect:/posts/create";
+        }
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         post.setUser(user);
@@ -258,6 +287,17 @@ public class PostController {
         post.setCategories(categories);
 
         postDao.save(post);
+
+        if (imageUrls != null && !imageUrls.isEmpty()) {
+            String[] urls = imageUrls.split(",");
+            for (String imageUrl : urls) {
+                Image image = new Image();
+                image.setImage(imageUrl);
+                image.setPost(post);
+                imageDao.save(image);
+            }
+        }
+
         long postId = postDao.getIdByTitle(post.getTitle()).getId();
         Post postInfo = postDao.getById(postId);
 

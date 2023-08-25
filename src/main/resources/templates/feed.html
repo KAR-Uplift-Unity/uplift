@@ -18,10 +18,14 @@
         <button type="submit">Search</button>
     </form>
 
+    <form th:action="@{/posts/category/{id}}" method="post">
+        <button type="submit">Search</button>
+    </form>
+
     <div class="row" th:if="${searchResultsTitle}">
         <div th:each="post : ${searchResultsTitle}" class="col-md-4">
             <div class="card mb-4">
-                <!--                <img th:src="${post.imageUrl}" class="card-img-top" alt="Post Image">-->
+                <!--<img th:src="${post.imageUrl}" class="card-img-top" alt="Post Image">-->
                 <div class="card-body">
                     <h5 class="card-title" th:text="${post.title}">Post Title</h5>
                     <p class="card-text" th:text="${post.story}">Post Story</p>
@@ -44,18 +48,18 @@
     </div>
 </div>
 
-<!--<div class="row" th:if="${searchResultsTags}">-->
-<!--    <div th:each="post : ${searchResultsTags}" class="col-md-4">-->
-<!--        <div class="card mb-4">-->
-<!--            &lt;!&ndash;                <img th:src="${post.imageUrl}" class="card-img-top" alt="Post Image">&ndash;&gt;-->
-<!--            <div class="card-body">-->
-<!--                <h5 class="card-title" th:text="${post.title}">Post Title</h5>-->
-<!--                <p class="card-text" th:text="${post.story}">Post Story</p>-->
-<!--                <a th:href="@{/post/{id}(id=${post.id})}" class="btn btn-primary">Read More</a>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
+<div class="row" th:if="${category}">
+    <div th:each="post : ${category}" class="col-md-4">
+        <div class="card mb-4">
+            <!--                <img th:src="${post.imageUrl}" class="card-img-top" alt="Post Image">-->
+            <div class="card-body">
+                <h5 class="card-title" th:text="${post.title}">Post Title</h5>
+                <p class="card-text" th:text="${post.story}">Post Story</p>
+                <a th:href="@{/post/{id}(id=${post.id})}" class="btn btn-primary">Read More</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div th:each="post : ${posts}" id="Latest posts">
     <a th:href="@{/posts/{id} (id= ${post.getId()})}"></a>

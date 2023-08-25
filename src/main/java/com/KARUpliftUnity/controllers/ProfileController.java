@@ -8,6 +8,8 @@ import com.KARUpliftUnity.repositories.UserRepository;
 import com.KARUpliftUnity.services.EmailService;
 import com.KARUpliftUnity.services.UserDetailsLoader;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,6 +21,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.security.Principal;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 @Controller
@@ -50,9 +54,18 @@ public class ProfileController {
         if (admin) {
             model.addAttribute("admin", 1);
         }
+
+        String imageUrl = user.getProfileImageUrl();
+        if (imageUrl == null || imageUrl.isEmpty()) {
+            imageUrl = "/images/default-image.png";
+        }
+
+        model.addAttribute("profileImage", imageUrl);
+
         model.addAttribute("username", user.getUsername());
         model.addAttribute("activePosts", postDao.findByUserIdAndArchiveFalse(user.getId()));
         model.addAttribute("archivedPosts", postDao.findByUserIdAndArchiveTrue(user.getId()));
+
         return "/users/profile";
     }
 
@@ -98,14 +111,14 @@ public class ProfileController {
         // Username validation
         if (username.length() < 4) {
             model.addAttribute("usernameError", "Username should be at least 4 characters long");
-            return "settings"; // Assuming you want to redirect back to the settings page
+            return "settings";
         }
 
         // Email validation
         Pattern emailPattern = Pattern.compile("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$");
         if (!emailPattern.matcher(email).matches()) {
             model.addAttribute("emailError", "Please provide a valid email address");
-            return "settings"; // Redirect back to the settings page
+            return "settings";
         }
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -177,5 +190,25 @@ public class ProfileController {
         redirectAttributes.addFlashAttribute("successMessage", "Password updated successfully.");
 
         return "redirect:/settings";
+    }
+
+    @PostMapping("/update-profile-image")
+    public ResponseEntity<Map<String, String>> updateProfileImage(@RequestBody Map<String, String> body, Principal principal) {
+        User user = userDao.findByUsername(principal.getName());
+
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", "User not found"));
+        }
+
+        user.setProfileImageUrl(body.get("imageUrl"));
+        userDao.save(user);
+
+        User updatedUser = userDao.findByUsername(principal.getName());
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Authentication newAuth = new UsernamePasswordAuthenticationToken(updatedUser, auth.getCredentials(), auth.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(newAuth);
+
+        return ResponseEntity.ok(Map.of("message", "Profile image updated successfully"));
     }
 }
