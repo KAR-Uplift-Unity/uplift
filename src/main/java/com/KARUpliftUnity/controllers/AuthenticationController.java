@@ -13,8 +13,9 @@ public class AuthenticationController {
     public String showLoginForm(HttpServletRequest request, HttpSession session) {
 
         String referer = request.getHeader("Referer");
+        System.out.println("Referer: " + referer);
 
-        if(referer != null) {
+        if(referer != null && !referer.contains("/signup") && !referer.contains("/login")) {
             session.setAttribute("redirectUrl", referer);
         }
 
@@ -25,8 +26,9 @@ public class AuthenticationController {
     public String processLogin(HttpSession session){
 
         String redirectUrl = (String)session.getAttribute("redirectUrl");
+        System.out.println("Redirecting to: " + redirectUrl);
 
-        if(redirectUrl != null){
+        if(redirectUrl != null && !redirectUrl.contains("/signup") && !redirectUrl.contains("/login")) {
             return "redirect:" + redirectUrl;
         }
 
