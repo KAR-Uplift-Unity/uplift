@@ -8,6 +8,18 @@ const profileOptions = {
     }
 };
 
+const postOptions = {
+    maxFiles: 10,
+    onUploadDone: (response) => {
+        const filestackUrls = response.filesUploaded.map(file => file.url);
+        document.getElementById('hiddenImageUrls').value = filestackUrls.join(',');
+    }
+};
+
+function openPostImagePicker() {
+    client.picker(postOptions).open();
+}
+
 function openProfileImagePicker() {
     client.picker(profileOptions).open();
 }

@@ -161,5 +161,13 @@ public class Post {
     public void setTagString(String tagString) {
         this.tagString = tagString;
     }
+
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
+    }
 }
 

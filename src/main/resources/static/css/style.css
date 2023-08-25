@@ -66,7 +66,7 @@ nav {
 
 /*NAVBAR END*/
 
-/*HERO SECTION START*/
+/*HERO SECTION / INDEX PAGE START*/
 
 .hero-section {
     background-color: var(--tan-color);
@@ -104,11 +104,18 @@ div.hero-section a.btn.btn-primary.custom-btn:active {
     background-color: var(--on-click-color);
 }
 
-.card-content h3 {
+.card-content h2, .index-body h2 {
     font-family: var(--logo-font);
 }
 
-/*HERO SECTION END*/
+.card-img-top {
+    width: 100%;
+    max-height: 175px;
+    object-fit: cover;
+}
+
+
+/*HERO SECTION END / INDEX PAGE END*/
 
 /*SIGN UP PAGE START*/
 
@@ -426,6 +433,16 @@ button.btn.btn-primary.custom-btn:active {
     padding: 5px 10px;
     cursor: pointer;
     width: 100px;
+}
+
+.carousel-item img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+}
+
+.date  {
+    font-size: 12px;
 }
 
 
