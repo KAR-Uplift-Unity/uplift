@@ -8,6 +8,6 @@ import java.util.List;
 public interface TagRepository extends JpaRepository<Tag, Long> {
     List<Tag> findByPost(Post post);
 
-    List<Tag> getAllByTagContainsIgnoreCase(String query);
+    List<Tag> findAllByTagContainsIgnoreCase(String query);
 
 }
