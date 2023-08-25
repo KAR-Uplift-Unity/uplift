@@ -117,33 +117,22 @@ public class PostController {
 
         return ResponseEntity.ok(updatedLikeCount);
     }
-
     @PostMapping("/posts/search")
-    public String search(@RequestParam(name = "query") String query, Model model) {
-        String query1 = query;
+    public String searchByStory(@RequestParam(name = "query") String query, Model model) {
+        List<Post> searchResultsTitle = postDao.findAllByTitleContainingIgnoreCaseOrStoryContainingIgnoreCase(query, query);
+        List<Tag> searchResultsTags = tagDao.findAllByTagContainsIgnoreCase(query);
 
-        List<Post> searchTags = null;
-        List<Post> searchResultsTitle = postDao.getAllByTitleContainsIgnoreCaseOrStoryContainsIgnoreCase(query, query1);
-        List<Tag> searchResultsTags = tagDao.getAllByTagContainsIgnoreCase(query);
+        model.addAttribute("searchResultsTitle", searchResultsTitle);
+        model.addAttribute("searchResultsTags", searchResultsTags);
+        model.addAttribute("query", query);
 
-        if(searchResultsTitle != null){
+        return "feed";
+    }
 
-            model.addAttribute("searchResultsTitle", searchResultsTitle);
-            
-        } else if (searchResultsTags != null) {
-
-            for (int i = 0; i < searchResultsTags.size(); i++) {
-                searchTags.add(searchResultsTags.get(i).getPost());
-                System.out.println(searchTags.toString());
-            }
-
-            model.addAttribute("searchResultsTags", searchTags);
-        }
-
-//        Category selectedCategory = categoryRepository.getCategoriesById(Integer.parseInt(query));
-//        List<Post> searchResultsCategory = selectedCategory != null ? selectedCategory.getPostCat() : new ArrayList<>();
-
-//        model.addAttribute("searchResultsCategory", searchResultsCategory);
+    @PostMapping("/posts/category/{id}")
+    public String searchByCategory(@PathVariable(name = "id") String id, Model model) {
+        List<Category> category = categoryRepository.findAllById(Long.parseLong(id));
+        model.addAttribute("category", category);
         return "feed";
     }
 
