@@ -59,13 +59,12 @@ public class ProfileController {
         if (imageUrl == null || imageUrl.isEmpty()) {
             imageUrl = "/images/default-image.png";
         }
-        System.out.println(imageUrl);
+
         model.addAttribute("profileImage", imageUrl);
 
         model.addAttribute("username", user.getUsername());
         model.addAttribute("activePosts", postDao.findByUserIdAndArchiveFalse(user.getId()));
         model.addAttribute("archivedPosts", postDao.findByUserIdAndArchiveTrue(user.getId()));
-        System.out.println("Profile Image URL: " + imageUrl);
 
         return "/users/profile";
     }
@@ -112,14 +111,14 @@ public class ProfileController {
         // Username validation
         if (username.length() < 4) {
             model.addAttribute("usernameError", "Username should be at least 4 characters long");
-            return "settings"; // Assuming you want to redirect back to the settings page
+            return "settings";
         }
 
         // Email validation
         Pattern emailPattern = Pattern.compile("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$");
         if (!emailPattern.matcher(email).matches()) {
             model.addAttribute("emailError", "Please provide a valid email address");
-            return "settings"; // Redirect back to the settings page
+            return "settings";
         }
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
