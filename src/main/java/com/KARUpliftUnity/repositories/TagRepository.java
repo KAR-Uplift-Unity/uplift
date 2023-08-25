@@ -10,4 +10,6 @@ public interface TagRepository extends JpaRepository<Tag, Long> {
 
     List<Tag> findAllByTagContainsIgnoreCase(String query);
 
+    List<Tag> findAllByPost(Post post);
+
 }

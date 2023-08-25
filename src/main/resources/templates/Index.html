@@ -3,11 +3,11 @@
 
 <head>
     <title>UpliftUnity</title>
+    <div th:replace="~{partials/header :: header}"></div>
 </head>
 
 <body class="index-body">
 <div class="content-wrapper">
-    <div th:replace="~{partials/header :: header}"></div>
     <div th:replace="~{partials/navbar :: navbar}"></div>
     <div class="hero-section">
         <div class="container">
@@ -16,7 +16,7 @@
                     <h1 class="display-3">UpliftUnity</h1>
                     <p class="pt-2">Where Stories Meet Support. Together, We Make a Difference.</p>
                     <a class="btn btn-primary custom-btn text-white d-flex align-items-center
-                     justify-content-center mt-3" href="/mission">Our Mission</a>
+                     justify-content-center mt-3" th:href="@{/mission}">Our Mission</a>
                 </div>
                 <div class="col-lg-6 col-xs-12 d-flex justify-content-end">
                     <img src="/images/earth.png" alt="Water color painting of earth"

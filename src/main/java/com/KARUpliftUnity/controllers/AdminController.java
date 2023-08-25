@@ -1,7 +1,6 @@
 package com.KARUpliftUnity.controllers;
 
-import com.KARUpliftUnity.models.Post;
-import com.KARUpliftUnity.models.User;
+import com.KARUpliftUnity.models.*;
 import com.KARUpliftUnity.repositories.*;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -20,7 +19,7 @@ public class AdminController {
 
     private final UserRepository userDao;
 
-    private final UserRepository updateDao;
+    private final UpdateRepository updateDao;
 
     private final TagRepository tagDao;
 
@@ -32,7 +31,7 @@ public class AdminController {
 
     private final CategoryRepository catDao;
 
-    public AdminController(PostRepository postDao, UserRepository userDao, UserRepository updateDao, TagRepository tagDao, LikeRepository likeDao, ImageRepository imgDao, CommentRepository comDao, CategoryRepository catDao) {
+    public AdminController(PostRepository postDao, UserRepository userDao, UpdateRepository updateDao, TagRepository tagDao, LikeRepository likeDao, ImageRepository imgDao, CommentRepository comDao, CategoryRepository catDao) {
         this.postDao = postDao;
         this.userDao = userDao;
         this.updateDao = updateDao;
@@ -55,14 +54,41 @@ public class AdminController {
         return "redirect:/";
     }
 
-    @DeleteMapping ("/admin-panel/{id}")
+    @PostMapping ("/admin-panel/{id}")
     public String dropUser(@PathVariable long id){
+        System.out.println("id = " + id);
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         boolean admin  = user.getAdmin();
         if (admin) {
+            User userToDel = userDao.findUserById(id);
+            List<Like> likes = likeDao.findAllByUser(userToDel);
+            if (likes != null){
+                likeDao.deleteAllInBatch(likes);
+            }
+            List<Comment> comments = comDao.findAllByUser(userToDel);
+            if (comments != null){
+                comDao.deleteAllInBatch(comments);
+            }
+            List<Post> usersPosts = postDao.findAllByUser(userToDel);
+            if (usersPosts != null){
+                for (Post post : usersPosts){
+                    List<Image> images = imgDao.findAllByPost(post);
+                    if (images != null){
+                        imgDao.deleteAllInBatch(images);
+                    }
+                    List<Update> updates = updateDao.findAllByPost(post);
+                    if (updates != null){
+                        updateDao.deleteAllInBatch(updates);
+                    }
+                    List<Category> categories = catDao.findAllByPost(post);
+                    if (categories != null){
+                        catDao.deleteAllInBatch(categories);
+                    }
+                }
+                postDao.deleteAllInBatch(usersPosts);
+            }
             userDao.deleteById(id);
-            return "admin/index";
         }
-        return "admin/index";
+        return "redirect:/admin-panel";
     }
 }

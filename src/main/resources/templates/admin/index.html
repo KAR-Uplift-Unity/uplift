@@ -11,8 +11,10 @@
 <h1>Users</h1>
 <div th:each="user : ${users}" id="Latest posts">
     <h4 th:text="${user.username}"></h4>
-    <form th:action="@{/admin-panel/{id}(id = ${user.id})}" method="DELETE"></form>
-    <button type="submit"  th:value="${user.id}">remove User</button>
+    <form th:action="@{/admin-panel/{id}(id = ${user.id})}" method="post">
+        <button type="submit">Remove user</button>
+    </form>
+
 </div>
 
 <div th:replace="~{partials/footer :: footer}"></div>
