@@ -72,12 +72,12 @@ public class SecurityConfiguration {
                         /* Pages that require authentication
                          * only authenticated users can create and edit ads */
                         .requestMatchers("/posts/create", "/posts/*/edit", "/profile",
-                                "/settings", "/admin-panel", "/posts/*/comments", "/posts/*/toggle-like",
+                                "/settings", "/admin-panel", "/admin-panel/*", "/posts/*/comments", "/posts/*/toggle-like",
                                 "/posts/*/archive", "/posts/*/unarchive", "/settings", "/update-password",
                                 "/update-details", "/update-profile-image").authenticated()
                         /* Pages that do not require authentication
                          * anyone can visit the home page, register, login, and view ads */
-                        .requestMatchers("/", "/posts", "/posts/*", "/signup", "/login", "/contact_us", "/mission", "/feed", "/posts/search", "/favicon.ico").permitAll()
+                        .requestMatchers("/", "/posts", "/posts/*", "/signup", "/login", "/contact_us", "/mission", "/feed", "/posts/search", "/favicon.ico", "/post/category/*").permitAll()
                         // allow loading of static resources
                         .requestMatchers("/css/**", "/js/**", "/images/**", "/favicon.ico").permitAll()
                 )
