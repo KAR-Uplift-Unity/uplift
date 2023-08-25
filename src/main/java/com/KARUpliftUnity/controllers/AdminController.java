@@ -48,7 +48,9 @@ public class AdminController {
         boolean admin  = user.getAdmin();
         if (admin) {
             List<User> allUsers = userDao.findAll();
+            List<Post> flagged = postDao.findAllByFlaggedIsTrue();
             model.addAttribute("users", allUsers);
+            model.addAttribute("flagged",flagged);
             return "admin/index";
         }
         return "redirect:/";
