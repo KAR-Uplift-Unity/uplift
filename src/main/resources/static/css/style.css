@@ -405,6 +405,32 @@ button.btn.btn-primary.custom-btn:active {
     box-shadow: none;
 }
 
+.image-preview-wrapper {
+    display: inline-block;
+    position: relative;
+    margin: 5px;
+}
+
+.remove-image-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: darkgray;
+    color: white;
+    cursor: pointer;
+    padding: 2px 5px;
+}
+
+.form-group .upload-button{
+    background-color: #a7aaaf;
+    color: white;
+}
+
+.form-group .upload-button:hover {
+    background-color: grey;
+    color: white;
+}
+
 /*CREATE A POST END*/
 
 /*INDIVIDUAL POST PAGE START*/
@@ -530,6 +556,16 @@ footer .footer-background {
 
 /*TAGS END*/
 
+/*PROFILE PAGE START*/
+
+.profile-image {
+    width: 65px;
+    height: 65px;
+    border-radius: 50px;
+}
+
+/*PROFILE PAGE END*/
+
 /*WELCOME MODAL START*/
 
 #firstTimeVisitorModal {
@@ -563,7 +599,6 @@ footer .footer-background {
         width: 55%;
     }
 }
-
 
 /*MEDIA QUERIES END*/
 
