@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>Edit Post</title>
     <div th:replace="~{partials/header :: header}"></div>
+
+    <meta th:name="'_csrf'" th:content="${_csrf.token}"/>
+    <meta th:name="'_csrf_header'" th:content="${_csrf.headerName}"/>
 </head>
 <body class="create-page-bg">
 <div th:replace="~{partials/navbar :: navbar}"></div>
@@ -53,8 +56,20 @@
         <!-- Images -->
         <h4>Images</h4>
         <div class="form-group">
-            <label for="images">Upload:</label>
-            <input type="file" name="images" id="images" class="form-control-file" multiple>
+            <button type="button" onclick="openPostImagePicker()" class="rounded btn btn-outline upload-button">Upload Images</button>
+            <input type="hidden" id="hiddenImageUrls" name="imageUrls">
+            <div id="imagePreviewContainer"></div>
+        </div>
+        <div id="existingImagesContainer">
+            <div class="row">
+                <div th:each="image : ${images}" class="col-2">
+                    <div class="image-preview-wrapper">
+                        <img th:src="${image.image}" alt="Existing image preview" width="90">
+                        <span class="remove-image-button" th:data-image-id="${image.id}"
+                              onclick="removeExistingImage(this)">X</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Submit -->
@@ -65,5 +80,7 @@
 </div>
 <div th:replace="~{partials/footer :: footer}"></div>
 <script th:src="@{/js/tag-edit.js}" type="text/javascript"></script>
+<script th:src="@{/js/filestack-api-key.js}"></script>
+<script th:src="@{/js/filestack-functionality.js}"></script>
 </body>
 </html>
