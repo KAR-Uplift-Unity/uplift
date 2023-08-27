@@ -14,11 +14,11 @@ public class Post {
     private long id;
     @Column(nullable = false)
     private Date date;
-    @Column(nullable = false, length = 45)
+    @Column(nullable = false, length = 150)
     private String title;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 5000)
     private String story;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 2500)
     private String solution;
     @Column
     private boolean flagged;

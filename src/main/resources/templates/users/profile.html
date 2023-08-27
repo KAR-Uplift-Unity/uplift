@@ -34,7 +34,8 @@
                         <a th:href="@{/posts/{id}(id=${post.id})}">
                             <h4 class="card-title" th:text="${post.title}"></h4>
                         </a>
-                        <p class="card-text" th:text="${post.story}"></p>
+                        <p class="card-text" th:text="${#strings.abbreviate(post.story,75)}"></p>
+
 
                         <!-- Edit and Archive buttons -->
                         <a th:href="@{/posts/{id}/edit(id=${post.id})}" class="btn btn-primary">Edit</a>

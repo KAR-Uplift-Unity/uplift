@@ -149,7 +149,7 @@ public class PostController {
         return "posts/search";
     }
 
-    @PostMapping("/posts/category/{id}")
+    @GetMapping("/posts/category/{id}")
     public String searchByCategory(@PathVariable(name = "id") long id, Model model) {
         List<Post> catPost = new ArrayList<>();
 
