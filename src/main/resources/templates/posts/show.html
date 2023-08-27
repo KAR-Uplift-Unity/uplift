@@ -93,19 +93,21 @@
                     <p class="card-text" th:text="${comment.comment}"></p>
                     <footer class="blockquote-footer"><cite th:text="${comment.user.username}"></cite></footer>
                     <div class="row d-flex align-items-center mt-2 pl-3">
-                    <span th:text="${comment.timestamp != null} ? ${#temporals.format(comment.timestamp, 'MM/dd/yyyy h:mm a')} : ''" class="text-muted"></span>
+                        <span th:text="${comment.timestamp != null} ? ${#temporals.format(comment.timestamp, 'MM/dd/yyyy h:mm a')} : ''"
+                              class="text-muted"></span>
 
-                    <!-- Edit button for the comment -->
-                    <button th:if="${#authentication.name == comment.user.username}"
-                            class="btn comment-button"
-                            data-toggle="modal"
-                            th:data-target="'#editCommentModal-' + ${comment.id}">Edit</button>
+                        <!-- Edit button for the comment -->
+                        <button th:if="${#authentication.name == comment.user.username}"
+                                class="btn comment-button"
+                                data-toggle="modal"
+                                th:data-target="'#editCommentModal-' + ${comment.id}">Edit
+                        </button>
 
-                    <!-- Delete button for the comment -->
-                    <form th:if="${#authentication.name == comment.user.username}"
-                          th:action="@{/comments/{id}/delete(id=${comment.id})}" method="post">
-                        <button type="submit" class="btn comment-button">Delete</button>
-                    </form>
+                        <!-- Delete button for the comment -->
+                        <form th:if="${#authentication.name == comment.user.username}"
+                              th:action="@{/comments/{id}/delete(id=${comment.id})}" method="post">
+                            <button type="submit" class="btn comment-button">Delete</button>
+                        </form>
                     </div>
                 </div>
 
@@ -123,11 +125,13 @@
                                 <form th:action="@{/comments/{id}/edit(id=${comment.id})}" method="post">
                                     <div class="form-group">
                                         <label for="comment-content">Comment</label>
-                                        <textarea class="form-control" name="content" rows="3" required id="comment-content">[[${comment.comment}]]</textarea>
+                                        <textarea class="form-control" name="content" rows="3" required
+                                                  id="comment-content">[[${comment.comment}]]</textarea>
 
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                        </button>
                                         <button type="submit" class="btn btn-primary">Save changes</button>
                                     </div>
                                 </form>
@@ -141,17 +145,20 @@
         <!-- Add Comment Form -->
         <form th:action="@{/posts/{id}/comments(id=${post.id})}" method="post" class="mt-4">
             <div class="form-group">
-                <textarea name="comment" class="form-control" rows="3" placeholder="Add your comment..." required></textarea>
+                <textarea name="comment" class="form-control" rows="3" placeholder="Add your comment..."
+                          required></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Add Comment</button>
         </form>
     </div>
-    <button onclick="window.history.back()" class="btn btn-primary mt-3">Go Back</button>
-    <button class="btn btn-danger mb-2" data-toggle="modal" data-target="#reportModal">Report Post</button>
+    <div class="row mt-5">
+        <button class="btn btn-danger mx-auto" data-toggle="modal" data-target="#reportModal">Report Post</button>
+    </div>
 </div>
 
 <!-- Report Modal -->
-<div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
+<div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -171,7 +178,7 @@
                             <option value="Other">Other</option>
                         </select>
                     </div>
-                    <input type="hidden" name="postId" th:value="${post.id}" />
+                    <input type="hidden" name="postId" th:value="${post.id}"/>
                     <button type="submit" class="btn btn-danger">Submit Report</button>
                 </form>
             </div>
