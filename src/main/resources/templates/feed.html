@@ -8,6 +8,7 @@
 <body>
 <div th:replace="~{partials/navbar :: navbar}"></div>
 <div class="container">
+    <h1>Feed</h1>
     <h2>Search Results for "<span th:text="${query}">Your Query</span>"</h2>
 
     <form th:action="@{/posts/search}" method="post">
@@ -28,7 +29,9 @@
             <div class="card mb-4">
                 <!--<img th:src="${post.imageUrl}" class="card-img-top" alt="Post Image">-->
                 <div class="card-body">
-                    <h5 class="card-title" th:text="${post.title}">Post Title</h5>
+                    <a th:href="@{/posts/{id}(id=${post.id})}">
+                        <h5 class="card-title" th:text="${post.title}"></h5>
+                    </a>
                     <p class="card-text" th:text="${#strings.abbreviate(post.story,150)}">Post Story</p>
                     <a th:href="@{/posts/{id}(id=${post.id})}" class="btn btn-primary">Read More</a>
                 </div>
@@ -56,18 +59,27 @@
                 <div class="card-body">
                     <h5 class="card-title" th:text="${post.title}">Post Title</h5>
                     <p class="card-text" th:text="${#strings.abbreviate(post.story,150)}">Post Story</p>
-                    <a th:href="@{/posts/{id}(id=${post.id})}" class="btn btn-primary">Read More</a>
+                    <a th:href="@{/post/{id}(id=${post.id})}" class="btn btn-primary">Read More</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <div th:each="post : ${posts}" id="Latest posts">
-        <h2 th:text="${post.title}"></h2>
-        <p th:text="${#strings.abbreviate(post.story,150)}"></p>
-        <a th:href="@{/posts/{id}(id=${post.id})}" class="btn btn-primary">Read More</a>
-        <hr>
+    <div class="col-lg-8 d-flex flex-column justify-content-center mx-auto">
+        <div th:each="post : ${posts}" class="card mb-3" id="Latest posts">
+            <img th:if="${post.images.size() > 0}" th:src="${post.images.get(0).image}" class="card-img-top"
+                 alt="Post Image">
+            <div class="card-body">
+                <a th:href="@{/posts/{id} (id= ${post.getId()})}">
+                    <h5 class="card-title" th:text="${post.title}"></h5>
+                </a>
+                <p class="card-text" th:text="${#strings.abbreviate(post.story,150)}"></p>
+            </div>
+        </div>
     </div>
+
+    <button onclick="window.history.back()" class="btn btn-primary mt-3">Go Back</button>
+
 </div>
 <div th:replace="~{partials/footer :: footer}"></div>
 </body>

@@ -4,41 +4,50 @@
     <meta charset="UTF-8">
     <title>Profile</title>
     <div th:replace="~{partials/header :: header}"></div>
-
-    <meta th:name="'_csrf'" th:content="${_csrf.token}"/>
-    <meta th:name="'_csrf_header'" th:content="${_csrf.headerName}"/>
-
-
 </head>
 <body>
 <div th:replace="~{partials/navbar :: navbar}"></div>
 <div class="container">
-    <div class="d-flex justify-content-between my-4">
-        <img th:src="${profileImage}" alt="Profile Image" width="90" height="90">
-
-        <h2 th:text="${username}"></h2>
-        <a href="/settings">Profile Settings</a>
+    <div class="row d-flex mt-4">
+        <div class="col">
+            <img th:src="${profileImage}" alt="Profile Image" class="profile-image">
+            <h4 th:text="${username}"></h4>
+        </div>
+        <div class="col d-flex justify-content-end">
+            <a href="/settings">Profile Settings</a>
+        </div>
     </div>
-    <button onclick="openProfileImagePicker()">Upload Profile Image</button>
-    <div>
-        <h3>Your active posts</h3>
+    <div class="mt-2">
+        <h3 class="mb-2">Your active posts</h3>
+        <div th:if="${activePosts.isEmpty()}" class="mb-4">
+            No archived posts to show.
+        </div>
         <div class="row">
-            <div th:each="post : ${activePosts}" class="col-md-3 mb-4">
+            <div th:unless="${activePosts.isEmpty()}" th:each="post : ${activePosts}" class="col-md-3 mb-4">
                 <div class="card">
-                    <!-- <img class="card-img-top" th:src="${post.imageURL}" alt="Post Image"> -->
+
+                    <!-- Display the first image for the post if it exists -->
+                    <img th:if="${post.images.size() > 0}" th:src="${post.images.get(0).image}" class="card-img-top"
+                         alt="Post Image">
+
                     <div class="card-body">
                         <a th:href="@{/posts/{id}(id=${post.id})}">
                             <h4 class="card-title" th:text="${post.title}"></h4>
                         </a>
                         <p class="card-text" th:text="${#strings.abbreviate(post.story,75)}"></p>
-                        <a th:href="@{/posts/{id}/edit(id=${post.id})}" class="btn btn-primary">Edit</a>
 
-                        <button type="button" class="btn btn-secondary" data-toggle="modal" th:attr="data-target='#archiveModal' + ${post.id}">Archive</button>
+
+                        <!-- Edit and Archive buttons -->
+                        <a th:href="@{/posts/{id}/edit(id=${post.id})}" class="btn btn-primary">Edit</a>
+                        <button type="button" class="btn btn-secondary" data-toggle="modal"
+                                th:attr="data-target='#archiveModal' + ${post.id}">Archive
+                        </button>
                     </div>
                 </div>
 
                 <!-- Archive Confirmation Modal -->
-                <div class="modal fade" th:id="'archiveModal' + ${post.id}" tabindex="-1" role="dialog" aria-labelledby="archiveModalLabel" aria-hidden="true">
+                <div class="modal fade" th:id="'archiveModal' + ${post.id}" tabindex="-1" role="dialog"
+                     aria-labelledby="archiveModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -65,11 +74,17 @@
 
 
     <div>
-        <h3>Your archived posts</h3>
+        <h3 class="mb-2">Your archived posts</h3>
+        <div th:if="${archivedPosts.isEmpty()}" class="mb-4">
+            No archived posts to show.
+        </div>
         <div class="row">
-            <div th:each="post : ${archivedPosts}" class="col-md-3 mb-4">
+            <div th:unless="${archivedPosts.isEmpty()}" th:each="post : ${archivedPosts}" class="col-md-3 mb-4">
                 <div class="card">
-                    <!-- <img class="card-img-top" th:src="${post.imageURL}" alt="Post Image"> -->
+
+                    <!-- Display the first image for the post if it exists -->
+                    <img th:if="${post.images.size() > 0}" th:src="${post.images.get(0).image}" class="card-img-top"
+                         alt="Post Image">
                     <div class="card-body">
                         <a th:href="@{/posts/{id}(id=${post.id})}">
                             <h4 class="card-title" th:text="${post.title}"></h4>
@@ -77,7 +92,7 @@
                         <p class="card-text" th:text="${post.story}"></p>
 
                         <form th:action="@{/posts/{id}/unarchive(id=${post.id})}" method="post">
-                            <input type="submit" class="btn btn-secondary mt-2" value="Restore">
+                            <input type="submit" class="btn btn-secondary mt-2 w-100" value="Restore">
                         </form>
                     </div>
                 </div>
@@ -85,17 +100,9 @@
         </div>
     </div>
     <button onclick="window.history.back()" class="btn btn-primary mt-3">Go Back</button>
-    <div id="success-message" class="alert alert-success d-none" role="alert">
-        Profile image updated successfully
-    </div>
 
-    <div id="error-message" class="alert alert-danger d-none" role="alert">
-        Failed to update profile image
-    </div>
 
 </div>
 <div th:replace="~{partials/footer :: footer}"></div>
-<script src="/js/filestack-api-key.js"></script>
-<script src="/js/filestack-functionality.js"></script>
 </body>
 </html>
