@@ -48,14 +48,9 @@ public class PostController {
     @GetMapping("/posts")
     public String index(Model model) {
         model.addAttribute("posts", postDao.findByArchiveFalse());
-        return "/feed";
-    }
-
-    @GetMapping("/feed")
-    public String showFeed(Model model) {
-        model.addAttribute("posts", postDao.findByArchiveFalse());
         return "feed";
     }
+
 
     @GetMapping("/posts/{id}")
     public String postId(@PathVariable long id, Model model) {
@@ -151,14 +146,28 @@ public class PostController {
         model.addAttribute("searchResultsTags", searchResultsTags);
         model.addAttribute("query", query);
 
-        return "feed";
+        return "posts/search";
     }
 
     @PostMapping("/posts/category/{id}")
-    public String searchByCategory(@PathVariable(name = "id") String id, Model model) {
-        List<Category> category = categoryRepository.findAllById(Long.parseLong(id));
-        model.addAttribute("category", category);
-        return "feed";
+    public String searchByCategory(@PathVariable(name = "id") long id, Model model) {
+        List<Post> catPost = new ArrayList<>();
+
+        List<Post> posts = postDao.findByArchiveFalse();
+        for (Post post: posts){
+            List<Category> cat = categoryRepository.findAllByPost(post);
+            for (Category category: cat){
+                if (category.getId() == id) {
+                    catPost.add(post);
+                }
+            }
+        }
+
+        if (catPost != null){
+            model.addAttribute("category", catPost);
+            return "posts/search";
+        }
+        return "redirect:/posts";
     }
 
     @GetMapping("/posts/{id}/edit")
