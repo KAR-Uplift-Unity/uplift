@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Controller
@@ -114,6 +115,7 @@ public class PostController {
         newComment.setComment(comment);
         newComment.setUser(user);
         newComment.setPost(post);
+        newComment.setTimestamp(LocalDateTime.now());
 
         commentDao.save(newComment);
 
@@ -191,9 +193,22 @@ public class PostController {
     @PostMapping("/posts/{id}/edit")
     public String editPost(@PathVariable long id,
                            @ModelAttribute Post editedPost,
-                           @RequestParam(name = "selectedCategories") List<Long> selectedCategories) {
+                           @RequestParam(name = "selectedCategories") List<Long> selectedCategories,
+                           @RequestParam(name = "imageUrls", required = false) String imageUrls) {
 
         Post existingPost = postDao.getById(id);
+
+        if (imageUrls != null && !imageUrls.isEmpty()) {
+
+            String[] urls = imageUrls.split(",");
+            for (String imageUrl : urls) {
+                Image image = new Image();
+                image.setImage(imageUrl);
+                image.setPost(existingPost);
+                imageDao.save(image);
+            }
+        }
+
 
         existingPost.setTitle(editedPost.getTitle());
         existingPost.setStory(editedPost.getStory());
@@ -246,6 +261,18 @@ public class PostController {
 
         return "redirect:/posts/" + id;
     }
+
+    @PostMapping("/posts/{imageId}/delete-image")
+    public ResponseEntity<String> deleteImage(@PathVariable long imageId) {
+        try {
+            Image image = imageDao.getById(imageId);
+            imageDao.delete(image);
+            return ResponseEntity.ok("Image deleted successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting image");
+        }
+    }
+
 
 
     @GetMapping("/posts/create")
