@@ -376,4 +376,14 @@ public class PostController {
 
         return "redirect:/posts/" + associatedPost.getId();
     }
+
+    @PostMapping("/report-post")
+    public String reportPost(@RequestParam(name="reportReason") String reportReason, @RequestParam(name="postId") Long postId) {
+        Post post = postDao.getById(postId);
+        post.setFlagged(true);
+        post.setReportReason(reportReason);
+        postDao.save(post);
+        return "redirect:/posts/" + postId;
+    }
+
 }
