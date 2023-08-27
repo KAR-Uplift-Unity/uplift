@@ -114,6 +114,14 @@ div.hero-section a.btn.btn-primary.custom-btn:active {
     object-fit: cover;
 }
 
+.icon-text-color {
+    color: #565656;
+}
+
+.icon-text-color:hover {
+    color: #ee994a;
+}
+
 
 /*HERO SECTION END / INDEX PAGE END*/
 
@@ -473,6 +481,22 @@ button.btn.btn-primary.custom-btn:active {
 
 
 /*INDIVIDUAL POST PAGE END*/
+
+/*POSTS/FEED PAGE START*/
+
+.feed-background {
+    background-color: var(--off-white-color);
+}
+
+.search-bar {
+    background-color: transparent;
+    width: 100%;
+    border-radius: 20px;
+    height: 40px;
+    padding-left: 2em;
+}
+
+/*POSTS/FEED PAGE END*/
 
 /*FOOTER START*/
 
