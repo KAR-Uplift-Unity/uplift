@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <title>Create A Post</title>
 
+    <div th:replace="~{partials/header :: header}"></div>
     <meta th:name="'_csrf'" th:content="${_csrf.token}"/>
     <meta th:name="'_csrf_header'" th:content="${_csrf.headerName}"/>
 </head>
 <body class="create-page-bg">
-<div th:replace="~{partials/header :: header}"></div>
 <div th:replace="~{partials/navbar :: navbar}"></div>
 <div class="container">
     <h1 class="text-center mt-4">Create A Post</h1>
@@ -55,10 +55,9 @@
         <!-- Images -->
         <h4>Images</h4>
         <div class="form-group">
-            <label>Upload:</label>
-            <button type="button" onclick="openPostImagePicker()">Upload Images</button>
+            <button type="button" onclick="openPostImagePicker()" class="rounded btn btn-outline upload-button">Upload Images</button>
             <input type="hidden" id="hiddenImageUrls" name="imageUrls">
-
+            <div id="imagePreviewContainer"></div>
         </div>
 
         <!-- Submit -->

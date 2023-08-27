@@ -2,6 +2,8 @@ package com.KARUpliftUnity.models;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "comments")
 public class Comment {
@@ -11,6 +13,8 @@ public class Comment {
     private long id;
     @Column(nullable = false)
     private String comment;
+    @Column
+    private LocalDateTime timestamp;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -19,6 +23,13 @@ public class Comment {
     private Post post;
 
     public Comment() {
+    }
+
+    public Comment(String comment, LocalDateTime timestamp, User user, Post post) {
+        this.comment = comment;
+        this.timestamp = timestamp;
+        this.user = user;
+        this.post = post;
     }
 
     public Comment(long id, String comment, User user, Post post) {
@@ -59,5 +70,13 @@ public class Comment {
 
     public void setPost(Post post) {
         this.post = post;
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
     }
 }

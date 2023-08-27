@@ -92,6 +92,11 @@
                 <div class="card-body">
                     <p class="card-text" th:text="${comment.comment}"></p>
                     <footer class="blockquote-footer"><cite th:text="${comment.user.username}"></cite></footer>
+                    <span th:text="${comment.timestamp != null} ? ${#temporals.format(comment.timestamp, 'MM/dd/yyyy h:mm a')} : ''"></span>
+                   <button th:if="${#authentication.name == comment.user.username}"
+                            th:href="@{/comments/{id}/edit(id=${comment.id})}" class="btn comment-button">Edit</button>
+                    <button th:if="${#authentication.name == comment.user.username}"
+                            th:href="@{/comments/{id}/delete(id=${comment.id})}" class="btn comment-button">Delete</button>
                 </div>
             </div>
         </div>
@@ -99,7 +104,7 @@
         <!-- Add Comment Form -->
         <form th:action="@{/posts/{id}/comments(id=${post.id})}" method="post" class="mt-4">
             <div class="form-group">
-                <textarea name="comment" class="form-control" rows="3" placeholder="Add your comment..."></textarea>
+                <textarea name="comment" class="form-control" rows="3" placeholder="Add your comment..." required></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Add Comment</button>
         </form>
