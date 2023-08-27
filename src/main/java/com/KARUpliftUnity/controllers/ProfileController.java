@@ -96,6 +96,13 @@ public class ProfileController {
         if (admin) {
             model.addAttribute("admin", 1);
         }
+
+        String imageUrl = user.getProfileImageUrl();
+        if (imageUrl == null || imageUrl.isEmpty()) {
+            imageUrl = "/images/default-image.png";
+        }
+
+        model.addAttribute("profileImage", imageUrl);
         model.addAttribute("username", user.getUsername());
         model.addAttribute("email", user.getEmail());
         return "/users/profile_settings";
