@@ -75,7 +75,7 @@ public class SecurityConfiguration {
                                 "/settings", "/admin-panel", "/admin-panel/*", "/posts/*/comments", "/posts/*/toggle-like",
                                 "/posts/*/archive", "/posts/*/unarchive", "/settings", "/update-password",
                                 "/update-details", "/update-profile-image", "/posts/*/delete-image", "/comments/*/edit",
-                                 "/comments/*/delete").authenticated()
+                                 "/comments/*/delete", "/report-post").authenticated()
                         /* Pages that do not require authentication
                          * anyone can visit the home page, register, login, and view ads */
                         .requestMatchers("/", "/posts", "/posts/*", "/signup", "/login", "/contact_us", "/mission", "/feed", "/posts/search", "/favicon.ico", "/posts/category/*").permitAll()

@@ -23,6 +23,8 @@ public class Post {
     @Column
     private boolean flagged;
     @Column
+    private String reportReason;
+    @Column
     private boolean archive;
     @ManyToOne
     @JoinColumn (name = "user_id")
@@ -50,7 +52,7 @@ public class Post {
     private List<Category> categories;
 
 
-    public Post(long id, Date date, String title, String story, String solution, boolean flagged, boolean archive, User user, List<Like> likes, List<Comment> comment, List<Update> updates, List<Image> images, List<Tag> tags, String tagString, List<Category> categories) {
+    public Post(long id, Date date, String title, String story, String solution, boolean flagged, String reportReason, boolean archive, User user, List<Like> likes, List<Comment> comment, List<Update> updates, List<Image> images, List<Tag> tags, String tagString, List<Category> categories) {
         this.id = id;
         this.date = date;
         this.title = title;
@@ -58,6 +60,7 @@ public class Post {
         this.solution = solution;
         this.flagged = flagged;
         this.archive = archive;
+        this.reportReason = reportReason;
         this.user = user;
         this.likes = likes;
         this.comment = comment;
@@ -176,6 +179,14 @@ public class Post {
 
     public void setImages(List<Image> images) {
         this.images = images;
+    }
+
+    public String getReportReason() {
+        return reportReason;
+    }
+
+    public void setReportReason(String reportReason) {
+        this.reportReason = reportReason;
     }
 }
 
