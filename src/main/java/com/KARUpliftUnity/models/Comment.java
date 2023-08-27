@@ -79,4 +79,8 @@ public class Comment {
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
+
+    public void updateTimestamp() {
+        this.timestamp = LocalDateTime.now();
+    }
 }
