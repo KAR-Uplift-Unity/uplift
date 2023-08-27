@@ -92,11 +92,48 @@
                 <div class="card-body">
                     <p class="card-text" th:text="${comment.comment}"></p>
                     <footer class="blockquote-footer"><cite th:text="${comment.user.username}"></cite></footer>
-                    <span th:text="${comment.timestamp != null} ? ${#temporals.format(comment.timestamp, 'MM/dd/yyyy h:mm a')} : ''"></span>
-                   <button th:if="${#authentication.name == comment.user.username}"
-                            th:href="@{/comments/{id}/edit(id=${comment.id})}" class="btn comment-button">Edit</button>
+                    <div class="row d-flex align-items-center mt-2 pl-3">
+                    <span th:text="${comment.timestamp != null} ? ${#temporals.format(comment.timestamp, 'MM/dd/yyyy h:mm a')} : ''" class="text-muted"></span>
+
+                    <!-- Edit button for the comment -->
                     <button th:if="${#authentication.name == comment.user.username}"
-                            th:href="@{/comments/{id}/delete(id=${comment.id})}" class="btn comment-button">Delete</button>
+                            class="btn comment-button"
+                            data-toggle="modal"
+                            th:data-target="'#editCommentModal-' + ${comment.id}">Edit</button>
+
+                    <!-- Delete button for the comment -->
+                    <form th:if="${#authentication.name == comment.user.username}"
+                          th:action="@{/comments/{id}/delete(id=${comment.id})}" method="post">
+                        <button type="submit" class="btn comment-button">Delete</button>
+                    </form>
+                    </div>
+                </div>
+
+                <!-- Modal for editing the comment -->
+                <div th:id="'editCommentModal-' + ${comment.id}" class="modal fade" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Edit Comment</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form th:action="@{/comments/{id}/edit(id=${comment.id})}" method="post">
+                                    <div class="form-group">
+                                        <label for="comment-content">Comment</label>
+                                        <textarea class="form-control" name="content" rows="3" required id="comment-content">[[${comment.comment}]]</textarea>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -110,7 +147,6 @@
         </form>
     </div>
     <button onclick="window.history.back()" class="btn btn-primary mt-3">Go Back</button>
-
 </div>
 <div th:replace="~{partials/footer :: footer}"></div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

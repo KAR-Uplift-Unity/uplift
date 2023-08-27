@@ -352,4 +352,28 @@ public class PostController {
                 + " thanks for creating the post: " + post.getTitle() + "You can view your post at https://upliftunity.com/posts/" + postId);
         return "redirect:/posts";
     }
+
+    @PostMapping("/comments/{id}/edit")
+    public String updateComment(@PathVariable long id, @RequestParam String content) {
+        Comment existingComment = commentDao.getById(id);
+        existingComment.setComment(content);
+        existingComment.updateTimestamp();
+
+        commentDao.save(existingComment);
+
+        Post post = existingComment.getPost();
+
+        return "redirect:/posts/" + post.getId();
+    }
+
+    @PostMapping("/comments/{id}/delete")
+    public String deleteComment(@PathVariable long id) {
+        Comment commentToDelete = commentDao.getById(id);
+
+        Post associatedPost = commentToDelete.getPost();
+
+        commentDao.deleteById(id);
+
+        return "redirect:/posts/" + associatedPost.getId();
+    }
 }
