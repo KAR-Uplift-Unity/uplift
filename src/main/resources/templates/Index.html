@@ -35,7 +35,7 @@
                         <a th:href="@{/posts/{id}(id=${post.id})}">
                             <h5 class="card-title" th:text="${post.title}"></h5>
                         </a>
-                        <p class="card-text" th:text="${post.story}">Post Content</p>
+                        <p class="card-text" th:text="${#strings.abbreviate(post.story,75)}">Post Content</p>
                         <a th:href="@{/posts/{id}(id=${post.id})}" class="btn btn-primary">Read More</a>
                     </div>
                 </div>
@@ -45,46 +45,45 @@
     <h2 class="text-center">Browse By Category</h2>
     <div class="container">
         <div class="row justify-content-center ">
-            <form th:action="@{/posts/category/1}" th:method="post">
-                <button type="submit"  class="btn btn-primary">Animals</button>
-            </form>
-            <form th:action="@{/posts/category/2}" th:method="post">
-                <button type="submit"  class="btn btn-primary">Community</button>
-            </form>
-            <form th:action="@{/posts/category/3}" th:method="post">
-                <button type="submit"  class="btn btn-primary">Education</button>
-            </form>
-            <form th:action="@{/posts/category/4}" th:method="post">
-                <button type="submit"  class="btn btn-primary">Emergencies</button>
-            </form>
-            <form th:action="@{/posts/category/5}" th:method="post">
-                <button type="submit"  class="btn btn-primary">Environment</button>
-            </form>
-            <form th:action="@{/posts/category/6}" th:method="post">
-                <button type="submit"  class="btn btn-primary">Family</button>
-            </form>
-            <form th:action="@{/posts/category/7}" th:method="post">
-                <button type="submit"  class="btn btn-primary">Medical</button>
-            </form>
-            <form th:action="@{/posts/category/8}" th:method="post">
-                <button type="submit"  class="btn btn-primary">Monthly Bills</button>
-            </form>
-            </form>
-            <form th:action="@{/posts/category/9}" th:method="post">
-                <button type="submit"  class="btn btn-primary">Recovery</button>
-            </form>
-            <form th:action="@{/posts/category/10}" th:method="post">
-                <button type="submit"  class="btn btn-primary">Travel</button>
-            </form>
-            <form th:action="@{/posts/category/11}" th:method="post">
-                <button type="submit"  class="btn btn-primary">Volunteer</button>
-            </form>
-            <form th:action="@{/posts/category/12}" th:method="post">
-                <button type="submit"  class="btn btn-primary">Youth</button>
-            </form>
-            <form th:action="@{/posts/category/13}" th:method="post">
-                <button type="submit"  class="btn btn-primary">Other</button>
-            </form>
+            <div>
+                <a class="btn btn-primary custom-btn text-white" th:href="@{/posts/category/1}">Animals</a>
+            </div>
+            <div>
+                <a class="btn btn-primary custom-btn text-white" th:href="@{/posts/category/2}">Community</a>
+            </div>
+            <div>
+                <a class="btn btn-primary custom-btn text-white" th:href="@{/posts/category/3}">Education</a>
+            </div>
+            <div>
+                <a class="btn btn-primary custom-btn text-white" th:href="@{/posts/category/4}">Emergencies</a>
+            </div>
+            <div>
+                <a class="btn btn-primary custom-btn text-white" th:href="@{/posts/category/5}">Environment</a>
+            </div>
+            <div>
+                <a class="btn btn-primary custom-btn text-white" th:href="@{/posts/category/6}">Family</a>
+            </div>
+            <div>
+                <a class="btn btn-primary custom-btn text-white" th:href="@{/posts/category/7}">Medical</a>
+            </div>
+            <div>
+                <a class="btn btn-primary custom-btn text-white" th:href="@{/posts/category/8}">Monthly Bills</a>
+            </div>
+            <div>
+                <a class="btn btn-primary custom-btn text-white" th:href="@{/posts/category/9}">Recovery</a>
+            </div>
+            <div>
+                <a class="btn btn-primary custom-btn text-white" th:href="@{/posts/category/10}">Travel</a>
+            </div>
+            <div>
+                <a class="btn btn-primary custom-btn text-white" th:href="@{/posts/category/11}">Volunteer</a>
+            </div>
+            <div>
+                <a class="btn btn-primary custom-btn text-white" th:href="@{/posts/category/12}">Youth</a>
+            </div>
+            <div>
+                <a class="btn btn-primary custom-btn text-white" th:href="@{/posts/category/13}">Other</a>
+            </div>
         </div>
     </div>
 

@@ -11,7 +11,7 @@ public class Update {
     private long id;
     @Column(nullable = false, length = 45)
     private String title;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 1000)
     private String description;
     @ManyToOne
     @JoinColumn(name = "post_id")
