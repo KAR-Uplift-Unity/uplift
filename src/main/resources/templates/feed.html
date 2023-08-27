@@ -5,17 +5,19 @@
     <title>Feed</title>
     <div th:replace="~{partials/header :: header}"></div>
 </head>
-<body>
+<body class="feed-background">
 <div th:replace="~{partials/navbar :: navbar}"></div>
 <div class="container">
     <h1>Feed</h1>
     <h2>Search Results for "<span th:text="${query}">Your Query</span>"</h2>
 
     <form th:action="@{/posts/search}" method="post">
-        <label>
-            <input type="text" name="query" placeholder="Search by story, tag, or category...">
-        </label>
-        <button type="submit">Search</button>
+        <div class="search-bar col-12">
+            <input type="text" name="query" placeholder="Search by story, tag, or category..." class="search-bar">
+        </div>
+<!--        <div>-->
+<!--            <button type="submit">Search</button>-->
+<!--        </div>-->
     </form>
     <div>
         <a class="btn btn-primary custom-btn text-white" th:href="@{/posts}">All Posts</a>
