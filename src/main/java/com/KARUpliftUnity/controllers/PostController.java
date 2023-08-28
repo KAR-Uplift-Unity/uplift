@@ -66,6 +66,14 @@ public class PostController {
             Post post = postDao.getById(id);
             User postAuthor = post.getUser();
             List<Comment> comments = commentDao.findByPostOrderByIdAsc(post);
+
+            List<Comment> commentsF = new ArrayList<>();
+            for (Comment comment: comments){
+                if (!comment.isFlagged()){
+                    commentsF.add(comment);
+                }
+            }
+
             List<Image> images = post.getImages();
 
             Like existingLike = null;
@@ -88,7 +96,7 @@ public class PostController {
             }
 
             model.addAttribute("post", post);
-            model.addAttribute("comments", comments);
+            model.addAttribute("comments", commentsF);
             model.addAttribute("hasLiked", hasLiked);
             model.addAttribute("likeCount", likeCount);
             model.addAttribute("images", images);
