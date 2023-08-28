@@ -117,6 +117,57 @@ public class PostController {
         return "posts/show";
     }
 
+    @GetMapping("/posts/{id}/review")
+    public String postIdReview(@PathVariable long id, Model model) {
+        try{
+            Post post = postDao.getById(id);
+            User postAuthor = post.getUser();
+            List<Comment> comments = commentDao.findByPostOrderByIdAsc(post);
+
+
+            List<Image> images = post.getImages();
+
+            Like existingLike = null;
+            User loggedInUser = null;
+
+            try {
+                loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                existingLike = likeDao.findByUserAndPost(loggedInUser, post);
+            } catch (Exception e) {
+
+            }
+
+            boolean hasLiked = existingLike != null;
+
+            int likeCount = likeDao.countByPost(post);
+
+            String imageUrl = postAuthor.getProfileImageUrl();
+            if (imageUrl == null || imageUrl.isEmpty()) {
+                imageUrl = "/images/default-image.png";
+            }
+
+            model.addAttribute("post", post);
+            model.addAttribute("comments", comments);
+            model.addAttribute("hasLiked", hasLiked);
+            model.addAttribute("likeCount", likeCount);
+            model.addAttribute("images", images);
+            model.addAttribute("profileImage", imageUrl);
+
+        }catch (Exception e){
+            Post post = postDao.getById(id);
+            List<Comment> comments = commentDao.findByPostOrderByIdAsc(post);
+            List<Image> images = post.getImages();
+            int likeCount = likeDao.countByPost(post);
+
+            model.addAttribute("post", post);
+            model.addAttribute("comments", comments);
+            model.addAttribute("hasLiked", false);
+            model.addAttribute("likeCount", likeCount);
+            model.addAttribute("images", images);
+        }
+        return "posts/show";
+    }
+
     @PostMapping("/posts/{id}/comments")
     public String addComment(@PathVariable long id, @RequestParam String comment) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
