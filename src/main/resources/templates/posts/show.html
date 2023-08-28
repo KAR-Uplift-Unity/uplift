@@ -108,6 +108,9 @@
                               th:action="@{/comments/{id}/delete(id=${comment.id})}" method="post">
                             <button type="submit" class="btn comment-button">Delete</button>
                         </form>
+                        <div class="row mt-5">
+                            <button class="btn btn-danger mx-auto" data-toggle="modal" data-target="#reportModal1">Report Comment</button>
+                        </div>
                     </div>
                 </div>
 
@@ -139,6 +142,37 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- modal for reporting comment -->
+                <div class="modal fade" id="reportModal1" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="reportModalLabel">Report Post</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form th:action="@{/report-comment}" method="post">
+                                    <div class="form-group">
+                                        <label for="reportReason1">Reason for reporting:</label>
+                                        <select class="form-control" id="reportReason1" name="reportReason">
+                                            <option value="Inappropriate Content">Inappropriate Content</option>
+                                            <option value="Spam">Spam</option>
+                                            <option value="Misinformation">Misinformation</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                    <input type="hidden" name="postId" th:value="${comment.id}"/>
+                                    <button type="submit" class="btn btn-danger">Submit Report</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -185,6 +219,7 @@
         </div>
     </div>
 </div>
+
 
 <div th:replace="~{partials/footer :: footer}"></div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
