@@ -11,4 +11,8 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
     List<Comment> findByPostOrderByIdAsc(Post post);
 
     List<Comment> findAllByUser(User user);
+
+    List<Comment> findAllByFlaggedIsTrue();
+
+    Comment findById(long id);
 }
