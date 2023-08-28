@@ -59,8 +59,8 @@ public class Post {
         this.story = story;
         this.solution = solution;
         this.flagged = flagged;
-        this.archive = archive;
         this.reportReason = reportReason;
+        this.archive = archive;
         this.user = user;
         this.likes = likes;
         this.comment = comment;
