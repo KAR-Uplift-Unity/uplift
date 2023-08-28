@@ -17,6 +17,8 @@ public class Comment {
     private LocalDateTime timestamp;
     @Column
     private boolean flagged;
+    @Column
+    private String reportReason;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
