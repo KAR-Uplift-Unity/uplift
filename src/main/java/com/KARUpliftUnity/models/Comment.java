@@ -15,6 +15,8 @@ public class Comment {
     private String comment;
     @Column
     private LocalDateTime timestamp;
+    @Column
+    private boolean flagged;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -25,20 +27,14 @@ public class Comment {
     public Comment() {
     }
 
-    public Comment(String comment, LocalDateTime timestamp, User user, Post post) {
-        this.comment = comment;
-        this.timestamp = timestamp;
-        this.user = user;
-        this.post = post;
-    }
-
-    public Comment(long id, String comment, User user, Post post) {
+    public Comment(long id, String comment, LocalDateTime timestamp, boolean flagged, User user, Post post) {
         this.id = id;
         this.comment = comment;
+        this.timestamp = timestamp;
+        this.flagged = flagged;
         this.user = user;
         this.post = post;
     }
-
 
     public long getId() {
         return id;
@@ -82,5 +78,13 @@ public class Comment {
 
     public void updateTimestamp() {
         this.timestamp = LocalDateTime.now();
+    }
+
+    public boolean isFlagged() {
+        return flagged;
+    }
+
+    public void setFlagged(boolean flagged) {
+        this.flagged = flagged;
     }
 }
