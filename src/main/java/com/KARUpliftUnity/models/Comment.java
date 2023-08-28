@@ -89,4 +89,12 @@ public class Comment {
     public void setFlagged(boolean flagged) {
         this.flagged = flagged;
     }
+
+    public String getReportReason() {
+        return reportReason;
+    }
+
+    public void setReportReason(String reportReason) {
+        this.reportReason = reportReason;
+    }
 }
