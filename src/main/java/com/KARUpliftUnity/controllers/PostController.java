@@ -47,7 +47,15 @@ public class PostController {
 
     @GetMapping("/posts")
     public String index(Model model) {
-        model.addAttribute("posts", postDao.findByArchiveFalse());
+        List<Post> posts = postDao.findByArchiveFalse();
+
+        List<Post> postsFlag = new ArrayList<>();
+        for (Post post: posts){
+            if (!post.isFlagged()){
+                postsFlag.add(post);
+            }
+        }
+        model.addAttribute("posts", postsFlag);
         return "feed";
     }
 
@@ -58,6 +66,65 @@ public class PostController {
             Post post = postDao.getById(id);
             User postAuthor = post.getUser();
             List<Comment> comments = commentDao.findByPostOrderByIdAsc(post);
+
+            List<Comment> commentsF = new ArrayList<>();
+            for (Comment comment: comments){
+                if (!comment.isFlagged()){
+                    commentsF.add(comment);
+                }
+            }
+
+            List<Image> images = post.getImages();
+
+            Like existingLike = null;
+            User loggedInUser = null;
+
+            try {
+                loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                existingLike = likeDao.findByUserAndPost(loggedInUser, post);
+            } catch (Exception e) {
+
+            }
+
+            boolean hasLiked = existingLike != null;
+
+            int likeCount = likeDao.countByPost(post);
+
+            String imageUrl = postAuthor.getProfileImageUrl();
+            if (imageUrl == null || imageUrl.isEmpty()) {
+                imageUrl = "/images/default-image.png";
+            }
+
+            model.addAttribute("post", post);
+            model.addAttribute("comments", commentsF);
+            model.addAttribute("hasLiked", hasLiked);
+            model.addAttribute("likeCount", likeCount);
+            model.addAttribute("images", images);
+            model.addAttribute("profileImage", imageUrl);
+
+        }catch (Exception e){
+            Post post = postDao.getById(id);
+            List<Comment> comments = commentDao.findByPostOrderByIdAsc(post);
+            List<Image> images = post.getImages();
+            int likeCount = likeDao.countByPost(post);
+
+            model.addAttribute("post", post);
+            model.addAttribute("comments", comments);
+            model.addAttribute("hasLiked", false);
+            model.addAttribute("likeCount", likeCount);
+            model.addAttribute("images", images);
+        }
+        return "posts/show";
+    }
+
+    @GetMapping("/posts/{id}/review")
+    public String postIdReview(@PathVariable long id, Model model) {
+        try{
+            Post post = postDao.getById(id);
+            User postAuthor = post.getUser();
+            List<Comment> comments = commentDao.findByPostOrderByIdAsc(post);
+
+
             List<Image> images = post.getImages();
 
             Like existingLike = null;
@@ -142,21 +209,44 @@ public class PostController {
         List<Post> searchResultsTitle = postDao.findAllByTitleContainingIgnoreCaseOrStoryContainingIgnoreCase(query, query);
         List<Tag> searchResultsTags = tagDao.findAllByTagContainsIgnoreCase(query);
 
-        model.addAttribute("searchResultsTitle", searchResultsTitle);
-        model.addAttribute("searchResultsTags", searchResultsTags);
-        model.addAttribute("query", query);
+        List<Post> searchTitle = new ArrayList<>();
+        List<Tag> searchTag = new ArrayList<>();
+        for (Post post: searchResultsTitle) {
+            if(!post.getArchive()) {
+                if (!post.isFlagged()) {
+                    searchTitle.add(post);
+                }
+            }
+        }
+        for (Tag tag: searchResultsTags){
+            if (!tag.getPost().getArchive()) {
+                if (!tag.getPost().isFlagged()) {
+                    searchTag.add(tag);
+                }
+            }
+        }
+
+        model.addAttribute("searchResultsTitle", searchTitle);
+        model.addAttribute("searchResultsTags", searchTag);
 
         return "posts/search";
     }
 
     @GetMapping("/posts/category/{id}")
     public String searchByCategory(@PathVariable(name = "id") long id, Model model) {
-        List<Post> catPost = new ArrayList<>();
+        List<Post> postsArc = postDao.findByArchiveFalse();
 
-        List<Post> posts = postDao.findByArchiveFalse();
-        for (Post post: posts){
+        List<Post> catPost = new ArrayList<>();
+        List<Post> posts = new ArrayList<>();
+
+        for (Post post: postsArc) {
+            if (!post.isFlagged()) {}
+            posts.add(post);
+        }
+
+        for (Post post: posts) {
             List<Category> cat = categoryRepository.findAllByPost(post);
-            for (Category category: cat){
+            for (Category category: cat) {
                 if (category.getId() == id) {
                     catPost.add(post);
                 }
@@ -378,11 +468,20 @@ public class PostController {
     }
 
     @PostMapping("/report-post")
-    public String reportPost(@RequestParam(name="reportReason") String reportReason, @RequestParam(name="postId") Long postId) {
+    public String reportPost(@RequestParam(name="reportReason") String reportReason, @RequestParam(name="postId") long postId) {
         Post post = postDao.getById(postId);
         post.setFlagged(true);
         post.setReportReason(reportReason);
         postDao.save(post);
+        return "redirect:/posts/" + postId;
+    }
+
+    @PostMapping("/report-comment")
+    public String reportComment(@RequestParam(name="reportReason") String reportReason, @RequestParam(name="postId") long postId, @RequestParam(name="commentId") long commentId) {
+        Comment comment = commentDao.getById(commentId);
+        comment.setFlagged(true);
+        comment.setReportReason(reportReason);
+        commentDao.save(comment);
         return "redirect:/posts/" + postId;
     }
 
