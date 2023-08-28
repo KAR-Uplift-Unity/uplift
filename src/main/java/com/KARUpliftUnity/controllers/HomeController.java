@@ -58,7 +58,14 @@ public class HomeController {
         for (int index : randomIndices) {
             randomPosts.add(allPosts.get(index));
         }
-        model.addAttribute("posts", randomPosts);
+
+        List<Post> posts = new ArrayList<>();
+        for (Post post: randomPosts){
+            if (!post.isFlagged()){
+                posts.add(post);
+            }
+        }
+        model.addAttribute("posts", posts);
         return "index";
     }
 
