@@ -409,11 +409,20 @@ public class PostController {
     }
 
     @PostMapping("/report-post")
-    public String reportPost(@RequestParam(name="reportReason") String reportReason, @RequestParam(name="postId") Long postId) {
+    public String reportPost(@RequestParam(name="reportReason") String reportReason, @RequestParam(name="postId") long postId) {
         Post post = postDao.getById(postId);
         post.setFlagged(true);
         post.setReportReason(reportReason);
         postDao.save(post);
+        return "redirect:/posts/" + postId;
+    }
+
+    @PostMapping("/report-comment")
+    public String reportComment(@RequestParam(name="reportReason") String reportReason, @RequestParam(name="postId") long postId, @RequestParam(name="commentId") long commentId) {
+        Comment comment = commentDao.getById(commentId);
+        comment.setFlagged(true);
+        comment.setReportReason(reportReason);
+        commentDao.save(comment);
         return "redirect:/posts/" + postId;
     }
 
