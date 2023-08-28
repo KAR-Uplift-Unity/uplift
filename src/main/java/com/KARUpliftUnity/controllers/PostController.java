@@ -47,7 +47,15 @@ public class PostController {
 
     @GetMapping("/posts")
     public String index(Model model) {
-        model.addAttribute("posts", postDao.findByArchiveFalse());
+        List<Post> posts = postDao.findByArchiveFalse();
+
+        List<Post> postsFlag = new ArrayList<>();
+        for (Post post: posts){
+            if (!post.isFlagged()){
+                postsFlag.add(post);
+            }
+        }
+        model.addAttribute("posts", postsFlag);
         return "feed";
     }
 
@@ -142,21 +150,44 @@ public class PostController {
         List<Post> searchResultsTitle = postDao.findAllByTitleContainingIgnoreCaseOrStoryContainingIgnoreCase(query, query);
         List<Tag> searchResultsTags = tagDao.findAllByTagContainsIgnoreCase(query);
 
-        model.addAttribute("searchResultsTitle", searchResultsTitle);
-        model.addAttribute("searchResultsTags", searchResultsTags);
-        model.addAttribute("query", query);
+        List<Post> searchTitle = new ArrayList<>();
+        List<Tag> searchTag = new ArrayList<>();
+        for (Post post: searchResultsTitle) {
+            if(!post.getArchive()) {
+                if (!post.isFlagged()) {
+                    searchTitle.add(post);
+                }
+            }
+        }
+        for (Tag tag: searchResultsTags){
+            if (!tag.getPost().getArchive()) {
+                if (!tag.getPost().isFlagged()) {
+                    searchTag.add(tag);
+                }
+            }
+        }
+
+        model.addAttribute("searchResultsTitle", searchTitle);
+        model.addAttribute("searchResultsTags", searchTag);
 
         return "posts/search";
     }
 
     @GetMapping("/posts/category/{id}")
     public String searchByCategory(@PathVariable(name = "id") long id, Model model) {
-        List<Post> catPost = new ArrayList<>();
+        List<Post> postsArc = postDao.findByArchiveFalse();
 
-        List<Post> posts = postDao.findByArchiveFalse();
-        for (Post post: posts){
+        List<Post> catPost = new ArrayList<>();
+        List<Post> posts = new ArrayList<>();
+
+        for (Post post: postsArc) {
+            if (!post.isFlagged()) {}
+            posts.add(post);
+        }
+
+        for (Post post: posts) {
             List<Category> cat = categoryRepository.findAllByPost(post);
-            for (Category category: cat){
+            for (Category category: cat) {
                 if (category.getId() == id) {
                     catPost.add(post);
                 }
