@@ -93,4 +93,31 @@ public class AdminController {
         }
         return "redirect:/admin-panel";
     }
+
+    @PostMapping ("/admin-panel/posts/{id}")
+    public String dropPost(@PathVariable long id){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        boolean admin  = user.getAdmin();
+        if (admin) {
+            Post post = postDao.findPostById(id);
+
+            List<Image> images = imgDao.findAllByPost(post);
+            if (images != null){
+                imgDao.deleteAllInBatch(images);
+            }
+
+            List<Update> updates = updateDao.findAllByPost(post);
+            if (updates != null){
+                updateDao.deleteAllInBatch(updates);
+            }
+
+            List<Category> categories = catDao.findAllByPost(post);
+            if (categories != null){
+                catDao.deleteAllInBatch(categories);
+            }
+
+            postDao.delete(post);
+        }
+        return "redirect:/admin-panel";
+    }
 }
