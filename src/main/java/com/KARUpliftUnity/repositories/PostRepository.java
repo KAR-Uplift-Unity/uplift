@@ -13,6 +13,8 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     Post getAllByUserId(long id);
     Post findPostById(Long id);
     List<Post> findByUserIdAndArchiveFalse(Long userId);
+    List<Post> findByArchiveFalseOrderByDateDesc();
+
     List<Post> findByUserIdAndArchiveTrue(Long userId);
     List<Post> findByArchiveFalse();
     List<Post> findAllByTitleContainingIgnoreCaseOrStoryContainingIgnoreCase(String query, String query1);
