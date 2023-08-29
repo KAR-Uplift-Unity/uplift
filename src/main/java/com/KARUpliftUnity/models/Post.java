@@ -14,7 +14,7 @@ public class Post {
     private long id;
     @Column(nullable = false)
     private Date date;
-    @Column(nullable = false, length = 150)
+    @Column(nullable = false, length = 75)
     private String title;
     @Column(nullable = false, length = 5000)
     private String story;
@@ -28,6 +28,8 @@ public class Post {
     private boolean archive;
     @Column
     private Date archiveDate;
+    @Column(columnDefinition = "integer default 0")
+    private Integer days;
     @ManyToOne
     @JoinColumn (name = "user_id")
     private User user;
@@ -45,7 +47,10 @@ public class Post {
     @Transient
     private String tagString;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
     @JoinTable(
             name="post_categories",
             joinColumns={@JoinColumn(name="post_id")},
@@ -54,7 +59,7 @@ public class Post {
     private List<Category> categories;
 
 
-    public Post(long id, Date date, String title, String story, String solution, boolean flagged, String reportReason, boolean archive, Date archiveDate, User user, List<Like> likes, List<Comment> comment, List<Update> updates, List<Image> images, List<Tag> tags, String tagString, List<Category> categories) {
+    public Post(long id, Date date, String title, String story, String solution, boolean flagged, String reportReason, boolean archive, Date archiveDate, int days, User user, List<Like> likes, List<Comment> comment, List<Update> updates, List<Image> images, List<Tag> tags, String tagString, List<Category> categories) {
         this.id = id;
         this.date = date;
         this.title = title;
@@ -64,6 +69,7 @@ public class Post {
         this.reportReason = reportReason;
         this.archive = archive;
         this.archiveDate = archiveDate;
+        this.days = days;
         this.user = user;
         this.likes = likes;
         this.comment = comment;
@@ -226,6 +232,14 @@ public class Post {
 
     public void setUpdates(List<Update> updates) {
         this.updates = updates;
+    }
+
+    public int getDays() {
+        return days;
+    }
+
+    public void setDays(int days) {
+        this.days = days;
     }
 }
 

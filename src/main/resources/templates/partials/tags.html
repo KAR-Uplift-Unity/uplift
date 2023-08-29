@@ -9,7 +9,7 @@
 <div class="parent-tags" th:fragment="tagsedit">
   <label for="tagString1">Tags (comma-separate / Shift to enter):</label>
   <div class="wrapper-tags">
-    <input type="text" placeholder="type here" class="input-tag" id="tagString1" th:value="${tagString}">
+    <input type="text" placeholder="type here" class="input-tag" id="tagString1" maxlength="150" th:value="${tagString}">
   </div>
   <span class="tags-length">0 Tags</span>
 </div>
