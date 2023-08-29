@@ -125,15 +125,12 @@ div.hero-section a.btn.btn-primary.custom-btn:active {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
     transform: scale(1);
+    font-family: var(--poppins-font);
 }
 
 .index-card:hover {
     transform: scale(1.02);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.index-card {
-    font-family: var(--poppins-font);
 }
 
 .read-more {
@@ -528,7 +525,6 @@ button.btn.btn-primary.custom-btn:active {
     font-size: 12px;
 }
 
-
 /*INDIVIDUAL POST PAGE END*/
 
 /*POSTS/FEED PAGE START*/
@@ -545,8 +541,22 @@ button.btn.btn-primary.custom-btn:active {
     background-color: transparent;
     width: 100%;
     border-radius: 20px;
+    border: 1px solid var(--logo-color);
     height: 40px;
     padding-left: 2em;
+}
+
+.category-button {
+    border: 1px solid var(--logo-color);
+    border-radius: 20px;
+    width: 125px;
+}
+
+.category-button:hover{
+    color: white;
+    background-color: var(--primary-button-color);
+    border: none;
+
 }
 
 /*POSTS/FEED PAGE END*/
@@ -654,6 +664,7 @@ footer .footer-background {
 }
 
 .profile-background {
+    background-color: var(--off-white-color);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
