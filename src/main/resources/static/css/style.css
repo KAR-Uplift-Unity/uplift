@@ -110,8 +110,43 @@ div.hero-section a.btn.btn-primary.custom-btn:active {
 
 .card-img-top {
     width: 100%;
-    max-height: 175px;
+    height: 175px;
     object-fit: cover;
+}
+
+.index-card-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 95%;
+}
+
+.index-card {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    transform: scale(1);
+}
+
+.index-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.index-card {
+    font-family: var(--poppins-font);
+}
+
+.read-more {
+    color: #00917B;
+    text-decoration: underline;
+}
+
+.index-card-text {
+    color: #444444;
+}
+
+.index-card-title:hover {
+    text-decoration-color: #444444;
 }
 
 .icon-text-color {
@@ -148,7 +183,7 @@ div.hero-section a.btn.btn-primary.custom-btn:active {
     border-color: lightgrey;
 }
 
-.left-panel .form-background form{
+.left-panel .form-background form {
     font-family: var(--poppins-font);
 }
 
@@ -238,7 +273,7 @@ button.btn.btn-primary.custom-btn:active {
     border-color: lightgrey;
 }
 
-.login-form .login-form-background form{
+.login-form .login-form-background form {
     font-family: var(--poppins-font);
 }
 
@@ -264,6 +299,10 @@ button.btn.btn-primary.custom-btn:active {
 
 .about-us-background {
     background-color: var(--off-white-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    flex: 1;
 }
 
 .mission-content {
@@ -280,15 +319,14 @@ button.btn.btn-primary.custom-btn:active {
 }
 
 .team-member-image {
-    width: 150px;
-    height: auto;
-    display: block;
-    margin: 0 auto;
+    width: auto;
+    height: 225px;
 }
+
 /* Carousel for images */
-.home .home-slider img{
+.home .home-slider img {
     height: 25rem;
-    width:35rem;
+    width: 35rem;
     border-radius: .5rem;
     object-fit: cover;
 }
@@ -301,6 +339,10 @@ button.btn.btn-primary.custom-btn:active {
 .contact-bg {
     background-color: var(--off-white-color);
     font-family: var(--poppins-font);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    flex: 1;
 }
 
 .contact-bg h1 {
@@ -341,9 +383,15 @@ button.btn.btn-primary.custom-btn:active {
 
 /*CREATE A POST START */
 
+
+
 .create-page-bg {
     background-color: var(--off-white-color);
     font-family: var(--poppins-font);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    flex: 1;
 }
 
 .create-page-bg h1 {
@@ -383,18 +431,10 @@ button.btn.btn-primary.custom-btn:active {
 }
 
 .btn-group-toggle .btn-outline-primary:hover {
-    background-color: var(--primary-button-color);
-    border-color: var(--primary-button-color);
     color: #ffffff;
+    border: none;
 }
 
-.btn-group-toggle .btn-outline-primary:active,
-.btn-group-toggle .btn-outline-primary:focus {
-    background-color: var(--primary-button-color);
-    border-color: var(--primary-button-color);
-    color: #ffffff;
-    box-shadow: none;
-}
 
 .create-page-bg input, .create-page-bg textarea {
     background-color: transparent;
@@ -408,9 +448,6 @@ button.btn.btn-primary.custom-btn:active {
 
 .create-page-bg input:focus, .create-page-bg textarea:focus {
     background-color: transparent;
-    border-color: var(--logo-color);
-    outline: none;
-    box-shadow: none;
 }
 
 .image-preview-wrapper {
@@ -429,7 +466,7 @@ button.btn.btn-primary.custom-btn:active {
     padding: 2px 5px;
 }
 
-.form-group .upload-button{
+.form-group .upload-button {
     background-color: #a7aaaf;
     color: white;
 }
@@ -437,6 +474,10 @@ button.btn.btn-primary.custom-btn:active {
 .form-group .upload-button:hover {
     background-color: grey;
     color: white;
+}
+
+.form-text {
+    font-weight: var(--weight-medium);
 }
 
 /*CREATE A POST END*/
@@ -447,6 +488,14 @@ button.btn.btn-primary.custom-btn:active {
     background-color: var(--off-white-color);
     font-family: var(--poppins-font);
 }
+
+.individual-post{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    flex: 1;
+}
+
 
 /* Normal state */
 .heart-btn {
@@ -475,7 +524,7 @@ button.btn.btn-primary.custom-btn:active {
     object-fit: cover;
 }
 
-.date  {
+.date {
     font-size: 12px;
 }
 
@@ -486,6 +535,10 @@ button.btn.btn-primary.custom-btn:active {
 
 .feed-background {
     background-color: var(--off-white-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    flex: 1;
 }
 
 .search-bar {
@@ -497,6 +550,18 @@ button.btn.btn-primary.custom-btn:active {
 }
 
 /*POSTS/FEED PAGE END*/
+
+/*PROFILE SETTING PAGE START */
+
+.profile-settings-bg {
+    background-color: var(--off-white-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    flex: 1;
+}
+
+/*PROFILE SETTING PAGE END*/
 
 /*FOOTER START*/
 
@@ -588,7 +653,25 @@ footer .footer-background {
     border-radius: 50px;
 }
 
+.profile-background {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    flex: 1;
+}
+
 /*PROFILE PAGE END*/
+
+/*ADMIN PAGE START*/
+
+.admin-background {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    flex: 1;
+}
+
+/*ADMIN PAGE END*/
 
 /*WELCOME MODAL START*/
 
@@ -599,6 +682,7 @@ footer .footer-background {
 .logo-span {
     font-family: var(--logo-font);
 }
+
 /*WELCOME MODAL END*/
 
 
@@ -611,12 +695,14 @@ footer .footer-background {
     }
 
 }
+
 /*Mobile devices*/
 @media only screen and (min-width: 481px) and (max-width: 768px) {
     .form-background {
         width: 88%;
     }
 }
+
 /*Large and up*/
 @media only screen and (min-width: 1201px) {
     .form-background {

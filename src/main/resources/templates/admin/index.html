@@ -5,74 +5,81 @@
     <title>Admin Panel</title>
     <div th:replace="~{partials/header :: header}"></div>
 </head>
-<body>
+<body class="admin-background">
 <div th:replace="~{partials/navbar :: navbar}"></div>
-
-
-
-<div class="container">
-    <h1 class="m-5">Welcome Admin</h1>
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="user-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Users</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="post-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Flagged Posts</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="comment-tab" data-toggle="tab" data-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Flagged Comments</button>
-        </li>
-    </ul>
-    <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="user-tab">
-            <h1 class="m-3">Users</h1>
-            <div th:each="user : ${users}">
-                <div class="card m-2" style="width: 18rem;">
-                    <div class="card-body justify-content-center">
-                        <h5 class="card-title" th:text="${user.username}"></h5>
-                        <form th:action="@{/admin-panel/{id}(id = ${user.id})}" method="post">
-                            <button class="btn btn-primary" type="submit">Remove user</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="post-tab">
-            <h1 class="m-3">Flagged Posts</h1>
-            <div th:each="post : ${flaggedP}">
-                <div class="card m-2" style="width: 18rem;">
-                    <div class="card-body justify-content-center">
-                        <h5 class="card-title" th:text="${post.title}"></h5>
-                        <p class="card-text" th:text="${post.reportReason}"></p>
-                        <a th:href="@{/posts/{id}/review (id = ${post.id})}" class="btn btn-primary">View Post</a>
-                        <form th:action="@{/admin-panel/posts/{id}/un-flag(id = ${post.id})}" method="post">
-                            <button class="btn btn-primary" type="submit">Remove Flag</button>
-                        </form>
-                        <form th:action="@{/admin-panel/posts/{id}(id = ${post.id})}" method="post">
-                            <button class="btn btn-primary" type="submit">Remove Post</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="comment-tab">
-            <h1 class="m-3">Flagged Comments</h1>
-            <div th:each="comment : ${flaggedC}">
-                <div class="card m-2" style="width: 18rem;">
-                    <div class="card-body justify-content-center">
-                        <h5 th:text="${comment.reportReason}"></h5>
-                        <p class="card-text" th:text="${comment.comment}"></p>
-                        <footer class="blockquote-footer"><cite th:text="${comment.user.username}"></cite></footer>
-                        <div class="row d-flex align-items-center mt-2 pl-3">
-                            <span th:text="${comment.timestamp != null} ? ${#temporals.format(comment.timestamp, 'MM/dd/yyyy h:mm a')} : ''" class="text-muted"></span>
+<div class="content-wrapper">
+    <div class="container">
+        <h1 class="m-5">Welcome Admin</h1>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="user-tab" data-toggle="tab" data-target="#home" type="button"
+                        role="tab" aria-controls="home" aria-selected="true">Users
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="post-tab" data-toggle="tab" data-target="#profile" type="button" role="tab"
+                        aria-controls="profile" aria-selected="false">Flagged Posts
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="comment-tab" data-toggle="tab" data-target="#contact" type="button"
+                        role="tab" aria-controls="contact" aria-selected="false">Flagged Comments
+                </button>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="user-tab">
+                <h1 class="m-3">Users</h1>
+                <div th:each="user : ${users}">
+                    <div class="card m-2" style="width: 18rem;">
+                        <div class="card-body justify-content-center">
+                            <h5 class="card-title" th:text="${user.username}"></h5>
+                            <form th:action="@{/admin-panel/{id}(id = ${user.id})}" method="post">
+                                <button class="btn btn-primary" type="submit">Remove user</button>
+                            </form>
                         </div>
-                        <a th:href="@{/posts/{id}/review (id = ${comment.post.id})}" class="btn btn-primary">View Post</a>
-                        <form th:action="@{/admin-panel/comments/{id}/un-flag(id = ${comment.id})}" method="post">
-                            <button class="btn btn-primary" type="submit">Remove Flag</button>
-                        </form>
-                        <form th:action="@{/admin-panel/comments/{id}(id = ${comment.id})}" method="post">
-                            <button class="btn btn-primary" type="submit">Remove Comment</button>
-                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="post-tab">
+                <h1 class="m-3">Flagged Posts</h1>
+                <div th:each="post : ${flaggedP}">
+                    <div class="card m-2" style="width: 18rem;">
+                        <div class="card-body justify-content-center">
+                            <h5 class="card-title" th:text="${post.title}"></h5>
+                            <p class="card-text" th:text="${post.reportReason}"></p>
+                            <a th:href="@{/posts/{id}/review (id = ${post.id})}" class="btn btn-primary">View Post</a>
+                            <form th:action="@{/admin-panel/posts/{id}/un-flag(id = ${post.id})}" method="post">
+                                <button class="btn btn-primary" type="submit">Remove Flag</button>
+                            </form>
+                            <form th:action="@{/admin-panel/posts/{id}(id = ${post.id})}" method="post">
+                                <button class="btn btn-primary" type="submit">Remove Post</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="comment-tab">
+                <h1 class="m-3">Flagged Comments</h1>
+                <div th:each="comment : ${flaggedC}">
+                    <div class="card m-2" style="width: 18rem;">
+                        <div class="card-body justify-content-center">
+                            <h5 th:text="${comment.reportReason}"></h5>
+                            <p class="card-text" th:text="${comment.comment}"></p>
+                            <footer class="blockquote-footer"><cite th:text="${comment.user.username}"></cite></footer>
+                            <div class="row d-flex align-items-center mt-2 pl-3">
+                                <span th:text="${comment.timestamp != null} ? ${#temporals.format(comment.timestamp, 'MM/dd/yyyy h:mm a')} : ''"
+                                      class="text-muted"></span>
+                            </div>
+                            <a th:href="@{/posts/{id}/review (id = ${comment.post.id})}" class="btn btn-primary">View
+                                Post</a>
+                            <form th:action="@{/admin-panel/comments/{id}/un-flag(id = ${comment.id})}" method="post">
+                                <button class="btn btn-primary" type="submit">Remove Flag</button>
+                            </form>
+                            <form th:action="@{/admin-panel/comments/{id}(id = ${comment.id})}" method="post">
+                                <button class="btn btn-primary" type="submit">Remove Comment</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

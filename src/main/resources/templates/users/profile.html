@@ -5,103 +5,106 @@
     <title>Profile</title>
     <div th:replace="~{partials/header :: header}"></div>
 </head>
-<body>
+<body class="profile-background">
 <div th:replace="~{partials/navbar :: navbar}"></div>
-<div class="container">
-    <div class="row d-flex mt-4">
-        <div class="col">
-            <img th:src="${profileImage}" alt="Profile Image" class="profile-image">
-            <h4 th:text="${username}"></h4>
+<div class="content-wrapper">
+    <div class="container">
+        <div class="row d-flex mt-4">
+            <div class="col">
+                <img th:src="${profileImage}" alt="Profile Image" class="profile-image">
+                <h4 th:text="${username}"></h4>
+            </div>
+            <div class="col d-flex justify-content-end">
+                <a href="/settings">Profile Settings</a>
+            </div>
         </div>
-        <div class="col d-flex justify-content-end">
-            <a href="/settings">Profile Settings</a>
-        </div>
-    </div>
-    <div class="mt-2">
-        <h3 class="mb-2">Your active posts</h3>
-        <div th:if="${activePosts.isEmpty()}" class="mb-4">
-            No archived posts to show.
-        </div>
-        <div class="row">
-            <div th:unless="${activePosts.isEmpty()}" th:each="post : ${activePosts}" class="col-md-3 mb-4">
-                <div class="card">
+        <div class="mt-2">
+            <h3 class="mb-2">Your active posts</h3>
+            <div th:if="${activePosts.isEmpty()}" class="mb-4">
+                No archived posts to show.
+            </div>
+            <div class="row">
+                <div th:unless="${activePosts.isEmpty()}" th:each="post : ${activePosts}"
+                     class="col-12 col-lg-4 col-md-6 mb-4">
+                    <div class="card index-card">
 
-                    <!-- Display the first image for the post if it exists -->
-                    <img th:if="${post.images.size() > 0}" th:src="${post.images.get(0).image}" class="card-img-top"
-                         alt="Post Image">
+                        <img th:if="${post.images.size() > 0}" th:src="${post.images.get(0).image}" class="card-img-top"
+                             alt="Post Image">
 
-                    <div class="card-body">
-                        <a th:href="@{/posts/{id}(id=${post.id})}">
-                            <h4 class="card-title" th:text="${post.title}"></h4>
-                        </a>
-                        <p class="card-text" th:text="${#strings.abbreviate(post.story,75)}"></p>
+                        <div class="card-body">
+                            <a th:href="@{/posts/{id}(id=${post.id})}" class="index-card-title">
+                                <h5 class="card-title text-dark index-card-title"
+                                    th:text="${#strings.abbreviate(post.title, 35)}"></h5>
+                            </a>
+                            <p class="card-text index-card-text" th:text="${#strings.abbreviate(post.story,75)}"></p>
 
 
-                        <!-- Edit and Archive buttons -->
-                        <a th:href="@{/posts/{id}/edit(id=${post.id})}" class="btn btn-primary">Edit</a>
-                        <button type="button" class="btn btn-secondary" data-toggle="modal"
-                                th:attr="data-target='#archiveModal' + ${post.id}">Archive
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Archive Confirmation Modal -->
-                <div class="modal fade" th:id="'archiveModal' + ${post.id}" tabindex="-1" role="dialog"
-                     aria-labelledby="archiveModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="archiveModalLabel">Confirm Archive</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
+                            <!-- Edit and Archive buttons -->
+                            <div class="buttons d-flex justify-content-center">
+                                <a th:href="@{/posts/{id}/edit(id=${post.id})}"
+                                   class="btn btn-primary w-50 mr-2">Edit</a>
+                                <button type="button" class="btn btn-secondary w-50" data-toggle="modal"
+                                        th:attr="data-target='#archiveModal' + ${post.id}">Archive
                                 </button>
                             </div>
-                            <div class="modal-body">
-                                <p>Are you sure you want to archive this post?</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                <form th:action="@{/posts/{id}/archive(id=${post.id})}" method="post">
-                                    <input type="submit" class="btn btn-danger" value="Confirm Archive">
-                                </form>
+                        </div>
+                    </div>
+
+                    <!-- Archive Confirmation Modal -->
+                    <div class="modal fade" th:id="'archiveModal' + ${post.id}" tabindex="-1" role="dialog"
+                         aria-labelledby="archiveModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="archiveModalLabel">Confirm Archive</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Are you sure you want to archive this post?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                    <form th:action="@{/posts/{id}/archive(id=${post.id})}" method="post">
+                                        <input type="submit" class="btn btn-danger" value="Confirm Archive">
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
-    <div>
-        <h3 class="mb-2">Your archived posts</h3>
-        <div th:if="${archivedPosts.isEmpty()}" class="mb-4">
-            No archived posts to show.
-        </div>
-        <div class="row">
-            <div th:unless="${archivedPosts.isEmpty()}" th:each="post : ${archivedPosts}" class="col-md-3 mb-4">
-                <div class="card">
+        <div>
+            <h3 class="mb-2">Your archived posts</h3>
+            <div th:if="${archivedPosts.isEmpty()}" class="mb-4">
+                No archived posts to show.
+            </div>
+            <div class="row">
+                <div th:unless="${archivedPosts.isEmpty()}" th:each="post : ${archivedPosts}" class="col-md-3 mb-4">
+                    <div class="card">
 
-                    <!-- Display the first image for the post if it exists -->
-                    <img th:if="${post.images.size() > 0}" th:src="${post.images.get(0).image}" class="card-img-top"
-                         alt="Post Image">
-                    <div class="card-body">
-                        <a th:href="@{/posts/{id}(id=${post.id})}">
-                            <h4 class="card-title" th:text="${post.title}"></h4>
-                        </a>
-                        <p class="card-text" th:text="${post.story}"></p>
+                        <!-- Display the first image for the post if it exists -->
+                        <img th:if="${post.images.size() > 0}" th:src="${post.images.get(0).image}" class="card-img-top"
+                             alt="Post Image">
+                        <div class="card-body">
+                            <a th:href="@{/posts/{id}(id=${post.id})}">
+                                <h5 class="card-title" th:text="${post.title}"></h5>
+                            </a>
+                            <p class="card-text" th:text="${post.story}"></p>
 
-                        <form th:action="@{/posts/{id}/unarchive(id=${post.id})}" method="post">
-                            <input type="submit" class="btn btn-secondary mt-2 w-100" value="Restore">
-                        </form>
+                            <form th:action="@{/posts/{id}/unarchive(id=${post.id})}" method="post">
+                                <input type="submit" class="btn btn-secondary mt-2 w-100" value="Restore">
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <button onclick="window.history.back()" class="btn btn-primary mt-3">Go Back</button>
-
-
 </div>
 <div th:replace="~{partials/footer :: footer}"></div>
 </body>

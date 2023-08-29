@@ -7,117 +7,119 @@
 </head>
 <body class="feed-background">
 <div th:replace="~{partials/navbar :: navbar}"></div>
-<div class="container">
-    <h1>Feed</h1>
-    <h2>Search Results for "<span th:text="${query}">Your Query</span>"</h2>
+<div class="content-wrapper">
+    <div class="container">
+        <h1>Feed</h1>
+        <!--    <h2 class="text-center">Search Results for "<span th:text="${query}">Your Query</span>"</h2>-->
 
-    <form th:action="@{/posts/search}" method="post">
-        <div class="search-bar col-12">
-            <input type="text" name="query" placeholder="Search by story, tag, or category..." class="search-bar">
+        <form th:action="@{/posts/search}" method="post" class="d-flex justify-content-center">
+            <div class="search-bar col-12 col-lg-8 mb-4">
+                <input type="text" name="query" placeholder="Search by story, tag, or category..." class="search-bar">
+            </div>
+            <!--        <div>-->
+            <!--            <button type="submit">Search</button>-->
+            <!--        </div>-->
+        </form>
+        <div class="row d-flex justify-content-center col-12 col-lg-8 col-md-6 mx-auto mb-4">
+
+            <div class="mr-2 mb-2">
+                <a class="btn btn-primary custom-btn text-white" th:href="@{/posts}">All Posts</a>
+            </div>
+            <div class="mr-2 mb-2">
+                <a class="btn btn-primary custom-btn text-white" th:href="@{/posts/category/1}">Animals</a>
+            </div>
+            <div class="mr-2 mb-2">
+                <a class="btn btn-primary custom-btn text-white" th:href="@{/posts/category/2}">Community</a>
+            </div>
+            <div class="mr-2 mb-2">
+                <a class="btn btn-primary custom-btn text-white" th:href="@{/posts/category/3}">Education</a>
+            </div>
+            <div class="mr-2 mb-2">
+                <a class="btn btn-primary custom-btn text-white" th:href="@{/posts/category/4}">Emergencies</a>
+            </div>
+            <div class="mr-2 mb-2">
+                <a class="btn btn-primary custom-btn text-white" th:href="@{/posts/category/5}">Environment</a>
+            </div>
+            <div class="mr-2 mb-2">
+                <a class="btn btn-primary custom-btn text-white" th:href="@{/posts/category/6}">Family</a>
+            </div>
+            <div class="mr-2 mb-2">
+                <a class="btn btn-primary custom-btn text-white" th:href="@{/posts/category/7}">Medical</a>
+            </div>
+            <div class="mr-2 mb-2">
+                <a class="btn btn-primary custom-btn text-white" th:href="@{/posts/category/8}">Monthly Bills</a>
+            </div>
+            <div class="mr-2 mb-2">
+                <a class="btn btn-primary custom-btn text-white" th:href="@{/posts/category/9}">Recovery</a>
+            </div>
+            <div class="mr-2 mb-2">
+                <a class="btn btn-primary custom-btn text-white" th:href="@{/posts/category/10}">Travel</a>
+            </div>
+            <div class="mr-2 mb-2">
+                <a class="btn btn-primary custom-btn text-white" th:href="@{/posts/category/11}">Volunteer</a>
+            </div>
+            <div class="mr-2 mb-2">
+                <a class="btn btn-primary custom-btn text-white" th:href="@{/posts/category/12}">Youth</a>
+            </div>
+            <div class="mr-2 mb-2">
+                <a class="btn btn-primary custom-btn text-white" th:href="@{/posts/category/13}">Other</a>
+            </div>
         </div>
-<!--        <div>-->
-<!--            <button type="submit">Search</button>-->
-<!--        </div>-->
-    </form>
-    <div>
-        <a class="btn btn-primary custom-btn text-white" th:href="@{/posts}">All Posts</a>
-    </div>
-    <div>
-        <a class="btn btn-primary custom-btn text-white" th:href="@{/posts/category/1}">Animals</a>
-    </div>
-    <div>
-        <a class="btn btn-primary custom-btn text-white" th:href="@{/posts/category/2}">Community</a>
-    </div>
-    <div>
-        <a class="btn btn-primary custom-btn text-white" th:href="@{/posts/category/3}">Education</a>
-    </div>
-    <div>
-        <a class="btn btn-primary custom-btn text-white" th:href="@{/posts/category/4}">Emergencies</a>
-    </div>
-    <div>
-        <a class="btn btn-primary custom-btn text-white" th:href="@{/posts/category/5}">Environment</a>
-    </div>
-    <div>
-        <a class="btn btn-primary custom-btn text-white" th:href="@{/posts/category/6}">Family</a>
-    </div>
-    <div>
-        <a class="btn btn-primary custom-btn text-white" th:href="@{/posts/category/7}">Medical</a>
-    </div>
-    <div>
-        <a class="btn btn-primary custom-btn text-white" th:href="@{/posts/category/8}">Monthly Bills</a>
-    </div>
-    <div>
-        <a class="btn btn-primary custom-btn text-white" th:href="@{/posts/category/9}">Recovery</a>
-    </div>
-    <div>
-        <a class="btn btn-primary custom-btn text-white" th:href="@{/posts/category/10}">Travel</a>
-    </div>
-    <div>
-        <a class="btn btn-primary custom-btn text-white" th:href="@{/posts/category/11}">Volunteer</a>
-    </div>
-    <div>
-        <a class="btn btn-primary custom-btn text-white" th:href="@{/posts/category/12}">Youth</a>
-    </div>
-    <div>
-        <a class="btn btn-primary custom-btn text-white" th:href="@{/posts/category/13}">Other</a>
-    </div>
 
-    <div class="row" th:if="${searchResultsTitle}">
-        <div th:each="post : ${searchResultsTitle}" class="col-md-4">
-            <div class="card mb-4">
-                <!--<img th:src="${post.imageUrl}" class="card-img-top" alt="Post Image">-->
+        <div class="row" th:if="${searchResultsTitle}">
+            <div th:each="post : ${searchResultsTitle}" class="col-md-4">
+                <div class="card mb-4">
+                    <!--<img th:src="${post.imageUrl}" class="card-img-top" alt="Post Image">-->
+                    <div class="card-body">
+                        <a th:href="@{/posts/{id}(id=${post.id})}">
+                            <h5 class="card-title" th:text="${post.title}"></h5>
+                        </a>
+                        <p class="card-text" th:text="${#strings.abbreviate(post.story,150)}">Post Story</p>
+                        <a th:href="@{/posts/{id}(id=${post.id})}" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" th:if="${searchResultsTags}">
+            <div th:each="tag : ${searchResultsTags}" class="col-md-4">
+                <div class="card mb-4">
+                    <!--                <img th:src="${post.imageUrl}" class="card-img-top" alt="Post Image">-->
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${tag.post.title}">Post Title</h5>
+                        <p class="card-text" th:text="${#strings.abbreviate(tag.post.story,150)}">Post Story</p>
+                        <a th:href="@{/posts/{id}(id=${tag.post.id})}" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" th:if="${category}">
+            <div th:each="post : ${category}" class="col-md-4">
+                <div class="card mb-4">
+                    <!--                <img th:src="${post.imageUrl}" class="card-img-top" alt="Post Image">-->
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${post.title}">Post Title</h5>
+                        <p class="card-text" th:text="${#strings.abbreviate(post.story,150)}">Post Story</p>
+                        <a th:href="@{/post/{id}(id=${post.id})}" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-8 d-flex flex-column justify-content-center mx-auto">
+            <div th:each="post : ${posts}" class="card mb-3" id="Latest posts">
+                <img th:if="${post.images.size() > 0}" th:src="${post.images.get(0).image}" class="card-img-top"
+                     alt="Post Image">
                 <div class="card-body">
-                    <a th:href="@{/posts/{id}(id=${post.id})}">
+                    <a th:href="@{/posts/{id} (id= ${post.getId()})}">
                         <h5 class="card-title" th:text="${post.title}"></h5>
                     </a>
-                    <p class="card-text" th:text="${#strings.abbreviate(post.story,150)}">Post Story</p>
-                    <a th:href="@{/posts/{id}(id=${post.id})}" class="btn btn-primary">Read More</a>
+                    <p class="card-text" th:text="${#strings.abbreviate(post.story,150)}"></p>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="row" th:if="${searchResultsTags}">
-        <div th:each="tag : ${searchResultsTags}" class="col-md-4">
-            <div class="card mb-4">
-                <!--                <img th:src="${post.imageUrl}" class="card-img-top" alt="Post Image">-->
-                <div class="card-body">
-                    <h5 class="card-title" th:text="${tag.post.title}">Post Title</h5>
-                    <p class="card-text" th:text="${#strings.abbreviate(tag.post.story,150)}">Post Story</p>
-                    <a th:href="@{/posts/{id}(id=${tag.post.id})}" class="btn btn-primary">Read More</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row" th:if="${category}">
-        <div th:each="post : ${category}" class="col-md-4">
-            <div class="card mb-4">
-                <!--                <img th:src="${post.imageUrl}" class="card-img-top" alt="Post Image">-->
-                <div class="card-body">
-                    <h5 class="card-title" th:text="${post.title}">Post Title</h5>
-                    <p class="card-text" th:text="${#strings.abbreviate(post.story,150)}">Post Story</p>
-                    <a th:href="@{/post/{id}(id=${post.id})}" class="btn btn-primary">Read More</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-lg-8 d-flex flex-column justify-content-center mx-auto">
-        <div th:each="post : ${posts}" class="card mb-3" id="Latest posts">
-            <img th:if="${post.images.size() > 0}" th:src="${post.images.get(0).image}" class="card-img-top"
-                 alt="Post Image">
-            <div class="card-body">
-                <a th:href="@{/posts/{id} (id= ${post.getId()})}">
-                    <h5 class="card-title" th:text="${post.title}"></h5>
-                </a>
-                <p class="card-text" th:text="${#strings.abbreviate(post.story,150)}"></p>
-            </div>
-        </div>
-    </div>
-
-    <button onclick="window.history.back()" class="btn btn-primary mt-3">Go Back</button>
-
 </div>
 <div th:replace="~{partials/footer :: footer}"></div>
 </body>
