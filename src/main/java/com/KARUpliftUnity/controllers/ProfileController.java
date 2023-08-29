@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
+import java.util.Date;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -62,7 +63,7 @@ public class ProfileController {
 
         model.addAttribute("profileImage", imageUrl);
 
-        model.addAttribute("username", user.getUsername());
+        model.addAttribute("user", user);
         model.addAttribute("activePosts", postDao.findByUserIdAndArchiveFalse(user.getId()));
         model.addAttribute("archivedPosts", postDao.findByUserIdAndArchiveTrue(user.getId()));
 
@@ -74,6 +75,7 @@ public class ProfileController {
         Post post = postDao.findById(id).orElse(null);
         if (post != null) {
             post.setArchive(true);
+            post.setArchiveDate(new Date());
             postDao.save(post);
         }
         return "redirect:/profile";
@@ -84,6 +86,7 @@ public class ProfileController {
         Post post = postDao.findById(id).orElse(null);
         if (post != null) {
             post.setArchive(false);
+            post.setArchiveDate(null);
             postDao.save(post);
         }
         return "redirect:/profile";
@@ -103,8 +106,7 @@ public class ProfileController {
         }
 
         model.addAttribute("profileImage", imageUrl);
-        model.addAttribute("username", user.getUsername());
-        model.addAttribute("email", user.getEmail());
+        model.addAttribute("user", user);
         return "/users/profile_settings";
     }
 

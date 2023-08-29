@@ -26,6 +26,8 @@ public class Post {
     private String reportReason;
     @Column
     private boolean archive;
+    @Column
+    private Date archiveDate;
     @ManyToOne
     @JoinColumn (name = "user_id")
     private User user;
@@ -52,7 +54,7 @@ public class Post {
     private List<Category> categories;
 
 
-    public Post(long id, Date date, String title, String story, String solution, boolean flagged, String reportReason, boolean archive, User user, List<Like> likes, List<Comment> comment, List<Update> updates, List<Image> images, List<Tag> tags, String tagString, List<Category> categories) {
+    public Post(long id, Date date, String title, String story, String solution, boolean flagged, String reportReason, boolean archive, Date archiveDate, User user, List<Like> likes, List<Comment> comment, List<Update> updates, List<Image> images, List<Tag> tags, String tagString, List<Category> categories) {
         this.id = id;
         this.date = date;
         this.title = title;
@@ -61,6 +63,7 @@ public class Post {
         this.flagged = flagged;
         this.reportReason = reportReason;
         this.archive = archive;
+        this.archiveDate = archiveDate;
         this.user = user;
         this.likes = likes;
         this.comment = comment;
@@ -187,6 +190,42 @@ public class Post {
 
     public void setReportReason(String reportReason) {
         this.reportReason = reportReason;
+    }
+
+    public boolean isArchive() {
+        return archive;
+    }
+
+    public Date getArchiveDate() {
+        return archiveDate;
+    }
+
+    public void setArchiveDate(Date archiveDate) {
+        this.archiveDate = archiveDate;
+    }
+
+    public List<Like> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<Like> likes) {
+        this.likes = likes;
+    }
+
+    public List<Comment> getComment() {
+        return comment;
+    }
+
+    public void setComment(List<Comment> comment) {
+        this.comment = comment;
+    }
+
+    public List<Update> getUpdates() {
+        return updates;
+    }
+
+    public void setUpdates(List<Update> updates) {
+        this.updates = updates;
     }
 }
 
