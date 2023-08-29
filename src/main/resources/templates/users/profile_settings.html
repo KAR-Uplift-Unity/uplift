@@ -15,17 +15,17 @@
     <div class="user-details mt-4">
         <img th:src="${profileImage}" alt="Profile Image" class="profile-image">
 
-        <h2 th:text="${username}">Username</h2>
+        <h2 th:text="${user.username}"></h2>
         <button onclick="openProfileImagePicker()" class="btn btn-secondary">Upload Profile Image</button>
         <form action="/update-details" method="post" id="userDetailsForm" class="mt-3">
             <div class="form-group">
                 <label for="username">Username:</label>
-                <input type="text" id="username" name="username" th:value="${username}" readonly class="form-control">
+                <input type="text" id="username" name="username" th:value="${user.username}" readonly class="form-control">
             </div>
 
             <div class="form-group">
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email" th:value="${email}" readonly class="form-control">
+                <input type="email" id="email" name="email" th:value="${user.email}" readonly class="form-control">
             </div>
 
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editUserDetailsModal">Edit</button>
@@ -40,6 +40,11 @@
     </div>
     <div th:if="${successMessage}" class="alert alert-success mt-4" th:text="${successMessage}"></div>
     <div th:if="${errorMessage}" class="alert alert-danger mt-4" th:text="${errorMessage}"></div>
+
+    <div class="password-change mt-5">
+        <h2>Archive User Account</h2>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#archiveUser">Archive</button>
+    </div>
 </div>
 
 <!-- Edit User Details Modal -->
@@ -118,7 +123,33 @@
         Failed to update profile image
     </div>
 </div>
+
+<!-- Archive User -->
+<div class="modal fade" id="archiveUser" tabindex="-1" role="dialog"
+     aria-labelledby="archiveModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="archiveModalLabel">Confirm Archive</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Please be aware that if you archive your user account. Your account can still be accessible. But if you access your account within 30 days of archival. Your archive status will be removed and your account will be live again! If your goal is to delete your account. Just archive and forget it. After 30 days it will be deleted from our system.</p>
+                <p>Are you sure you want to archive your user account?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <form th:action="@{/user/archive/{id}(id=${user.id})}" method="post">
+                    <input type="submit" class="btn btn-danger" value="Confirm Archive">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <div th:replace="~{partials/footer :: footer}"></div>
+<div th:replace="~{partials/footer :: footerscripts}"></div>
 <script th:src="@{/js/filestack-api-key.js}"></script>
 <script th:src="@{/js/filestack-functionality.js}"></script>
 </body>
