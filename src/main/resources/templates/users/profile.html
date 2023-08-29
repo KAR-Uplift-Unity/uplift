@@ -12,7 +12,7 @@
         <div class="row d-flex mt-4">
             <div class="col">
                 <img th:src="${profileImage}" alt="Profile Image" class="profile-image">
-                <h4 th:text="${username}"></h4>
+                <h4 th:text="${username}" class="pl-1"></h4>
             </div>
             <div class="col d-flex justify-content-end">
                 <a href="/settings">Profile Settings</a>
@@ -23,27 +23,28 @@
             <div th:if="${activePosts.isEmpty()}" class="mb-4">
                 No archived posts to show.
             </div>
-            <div class="row">
+            <div class="row d-flex">
                 <div th:unless="${activePosts.isEmpty()}" th:each="post : ${activePosts}"
-                     class="col-12 col-lg-4 col-md-6 mb-4">
-                    <div class="card index-card">
+                     class="col-12 col-lg-4 col-md-6 mb-4 d-flex">
+                    <div class="card index-card flex-grow-1">
 
                         <img th:if="${post.images.size() > 0}" th:src="${post.images.get(0).image}" class="card-img-top"
                              alt="Post Image">
 
-                        <div class="card-body">
+                        <div class="card-body d-flex flex-column">
                             <a th:href="@{/posts/{id}(id=${post.id})}" class="index-card-title">
                                 <h5 class="card-title text-dark index-card-title"
                                     th:text="${#strings.abbreviate(post.title, 35)}"></h5>
                             </a>
-                            <p class="card-text index-card-text" th:text="${#strings.abbreviate(post.story,75)}"></p>
+                            <p class="card-text index-card-text flex-grow-1"
+                               th:text="${#strings.abbreviate(post.story,75)}"></p>
 
 
                             <!-- Edit and Archive buttons -->
-                            <div class="buttons d-flex justify-content-center">
+                            <div class="buttons d-flex justify-content-end">
                                 <a th:href="@{/posts/{id}/edit(id=${post.id})}"
-                                   class="btn btn-primary w-50 mr-2">Edit</a>
-                                <button type="button" class="btn btn-secondary w-50" data-toggle="modal"
+                                   class="btn btn-outline-success w-50 mr-2">Edit</a>
+                                <button type="button" class="btn btn-outline-secondary w-50" data-toggle="modal"
                                         th:attr="data-target='#archiveModal' + ${post.id}">Archive
                                 </button>
                             </div>
@@ -80,24 +81,25 @@
         </div>
 
 
-        <div>
-            <h3 class="mb-2">Your archived posts</h3>
-            <div th:if="${archivedPosts.isEmpty()}" class="mb-4">
-                No archived posts to show.
-            </div>
-            <div class="row">
-                <div th:unless="${archivedPosts.isEmpty()}" th:each="post : ${archivedPosts}" class="col-md-3 mb-4">
-                    <div class="card">
+        <h3 class="mb-2">Your archived posts</h3>
+        <div th:if="${archivedPosts.isEmpty()}" class="mb-4">
+            No archived posts to show.
+        </div>
+        <div class="row d-flex">
+            <div th:unless="${archivedPosts.isEmpty()}" th:each="post : ${archivedPosts}"
+                 class="col-12 col-lg-4 col-md-6 mb-4 d-flex ">
+                <div class="card index-card flex-grow-1">
 
-                        <!-- Display the first image for the post if it exists -->
-                        <img th:if="${post.images.size() > 0}" th:src="${post.images.get(0).image}" class="card-img-top"
-                             alt="Post Image">
-                        <div class="card-body">
-                            <a th:href="@{/posts/{id}(id=${post.id})}">
-                                <h5 class="card-title" th:text="${post.title}"></h5>
-                            </a>
-                            <p class="card-text" th:text="${post.story}"></p>
-
+                    <!-- Display the first image for the post if it exists -->
+                    <img th:if="${post.images.size() > 0}" th:src="${post.images.get(0).image}" class="card-img-top"
+                         alt="Post Image">
+                    <div class="card-body d-flex flex-column">
+                        <a th:href="@{/posts/{id}(id=${post.id})}" class="index-card-title">
+                            <h5 class="card-title text-dark index-card-title"
+                                th:text="${#strings.abbreviate(post.title, 35)}"></h5>
+                        </a>
+                        <p class="card-text index-card-text flex-grow-1"
+                           th:text="${#strings.abbreviate(post.story,75)}"></p>
                             <p class="card-text font-weight-lighter" th:if="${post.days == 1}">1 Day until deletion</p>
                             <p class="card-text font-weight-lighter" th:if="${post.days == 2}">2 Days until deletion</p>
                             <p class="card-text font-weight-lighter" th:if="${post.days == 3}">3 Days until deletion</p>
@@ -105,9 +107,9 @@
                             <p class="card-text font-weight-lighter" th:if="${post.days == 5}">5 Days until deletion</p>
                             <p class="card-text font-weight-lighter" th:if="${post.days == 6}">6 Days until deletion</p>
                             <p class="card-text font-weight-lighter" th:if="${post.days == 7}">7 Days until deletion</p>
-
-                            <form th:action="@{/posts/{id}/unarchive(id=${post.id})}" method="post">
-                                <input type="submit" class="btn btn-secondary mt-2 w-100" value="Restore">
+                        <div class="buttons d-flex">
+                            <form th:action="@{/posts/{id}/unarchive(id=${post.id})}" method="post" class="w-100">
+                                <input type="submit" class="btn btn-outline-secondary mt-2 w-100" value="Restore">
                             </form>
                         </div>
                     </div>
