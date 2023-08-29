@@ -100,7 +100,13 @@
                         </a>
                         <p class="card-text index-card-text flex-grow-1"
                            th:text="${#strings.abbreviate(post.story,75)}"></p>
-
+                            <p class="card-text font-weight-lighter" th:if="${post.days == 1}">1 Day until deletion</p>
+                            <p class="card-text font-weight-lighter" th:if="${post.days == 2}">2 Days until deletion</p>
+                            <p class="card-text font-weight-lighter" th:if="${post.days == 3}">3 Days until deletion</p>
+                            <p class="card-text font-weight-lighter" th:if="${post.days == 4}">4 Days until deletion</p>
+                            <p class="card-text font-weight-lighter" th:if="${post.days == 5}">5 Days until deletion</p>
+                            <p class="card-text font-weight-lighter" th:if="${post.days == 6}">6 Days until deletion</p>
+                            <p class="card-text font-weight-lighter" th:if="${post.days == 7}">7 Days until deletion</p>
                         <div class="buttons d-flex">
                             <form th:action="@{/posts/{id}/unarchive(id=${post.id})}" method="post" class="w-100">
                                 <input type="submit" class="btn btn-outline-secondary mt-2 w-100" value="Restore">

@@ -86,9 +86,9 @@ public class AdminController {
                     if (updates != null){
                         updateDao.deleteAllInBatch(updates);
                     }
-                    List<Category> categories = catDao.findAllByPost(post);
-                    if (categories != null){
-                        catDao.deleteAllInBatch(categories);
+                    List<Tag> tags = tagDao.findAllByPost(post);
+                    if (tags != null){
+                        tagDao.deleteAllInBatch(tags);
                     }
                 }
                 postDao.deleteAllInBatch(usersPosts);
@@ -115,11 +115,6 @@ public class AdminController {
                 updateDao.deleteAllInBatch(updates);
             }
 
-            List<Category> categories = catDao.findAllByPost(post);
-            if (categories != null){
-                catDao.deleteAllInBatch(categories);
-            }
-
             List<Like> likes = likeDao.findAllByPost(post);
             if (likes != null){
                 likeDao.deleteAllInBatch(likes);
@@ -128,6 +123,11 @@ public class AdminController {
             List<Comment> comments = comDao.findAllByPost(post);
             if (comments != null){
                 comDao.deleteAllInBatch(comments);
+            }
+
+            List<Tag> tags = tagDao.findAllByPost(post);
+            if (tags != null){
+                tagDao.deleteAllInBatch(tags);
             }
 
             postDao.delete(post);

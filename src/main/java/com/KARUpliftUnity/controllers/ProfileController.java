@@ -23,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -61,11 +62,48 @@ public class ProfileController {
             imageUrl = "/images/default-image.png";
         }
 
+        List<Post> posts = postDao.findByUserIdAndArchiveTrue(user.getId());
+        Date curTime = new Date();
+
+        long curTimeLong = curTime.getTime();
+
+        for (Post post: posts){
+            long archiveTime = 0;
+            if (post.getArchive()){
+                archiveTime = post.getArchiveDate().getTime();
+                System.out.println("archiveTime = " + archiveTime);
+            }
+            long totalTime = curTimeLong - archiveTime;
+
+            if (totalTime <= 86400000 && totalTime > 0){
+                post.setDays(7);
+                postDao.save(post);
+            } else if (totalTime <= 172800000 && totalTime > 86400001){
+                post.setDays(6);
+                postDao.save(post);
+            } else if (totalTime <= 259200000 && totalTime > 172800001){
+                post.setDays(5);
+                postDao.save(post);
+            } else if (totalTime <= 345600000 && totalTime > 259200001){
+                post.setDays(4);
+                postDao.save(post);
+            } else if (totalTime <= 432000000 && totalTime > 345600001){
+                post.setDays(3);
+                postDao.save(post);
+            } else if (totalTime <= 518400000 && totalTime > 432000001){
+                post.setDays(2);
+                postDao.save(post);
+            } else if (totalTime <= 604800000 && totalTime > 518400001){
+                post.setDays(1);
+                postDao.save(post);
+            }
+        }
+
         model.addAttribute("profileImage", imageUrl);
 
         model.addAttribute("user", user);
         model.addAttribute("activePosts", postDao.findByUserIdAndArchiveFalse(user.getId()));
-        model.addAttribute("archivedPosts", postDao.findByUserIdAndArchiveTrue(user.getId()));
+        model.addAttribute("archivedPosts", posts);
 
         return "/users/profile";
     }
@@ -87,6 +125,7 @@ public class ProfileController {
         if (post != null) {
             post.setArchive(false);
             post.setArchiveDate(null);
+            post.setDays(0);
             postDao.save(post);
         }
         return "redirect:/profile";

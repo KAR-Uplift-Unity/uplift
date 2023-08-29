@@ -51,7 +51,105 @@ public class ScheduledTasks {
 
 
 // every hour will test if there are archived users or posts to remove from the db
-    @Scheduled(fixedRate = 3600000)
+//    @Scheduled(fixedRate = 3600000)
+//    public void deleteArchivedItems() {
+//        List<Post> posts = postDao.findByArchiveTrue();
+//        List<User> users = userDao.findAllByArchiveTrue();
+//
+//        Date curTime = new Date();
+//
+//        long curTimeLong = curTime.getTime();
+//
+//        for (Post post: posts){
+//            long archiveTime = 0;
+//            if (post.getArchive()){
+//                archiveTime = post.getArchiveDate().getTime();
+//                System.out.println("archiveTime = " + archiveTime);
+//            }
+//            long totalTime = curTimeLong - archiveTime;
+//            long sevenDays = 604800000;
+//            if(totalTime > sevenDays) {
+//
+//                List<Image> images = imgDao.findAllByPost(post);
+//                if (images != null){
+//                    imgDao.deleteAllInBatch(images);
+//                }
+//
+//                List<Update> updates = updateDao.findAllByPost(post);
+//                if (updates != null){
+//                    updateDao.deleteAllInBatch(updates);
+//                }
+//
+//                List<Like> likes = likeDao.findAllByPost(post);
+//                if (likes != null){
+//                    likeDao.deleteAllInBatch(likes);
+//                }
+//
+//                List<Comment> comments = comDao.findAllByPost(post);
+//                if (comments != null){
+//                    comDao.deleteAllInBatch(comments);
+//                }
+//
+//                List<Tag> tags = tagDao.findAllByPost(post);
+//                if (tags != null){
+//                    tagDao.deleteAllInBatch(tags);
+//                }
+//                postDao.delete(post);
+//            }
+//        }
+//
+//
+//        for (User user: users){
+//            long archiveTime = 0;
+//            if (user.getArchive()){
+//                archiveTime = user.getArchiveDate().getTime();
+//            }
+//            long totalTime = curTimeLong - archiveTime;
+//            long thirtyDays = 2592000000L;
+//            if(totalTime > thirtyDays) {
+//                List<Like> likes = likeDao.findAllByUser(user);
+//                if (likes != null){
+//                    likeDao.deleteAllInBatch(likes);
+//                }
+//                List<Comment> comments = comDao.findAllByUser(user);
+//                if (comments != null){
+//                    comDao.deleteAllInBatch(comments);
+//                }
+//                List<Post> usersPosts = postDao.findAllByUser(user);
+//                if (usersPosts != null){
+//                    for (Post post : usersPosts){
+//                        List<Image> images = imgDao.findAllByPost(post);
+//                        if (images != null){
+//                            imgDao.deleteAllInBatch(images);
+//                        }
+//
+//                        List<Update> updates = updateDao.findAllByPost(post);
+//                        if (updates != null){
+//                            updateDao.deleteAllInBatch(updates);
+//                        }
+//
+//                        List<Like> likes1 = likeDao.findAllByPost(post);
+//                        if (likes1 != null){
+//                            likeDao.deleteAllInBatch(likes1);
+//                        }
+//
+//                        List<Comment> comments1 = comDao.findAllByPost(post);
+//                        if (comments1 != null){
+//                            comDao.deleteAllInBatch(comments1);
+//                        }
+//                        List<Tag> tags = tagDao.findAllByPost(post);
+//                        if (tags != null){
+//                            tagDao.deleteAllInBatch(tags);
+//                        }
+//                    }
+//                    postDao.deleteAllInBatch(usersPosts);
+//                }
+//                userDao.delete(user);
+//            }
+//        }
+//    }
+
+    @Scheduled(fixedRate = 60000)
     public void deleteArchivedItems() {
         List<Post> posts = postDao.findByArchiveTrue();
         List<User> users = userDao.findAllByArchiveTrue();
@@ -67,7 +165,7 @@ public class ScheduledTasks {
                 System.out.println("archiveTime = " + archiveTime);
             }
             long totalTime = curTimeLong - archiveTime;
-            long sevenDays = 604800000;
+            long sevenDays = 120000;
             if(totalTime > sevenDays) {
 
                 List<Image> images = imgDao.findAllByPost(post);
@@ -80,11 +178,6 @@ public class ScheduledTasks {
                     updateDao.deleteAllInBatch(updates);
                 }
 
-                List<Category> categories = catDao.findAllByPost(post);
-                if (categories != null){
-                    catDao.deleteAllInBatch(categories);
-                }
-
                 List<Like> likes = likeDao.findAllByPost(post);
                 if (likes != null){
                     likeDao.deleteAllInBatch(likes);
@@ -94,6 +187,7 @@ public class ScheduledTasks {
                 if (comments != null){
                     comDao.deleteAllInBatch(comments);
                 }
+
                 List<Tag> tags = tagDao.findAllByPost(post);
                 if (tags != null){
                     tagDao.deleteAllInBatch(tags);
@@ -109,7 +203,7 @@ public class ScheduledTasks {
                 archiveTime = user.getArchiveDate().getTime();
             }
             long totalTime = curTimeLong - archiveTime;
-            long thirtyDays = 2592000000L;
+            long thirtyDays = 240000;
             if(totalTime > thirtyDays) {
                 List<Like> likes = likeDao.findAllByUser(user);
                 if (likes != null){
@@ -130,11 +224,6 @@ public class ScheduledTasks {
                         List<Update> updates = updateDao.findAllByPost(post);
                         if (updates != null){
                             updateDao.deleteAllInBatch(updates);
-                        }
-
-                        List<Category> categories = catDao.findAllByPost(post);
-                        if (categories != null){
-                            catDao.deleteAllInBatch(categories);
                         }
 
                         List<Like> likes1 = likeDao.findAllByPost(post);
