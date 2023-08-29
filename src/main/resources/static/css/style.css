@@ -299,6 +299,10 @@ button.btn.btn-primary.custom-btn:active {
 
 .about-us-background {
     background-color: var(--off-white-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    flex: 1;
 }
 
 .mission-content {
@@ -335,6 +339,10 @@ button.btn.btn-primary.custom-btn:active {
 .contact-bg {
     background-color: var(--off-white-color);
     font-family: var(--poppins-font);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    flex: 1;
 }
 
 .contact-bg h1 {
@@ -375,9 +383,15 @@ button.btn.btn-primary.custom-btn:active {
 
 /*CREATE A POST START */
 
+
+
 .create-page-bg {
     background-color: var(--off-white-color);
     font-family: var(--poppins-font);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    flex: 1;
 }
 
 .create-page-bg h1 {
@@ -475,6 +489,14 @@ button.btn.btn-primary.custom-btn:active {
     font-family: var(--poppins-font);
 }
 
+.individual-post{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    flex: 1;
+}
+
+
 /* Normal state */
 .heart-btn {
     background-color: white;
@@ -513,6 +535,10 @@ button.btn.btn-primary.custom-btn:active {
 
 .feed-background {
     background-color: var(--off-white-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    flex: 1;
 }
 
 .search-bar {
@@ -524,6 +550,18 @@ button.btn.btn-primary.custom-btn:active {
 }
 
 /*POSTS/FEED PAGE END*/
+
+/*PROFILE SETTING PAGE START */
+
+.profile-settings-bg {
+    background-color: var(--off-white-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    flex: 1;
+}
+
+/*PROFILE SETTING PAGE END*/
 
 /*FOOTER START*/
 
@@ -615,7 +653,25 @@ footer .footer-background {
     border-radius: 50px;
 }
 
+.profile-background {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    flex: 1;
+}
+
 /*PROFILE PAGE END*/
+
+/*ADMIN PAGE START*/
+
+.admin-background {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    flex: 1;
+}
+
+/*ADMIN PAGE END*/
 
 /*WELCOME MODAL START*/
 
