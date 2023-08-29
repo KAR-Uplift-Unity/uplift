@@ -12,216 +12,217 @@
 </head>
 <body class="individual-post">
 <div th:replace="~{partials/navbar :: navbar}"></div>
+<div class="content-wrapper">
+    <div class="container mt-5">
 
+        <!-- Post Image and Share/Email buttons -->
+        <div class="row">
+            <div class="col-8">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div th:each="image,iterStat : ${images}"
+                             th:class="${iterStat.first} ? 'carousel-item active' : 'carousel-item'">
 
-<div class="container mt-5">
+                            <img th:src="${image.image}" class="d-block w-100" alt="...">
 
-    <!-- Post Image and Share/Email buttons -->
-    <div class="row">
-        <div class="col-8">
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                    <div th:each="image,iterStat : ${images}"
-                         th:class="${iterStat.first} ? 'carousel-item active' : 'carousel-item'">
-
-                        <img th:src="${image.image}" class="d-block w-100" alt="...">
-
+                        </div>
                     </div>
+
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
-
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
+            </div>
+            <div class="col-4 d-flex flex-column">
+                <button class="btn btn-primary mb-2">Share</button>
+                <button class="btn btn-secondary">Email</button>
             </div>
         </div>
-        <div class="col-4 d-flex flex-column">
-            <button class="btn btn-primary mb-2">Share</button>
-            <button class="btn btn-secondary">Email</button>
+        <div class="like-container mt-4">
+            <input type="hidden" id="postId" th:value="${post.id}"/>
+            <button id="heart-btn" class="heart-btn"><i class="fa-solid fa-heart" th:if="${hasLiked}"></i><i
+                    class="fa-regular fa-heart" th:if="${!hasLiked}"></i>
+                <span id="like-count" th:text="${likeCount}"></span>
+            </button>
         </div>
-    </div>
-    <div class="like-container mt-4">
-        <input type="hidden" id="postId" th:value="${post.id}"/>
-        <button id="heart-btn" class="heart-btn"><i class="fa-solid fa-heart" th:if="${hasLiked}"></i><i
-                class="fa-regular fa-heart" th:if="${!hasLiked}"></i>
-            <span id="like-count" th:text="${likeCount}"></span>
-        </button>
-    </div>
 
-    <!-- Posted By and Date -->
-    <div class="mt-4 d-flex align-items-center">
-        <img th:src="${profileImage}" alt="Profile Image" width="50" height="50" style="border-radius: 50px;">
-        <div class="ml-2">
-            <p class="m-0 text-muted"><strong>Posted by:</strong> <span th:text="${post.user.username}"></span></p>
-            <p class="m-0 text-muted date"><span th:text="${#dates.format(post.date, 'MM/dd/yyyy')}"></span></p>
+        <!-- Posted By and Date -->
+        <div class="mt-4 d-flex align-items-center">
+            <img th:src="${profileImage}" alt="Profile Image" width="50" height="50" style="border-radius: 50px;">
+            <div class="ml-2">
+                <p class="m-0 text-muted"><strong>Posted by:</strong> <span th:text="${post.user.username}"></span></p>
+                <p class="m-0 text-muted date"><span th:text="${#dates.format(post.date, 'MM/dd/yyyy')}"></span></p>
+            </div>
         </div>
-    </div>
 
-    <!-- Title -->
-    <h2 th:text="${post.title}" class="mt-4"></h2>
+        <!-- Title -->
+        <h2 th:text="${post.title}" class="mt-4"></h2>
 
-    <!-- Story -->
-    <div class="mt-3">
-        <p th:text="${post.story}"></p>
-    </div>
+        <!-- Story -->
+        <div class="mt-3">
+            <p th:text="${post.story}"></p>
+        </div>
 
-    <!-- How You Can Help -->
-    <h4 class="mt-4">How you can help</h4>
-    <div>
-        <p th:text="${post.solution}"></p>
-    </div>
+        <!-- How You Can Help -->
+        <h4 class="mt-4">How you can help</h4>
+        <div>
+            <p th:text="${post.solution}"></p>
+        </div>
 
-    <!-- Categories -->
-    <h5 class="mt-4">Categories:</h5>
-    <div>
-        <button th:each="category : ${post.categories}" type="button" class="btn btn-outline-primary m-1"
-                th:text="${category.cat}"></button>
-    </div>
+        <!-- Categories -->
+        <h5 class="mt-4">Categories:</h5>
+        <div>
+            <button th:each="category : ${post.categories}" type="button" class="btn btn-outline-primary m-1"
+                    th:text="${category.cat}"></button>
+        </div>
 
-    <!-- Comments and Comment Form -->
-    <div class="mt-4">
-        <h5 class="mb-4">Comments:</h5>
-        <div th:each="comment : ${comments}" class="mb-3">
-            <!-- Comment Card -->
-            <div class="card">
-                <div class="card-body">
-                    <p class="card-text" th:text="${comment.comment}"></p>
-                    <footer class="blockquote-footer"><cite th:text="${comment.user.username}"></cite></footer>
-                    <div class="row d-flex align-items-center mt-2 pl-3">
+        <!-- Comments and Comment Form -->
+        <div class="mt-4">
+            <h5 class="mb-4">Comments:</h5>
+            <div th:each="comment : ${comments}" class="mb-3">
+                <!-- Comment Card -->
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-text" th:text="${comment.comment}"></p>
+                        <footer class="blockquote-footer"><cite th:text="${comment.user.username}"></cite></footer>
+                        <div class="row d-flex align-items-center mt-2 pl-3">
                         <span th:text="${comment.timestamp != null} ? ${#temporals.format(comment.timestamp, 'MM/dd/yyyy h:mm a')} : ''"
                               class="text-muted"></span>
 
-                        <!-- Edit button for the comment -->
-                        <button th:if="${#authentication.name == comment.user.username}"
-                                class="btn comment-button"
-                                data-toggle="modal"
-                                th:data-target="'#editCommentModal-' + ${comment.id}">Edit
-                        </button>
+                            <!-- Edit button for the comment -->
+                            <button th:if="${#authentication.name == comment.user.username}"
+                                    class="btn comment-button"
+                                    data-toggle="modal"
+                                    th:data-target="'#editCommentModal-' + ${comment.id}">Edit
+                            </button>
 
-                        <!-- Delete button for the comment -->
-                        <form th:if="${#authentication.name == comment.user.username}"
-                              th:action="@{/comments/{id}/delete(id=${comment.id})}" method="post">
-                            <button type="submit" class="btn comment-button">Delete</button>
-                        </form>
-                        <div class="row mt-5">
-                            <button class="btn btn-danger mx-auto" data-toggle="modal" data-target="#reportModal1">Report Comment</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Modal for editing the comment -->
-                <div th:id="'editCommentModal-' + ${comment.id}" class="modal fade" tabindex="-1" role="dialog">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Edit Comment</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
+                            <!-- Delete button for the comment -->
+                            <form th:if="${#authentication.name == comment.user.username}"
+                                  th:action="@{/comments/{id}/delete(id=${comment.id})}" method="post">
+                                <button type="submit" class="btn comment-button">Delete</button>
+                            </form>
+                            <div class="row mt-5">
+                                <button class="btn btn-danger mx-auto" data-toggle="modal" data-target="#reportModal1">
+                                    Report Comment
                                 </button>
                             </div>
-                            <div class="modal-body">
-                                <form th:action="@{/comments/{id}/edit(id=${comment.id})}" method="post">
-                                    <div class="form-group">
-                                        <label for="comment-content">Comment</label>
-                                        <textarea class="form-control" name="content" rows="3" required
-                                                  id="comment-content">[[${comment.comment}]]</textarea>
+                        </div>
+                    </div>
 
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
-                                        </button>
-                                        <button type="submit" class="btn btn-primary">Save changes</button>
-                                    </div>
-                                </form>
+                    <!-- Modal for editing the comment -->
+                    <div th:id="'editCommentModal-' + ${comment.id}" class="modal fade" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Edit Comment</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form th:action="@{/comments/{id}/edit(id=${comment.id})}" method="post">
+                                        <div class="form-group">
+                                            <label for="comment-content">Comment</label>
+                                            <textarea class="form-control" name="content" rows="3" required
+                                                      id="comment-content">[[${comment.comment}]]</textarea>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                            </button>
+                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- modal for reporting comment -->
-                <div class="modal fade" id="reportModal1" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel"
-                     aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="reportModalLabel1">Report Post</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form th:action="@{/report-comment}" method="post">
-                                    <div class="form-group">
-                                        <label for="reportReason1">Reason for reporting:</label>
-                                        <select class="form-control" id="reportReason1" name="reportReason">
-                                            <option value="Inappropriate Content">Inappropriate Content</option>
-                                            <option value="Spam">Spam</option>
-                                            <option value="Misinformation">Misinformation</option>
-                                            <option value="Other">Other</option>
-                                        </select>
-                                    </div>
-                                    <input type="hidden" name="postId" th:value="${post.id}"/>
-                                    <input type="hidden" name="commentId" th:value="${comment.id}"/>
-                                    <button type="submit" class="btn btn-danger">Submit Report</button>
-                                </form>
+                    <!-- modal for reporting comment -->
+                    <div class="modal fade" id="reportModal1" tabindex="-1" role="dialog"
+                         aria-labelledby="reportModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="reportModalLabel1">Report Post</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form th:action="@{/report-comment}" method="post">
+                                        <div class="form-group">
+                                            <label for="reportReason1">Reason for reporting:</label>
+                                            <select class="form-control" id="reportReason1" name="reportReason">
+                                                <option value="Inappropriate Content">Inappropriate Content</option>
+                                                <option value="Spam">Spam</option>
+                                                <option value="Misinformation">Misinformation</option>
+                                                <option value="Other">Other</option>
+                                            </select>
+                                        </div>
+                                        <input type="hidden" name="postId" th:value="${post.id}"/>
+                                        <input type="hidden" name="commentId" th:value="${comment.id}"/>
+                                        <button type="submit" class="btn btn-danger">Submit Report</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
+                </div>
             </div>
-        </div>
 
-        <!-- Add Comment Form -->
-        <form th:action="@{/posts/{id}/comments(id=${post.id})}" method="post" class="mt-4">
-            <div class="form-group">
+            <!-- Add Comment Form -->
+            <form th:action="@{/posts/{id}/comments(id=${post.id})}" method="post" class="mt-4">
+                <div class="form-group">
                 <textarea name="comment" class="form-control" rows="3" placeholder="Add your comment..."
                           required></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Add Comment</button>
-        </form>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Comment</button>
+            </form>
+        </div>
+        <div class="row my-5">
+            <button class="btn btn-danger mx-auto" data-toggle="modal" data-target="#reportModal">Report Post</button>
+        </div>
     </div>
-    <div class="row mt-5">
-        <button class="btn btn-danger mx-auto" data-toggle="modal" data-target="#reportModal">Report Post</button>
-    </div>
-</div>
 
-<!-- Report Modal -->
-<div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="reportModalLabel">Report Post</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form th:action="@{/report-post}" method="post">
-                    <div class="form-group">
-                        <label for="reportReason">Reason for reporting:</label>
-                        <select class="form-control" id="reportReason" name="reportReason">
-                            <option value="Inappropriate Content">Inappropriate Content</option>
-                            <option value="Spam">Spam</option>
-                            <option value="Misinformation">Misinformation</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-                    <input type="hidden" name="postId" th:value="${post.id}"/>
-                    <button type="submit" class="btn btn-danger">Submit Report</button>
-                </form>
+    <!-- Report Modal -->
+    <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reportModalLabel">Report Post</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form th:action="@{/report-post}" method="post">
+                        <div class="form-group">
+                            <label for="reportReason">Reason for reporting:</label>
+                            <select class="form-control" id="reportReason" name="reportReason">
+                                <option value="Inappropriate Content">Inappropriate Content</option>
+                                <option value="Spam">Spam</option>
+                                <option value="Misinformation">Misinformation</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <input type="hidden" name="postId" th:value="${post.id}"/>
+                        <button type="submit" class="btn btn-danger">Submit Report</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
-
 <div th:replace="~{partials/footer :: footer}"></div>
 <div th:replace="~{partials/footer :: footerscripts}"></div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
