@@ -204,6 +204,7 @@ public class PostController {
 
         return ResponseEntity.ok(updatedLikeCount);
     }
+
     @PostMapping("/posts/search")
     public String searchByStory(@RequestParam(name = "query") String query, Model model) {
         List<Post> searchResultsTitle = postDao.findAllByTitleContainingIgnoreCaseOrStoryContainingIgnoreCase(query, query);
@@ -239,8 +240,9 @@ public class PostController {
         List<Post> catPost = new ArrayList<>();
         List<Post> posts = new ArrayList<>();
 
-        for (Post post: postsArc) {
-            if (!post.isFlagged()) {}
+        for (Post post : postsArc) {
+            if (!post.isFlagged()) {
+            }
             posts.add(post);
         }
 
@@ -297,15 +299,16 @@ public class PostController {
 
         Post existingPost = postDao.getById(id);
 
-        if (imageUrls != null && !imageUrls.isEmpty()) {
+        if (imageUrls == null || imageUrls.isEmpty()) {
+            imageUrls = "/images/default-post-image.png";
+        }
 
-            String[] urls = imageUrls.split(",");
-            for (String imageUrl : urls) {
-                Image image = new Image();
-                image.setImage(imageUrl);
-                image.setPost(existingPost);
-                imageDao.save(image);
-            }
+        String[] urls = imageUrls.split(",");
+        for (String imageUrl : urls) {
+            Image image = new Image();
+            image.setImage(imageUrl);
+            image.setPost(existingPost);
+            imageDao.save(image);
         }
 
 
@@ -373,7 +376,6 @@ public class PostController {
     }
 
 
-
     @GetMapping("/posts/create")
     public String postsCreate(Model model) {
         if (!model.containsAttribute("postForm")) {
@@ -397,12 +399,7 @@ public class PostController {
                              @RequestParam(name = "imageUrls", required = false) String imageUrls,
                              RedirectAttributes redirectAttributes) {
 
-        if (imageUrls.equals("")) {
-            redirectAttributes.addFlashAttribute("errorMessage", "You must upload an image to save the post.");
-            redirectAttributes.addFlashAttribute("postForm", post);
-            redirectAttributes.addFlashAttribute("selectedCategoriesForm", selectedCategories);
-            return "redirect:/posts/create";
-        }
+
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         post.setUser(user);
@@ -414,14 +411,17 @@ public class PostController {
 
         postDao.save(post);
 
-        if (imageUrls != null && !imageUrls.isEmpty()) {
-            String[] urls = imageUrls.split(",");
-            for (String imageUrl : urls) {
-                Image image = new Image();
-                image.setImage(imageUrl);
-                image.setPost(post);
-                imageDao.save(image);
-            }
+        if (imageUrls == null || imageUrls.isEmpty()) {
+            imageUrls = "/images/default-post-image.png";
+        }
+
+
+        String[] urls = imageUrls.split(",");
+        for (String imageUrl : urls) {
+            Image image = new Image();
+            image.setImage(imageUrl);
+            image.setPost(post);
+            imageDao.save(image);
         }
 
         long postId = postDao.getIdByTitle(post.getTitle()).getId();
