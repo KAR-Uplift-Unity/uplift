@@ -2,14 +2,14 @@ package com.KARUpliftUnity.controllers;
 
 import com.KARUpliftUnity.models.User;
 import com.KARUpliftUnity.repositories.UserRepository;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.regex.Pattern;
 
 @Controller
@@ -76,6 +76,17 @@ public class UserController {
         user.setPassword(hash);
         userDao.save(user);
         return "redirect:/login";
+    }
+
+    @PostMapping("/user/archive/{id}")
+    public String archiveUser(@PathVariable long id, HttpServletRequest request) throws ServletException {
+        User user = userDao.findUserById(id);
+        user.setArchive(true);
+        user.setArchiveDate(new Date());
+        userDao.save(user);
+
+        request.logout();
+        return "redirect:/";
     }
 
 }

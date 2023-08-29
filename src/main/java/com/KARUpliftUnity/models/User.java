@@ -2,6 +2,7 @@ package com.KARUpliftUnity.models;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -22,6 +23,8 @@ public class User {
     @Column
     private boolean archive;
     @Column
+    private Date archiveDate;
+    @Column
     private String profileImageUrl;
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
     private List<Post> posts;
@@ -35,13 +38,14 @@ public class User {
     public User() {
     }
 
-    public User(long id, boolean admin, String username, String email, String password, boolean archive,String profileImageUrl, List<Post> posts, List<Like> likes, List<Comment> comments) {
+    public User(long id, boolean admin, String username, String email, String password, boolean archive, Date date, String profileImageUrl, List<Post> posts, List<Like> likes, List<Comment> comments) {
         this.id = id;
         this.admin = admin;
         this.username = username;
         this.email = email;
         this.password = password;
         this.archive = archive;
+        this.archiveDate = date;
         this.profileImageUrl = profileImageUrl;
         this.posts = posts;
         this.likes = likes;
@@ -140,6 +144,14 @@ public class User {
 
     public void setProfileImageUrl(String profileImageUrl) {
         this.profileImageUrl = profileImageUrl;
+    }
+
+    public Date getArchiveDate() {
+        return archiveDate;
+    }
+
+    public void setArchiveDate(Date archiveDate) {
+        this.archiveDate = archiveDate;
     }
 }
 
