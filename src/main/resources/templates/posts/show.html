@@ -97,7 +97,7 @@
 
                             <!-- Edit button for the comment -->
                             <button th:if="${#authentication.name == comment.user.username}"
-                                    class="btn comment-button"
+                                    class="btn btn-link"
                                     data-toggle="modal"
                                     th:data-target="'#editCommentModal-' + ${comment.id}">Edit
                             </button>
@@ -105,10 +105,10 @@
                             <!-- Delete button for the comment -->
                             <form th:if="${#authentication.name == comment.user.username}"
                                   th:action="@{/comments/{id}/delete(id=${comment.id})}" method="post">
-                                <button type="submit" class="btn comment-button">Delete</button>
+                                <button type="submit" class="btn btn-link">Delete</button>
                             </form>
-                            <div class="row mt-5">
-                                <button class="btn btn-danger mx-auto" data-toggle="modal" data-target="#reportModal1">
+                            <div class="row ml-2">
+                                <button class="btn btn-link mx-auto" data-toggle="modal" data-target="#reportModal1">
                                     Report Comment
                                 </button>
                             </div>
@@ -189,7 +189,7 @@
             </form>
         </div>
         <div class="row my-5">
-            <button class="btn btn-danger mx-auto" data-toggle="modal" data-target="#reportModal">Report Post</button>
+            <button class="btn btn-outline-danger mx-auto" data-toggle="modal" data-target="#reportModal">Report Post</button>
         </div>
     </div>
 

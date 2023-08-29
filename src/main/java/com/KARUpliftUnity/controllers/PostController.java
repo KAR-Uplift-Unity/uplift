@@ -47,7 +47,7 @@ public class PostController {
 
     @GetMapping("/posts")
     public String index(Model model) {
-        List<Post> posts = postDao.findByArchiveFalse();
+        List<Post> posts = postDao.findByArchiveFalseOrderByDateDesc();
 
         List<Post> postsFlag = new ArrayList<>();
         for (Post post: posts){
@@ -210,20 +210,19 @@ public class PostController {
         List<Post> searchResultsTitle = postDao.findAllByTitleContainingIgnoreCaseOrStoryContainingIgnoreCase(query, query);
         List<Tag> searchResultsTags = tagDao.findAllByTagContainsIgnoreCase(query);
 
+        Set<Long> uniquePostIds = new HashSet<>();
         List<Post> searchTitle = new ArrayList<>();
         List<Tag> searchTag = new ArrayList<>();
         for (Post post: searchResultsTitle) {
-            if(!post.getArchive()) {
-                if (!post.isFlagged()) {
-                    searchTitle.add(post);
-                }
+            if(!post.getArchive() && !post.isFlagged() && !uniquePostIds.contains(post.getId())) {
+                searchTitle.add(post);
+                uniquePostIds.add(post.getId());
             }
         }
         for (Tag tag: searchResultsTags){
-            if (!tag.getPost().getArchive()) {
-                if (!tag.getPost().isFlagged()) {
-                    searchTag.add(tag);
-                }
+            if (!tag.getPost().getArchive() && !tag.getPost().isFlagged() && !uniquePostIds.contains(tag.getPost().getId())) {
+                searchTag.add(tag);
+                uniquePostIds.add(tag.getPost().getId());
             }
         }
 
