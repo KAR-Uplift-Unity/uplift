@@ -25,24 +25,41 @@
             </div>
         </div>
     </div>
+
+    <svg id="wave" style="transform:rotate(180deg); transition: 0.3s" viewBox="0 0 1440 100" version="1.1"
+         xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0">
+                <stop stop-color="rgba(252, 236, 220, 1)" offset="0%"></stop>
+                <stop stop-color="rgba(252, 236, 220, 1)" offset="100%"></stop>
+            </linearGradient>
+        </defs>
+        <path style="transform:translate(0, 0px); opacity:1" fill="url(#sw-gradient-0)"
+              d="M0,40L80,48.3C160,57,320,73,480,66.7C640,60,800,30,960,18.3C1120,7,1280,13,1440,16.7C1600,20,1760,20,1920,21.7C2080,23,2240,27,2400,23.3C2560,20,2720,10,2880,18.3C3040,27,3200,53,3360,53.3C3520,53,3680,27,3840,15C4000,3,4160,7,4320,10C4480,13,4640,17,4800,20C4960,23,5120,27,5280,31.7C5440,37,5600,43,5760,46.7C5920,50,6080,50,6240,55C6400,60,6560,70,6720,75C6880,80,7040,80,7200,70C7360,60,7520,40,7680,30C7840,20,8000,20,8160,21.7C8320,23,8480,27,8640,23.3C8800,20,8960,10,9120,6.7C9280,3,9440,7,9600,15C9760,23,9920,37,10080,36.7C10240,37,10400,23,10560,18.3C10720,13,10880,17,11040,25C11200,33,11360,47,11440,53.3L11520,60L11520,100L11440,100C11360,100,11200,100,11040,100C10880,100,10720,100,10560,100C10400,100,10240,100,10080,100C9920,100,9760,100,9600,100C9440,100,9280,100,9120,100C8960,100,8800,100,8640,100C8480,100,8320,100,8160,100C8000,100,7840,100,7680,100C7520,100,7360,100,7200,100C7040,100,6880,100,6720,100C6560,100,6400,100,6240,100C6080,100,5920,100,5760,100C5600,100,5440,100,5280,100C5120,100,4960,100,4800,100C4640,100,4480,100,4320,100C4160,100,4000,100,3840,100C3680,100,3520,100,3360,100C3200,100,3040,100,2880,100C2720,100,2560,100,2400,100C2240,100,2080,100,1920,100C1760,100,1600,100,1440,100C1280,100,1120,100,960,100C800,100,640,100,480,100C320,100,160,100,80,100L0,100Z"></path>
+    </svg>
     <div class="container card-content">
-        <h2 class="text-center my-3">Discover</h2>
+        <h2 class="text-center my-3 mb-4">Discover</h2>
         <div class="row">
-            <div th:each="post : ${posts}" class="col-md-4">
-                <div class="card mb-4">
-                    <img th:if="${post.images.size() > 0}" th:src="${post.images.get(0).image}" class="card-img-top" alt="Post Image">
+            <div th:each="post : ${posts}" class="col-12 col-lg-4 col-md-6">
+                <div class="card mb-4 rounded mb-5 index-card">
+                    <img th:if="${post.images.size() > 0}" th:src="${post.images.get(0).image}" class="card-img-top"
+                         alt="Post Image">
                     <div class="card-body">
-                        <a th:href="@{/posts/{id}(id=${post.id})}">
-                            <h5 class="card-title" th:text="${post.title}"></h5>
+                        <a th:href="@{/posts/{id}(id=${post.id})}" class="index-card-title">
+                            <h5 class="card-title index-card-title text-dark"
+                                th:text="${#strings.abbreviate(post.title, 35)}"></h5>
                         </a>
-                        <p class="card-text" th:text="${#strings.abbreviate(post.story,75)}">Post Content</p>
-                        <a th:href="@{/posts/{id}(id=${post.id})}" class="btn btn-primary">Read More</a>
+                        <p class="card-text index-card-text" th:text="${#strings.abbreviate(post.story, 130)}">Post
+                            Content</p>
+                        <div class="d-flex justify-content-end">
+                            <a th:href="@{/posts/{id}(id=${post.id})}" class="read-more">Read More</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <h2 class="text-center mb-5">Browse By Category</h2>
+    <h2 class="text-center mb-5 mt-3">Browse By Category</h2>
     <div class="container">
         <div class="row justify-content-center ">
             <div class="col-lg-3 col-4">
@@ -152,7 +169,17 @@
         </div>
     </div>
 </div>
-
+<svg id="wave" style="transform:rotate(0deg); transition: 0.3s" viewBox="0 0 1440 100" version="1.1"
+     xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0">
+            <stop stop-color="rgba(252, 236, 220, 1)" offset="0%"></stop>
+            <stop stop-color="rgba(252, 236, 220, 1)" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <path style="transform:translate(0, 0px); opacity:1" fill="url(#sw-gradient-0)"
+          d="M0,20L48,16.7C96,13,192,7,288,10C384,13,480,27,576,38.3C672,50,768,60,864,60C960,60,1056,50,1152,38.3C1248,27,1344,13,1440,13.3C1536,13,1632,27,1728,40C1824,53,1920,67,2016,68.3C2112,70,2208,60,2304,56.7C2400,53,2496,57,2592,61.7C2688,67,2784,73,2880,76.7C2976,80,3072,80,3168,71.7C3264,63,3360,47,3456,36.7C3552,27,3648,23,3744,30C3840,37,3936,53,4032,56.7C4128,60,4224,50,4320,53.3C4416,57,4512,73,4608,66.7C4704,60,4800,30,4896,16.7C4992,3,5088,7,5184,21.7C5280,37,5376,63,5472,71.7C5568,80,5664,70,5760,61.7C5856,53,5952,47,6048,51.7C6144,57,6240,73,6336,80C6432,87,6528,83,6624,70C6720,57,6816,33,6864,21.7L6912,10L6912,100L6864,100C6816,100,6720,100,6624,100C6528,100,6432,100,6336,100C6240,100,6144,100,6048,100C5952,100,5856,100,5760,100C5664,100,5568,100,5472,100C5376,100,5280,100,5184,100C5088,100,4992,100,4896,100C4800,100,4704,100,4608,100C4512,100,4416,100,4320,100C4224,100,4128,100,4032,100C3936,100,3840,100,3744,100C3648,100,3552,100,3456,100C3360,100,3264,100,3168,100C3072,100,2976,100,2880,100C2784,100,2688,100,2592,100C2496,100,2400,100,2304,100C2208,100,2112,100,2016,100C1920,100,1824,100,1728,100C1632,100,1536,100,1440,100C1344,100,1248,100,1152,100C1056,100,960,100,864,100C768,100,672,100,576,100C480,100,384,100,288,100C192,100,96,100,48,100L0,100Z"></path>
+</svg>
 <div th:replace="~{partials/footer :: footer}"></div>
 <script src="/js/welcome-cookie.js"></script>
 </body>

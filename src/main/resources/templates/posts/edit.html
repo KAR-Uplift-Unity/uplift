@@ -13,11 +13,11 @@
 <div class="container">
     <h1 class="text-center mt-4">Create A Post</h1>
     <form th:action="@{/posts/{id}/edit(id=${post.id})}" th:object="${post}" method="post" enctype="multipart/form-data"
-          class="w-50 mx-auto">
+          class="mx-auto col-12 col-lg-8 col-md-10 mb-4">
         <h5 class="mt-4 text-center mb-4">Select the categories that best describe your post:</h5>
 
         <!-- Categories -->
-        <div class="btn-group-toggle" data-toggle="buttons">
+        <div class="btn-group-toggle d-flex justify-content-center" data-toggle="buttons">
             <div th:each="category : ${allCategories}">
                 <label class="btn btn-outline-primary custom-checkbox-label">
                     <input type="checkbox" th:value="${category.id}" name="selectedCategories"

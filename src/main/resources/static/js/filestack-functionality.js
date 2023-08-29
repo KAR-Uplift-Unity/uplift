@@ -9,7 +9,7 @@ const profileOptions = {
 };
 
 const postOptions = {
-    maxFiles: 10,
+    maxFiles: 5,
     onUploadDone: (response) => {
         const filestackUrls = response.filesUploaded.map(file => file.url);
 
@@ -26,6 +26,7 @@ const postOptions = {
             img.src = url;
             img.alt = "Uploaded image preview";
             img.width = 80;
+            img.height = 80;
 
             const closeButton = document.createElement('span');
             closeButton.innerText = 'X';

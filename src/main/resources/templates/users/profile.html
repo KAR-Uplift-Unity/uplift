@@ -23,25 +23,28 @@
             No archived posts to show.
         </div>
         <div class="row">
-            <div th:unless="${activePosts.isEmpty()}" th:each="post : ${activePosts}" class="col-md-3 mb-4">
-                <div class="card">
+            <div th:unless="${activePosts.isEmpty()}" th:each="post : ${activePosts}"
+                 class="col-12 col-lg-4 col-md-6 mb-4">
+                <div class="card index-card">
 
-                    <!-- Display the first image for the post if it exists -->
                     <img th:if="${post.images.size() > 0}" th:src="${post.images.get(0).image}" class="card-img-top"
                          alt="Post Image">
 
                     <div class="card-body">
-                        <a th:href="@{/posts/{id}(id=${post.id})}">
-                            <h4 class="card-title" th:text="${post.title}"></h4>
+                        <a th:href="@{/posts/{id}(id=${post.id})}" class="index-card-title">
+                            <h5 class="card-title text-dark index-card-title"
+                                th:text="${#strings.abbreviate(post.title, 35)}"></h5>
                         </a>
-                        <p class="card-text" th:text="${#strings.abbreviate(post.story,75)}"></p>
+                        <p class="card-text index-card-text" th:text="${#strings.abbreviate(post.story,75)}"></p>
 
 
                         <!-- Edit and Archive buttons -->
-                        <a th:href="@{/posts/{id}/edit(id=${post.id})}" class="btn btn-primary">Edit</a>
-                        <button type="button" class="btn btn-secondary" data-toggle="modal"
-                                th:attr="data-target='#archiveModal' + ${post.id}">Archive
-                        </button>
+                        <div class="buttons d-flex justify-content-center">
+                            <a th:href="@{/posts/{id}/edit(id=${post.id})}" class="btn btn-primary w-50 mr-2">Edit</a>
+                            <button type="button" class="btn btn-secondary w-50" data-toggle="modal"
+                                    th:attr="data-target='#archiveModal' + ${post.id}">Archive
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -87,7 +90,7 @@
                          alt="Post Image">
                     <div class="card-body">
                         <a th:href="@{/posts/{id}(id=${post.id})}">
-                            <h4 class="card-title" th:text="${post.title}"></h4>
+                            <h5 class="card-title" th:text="${post.title}"></h5>
                         </a>
                         <p class="card-text" th:text="${post.story}"></p>
 
@@ -99,9 +102,6 @@
             </div>
         </div>
     </div>
-    <button onclick="window.history.back()" class="btn btn-primary mt-3">Go Back</button>
-
-
 </div>
 <div th:replace="~{partials/footer :: footer}"></div>
 </body>
