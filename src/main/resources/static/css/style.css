@@ -112,6 +112,7 @@ div.hero-section a.btn.btn-primary.custom-btn:active {
 
 .card-content h2, .index-body h2 {
     font-family: var(--logo-font);
+    color: var(--logo-color);
 }
 
 .card-img-top {
@@ -547,6 +548,7 @@ button.btn.btn-primary.custom-btn:active {
     flex-direction: column;
     min-height: 100vh;
     flex: 1;
+    font-family: var(--poppins-font);
 }
 
 .search-bar {
@@ -581,6 +583,12 @@ button.btn.btn-primary.custom-btn:active {
     flex-direction: column;
     min-height: 100vh;
     flex: 1;
+    font-family: var(--poppins-font);
+}
+
+.profile-settings-bg h1 {
+    font-family: var(--logo-font);
+    color: var(--logo-color);
 }
 
 /*PROFILE SETTING PAGE END*/
@@ -681,6 +689,7 @@ footer .footer-background {
     flex-direction: column;
     min-height: 100vh;
     flex: 1;
+    font-family: var(--poppins-font);
 }
 
 /*PROFILE PAGE END*/
@@ -692,6 +701,12 @@ footer .footer-background {
     flex-direction: column;
     min-height: 100vh;
     flex: 1;
+    font-family: var(--poppins-font);
+}
+
+.admin-background h1 {
+    font-family: var(--logo-font);
+    color: var(--logo-color);
 }
 
 /*ADMIN PAGE END*/
