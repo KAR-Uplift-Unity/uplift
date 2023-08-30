@@ -384,6 +384,7 @@ public class PostController {
         List<Category> allCategories = categoryRepository.findAll();
         model.addAttribute("allCategories", allCategories);
 
+
         if (!model.containsAttribute("selectedCategoriesForm")) {
             model.addAttribute("selectedCategoriesForm", new ArrayList<Long>());
         }
@@ -394,16 +395,26 @@ public class PostController {
     @PostMapping("/posts/create")
     public String createPost(@ModelAttribute Post post,
                              @RequestParam(name = "tagString") String tagString,
-                             @RequestParam(name = "selectedCategories") List<Long> selectedCategories,
+                             @RequestParam(name = "selectedCategories", defaultValue = "") List<Long> selectedCategories,
                              @RequestParam(name = "imageUrls", required = false) String imageUrls,
                              RedirectAttributes redirectAttributes) {
 
+        if (selectedCategories.isEmpty()) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Selecting a category is required.");
+
+            redirectAttributes.addFlashAttribute("postForm", post);
+            redirectAttributes.addFlashAttribute("selectedCategoriesForm", selectedCategories);
+
+            return "redirect:/posts/create";
+        }
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         post.setUser(user);
 
         post.setDate(new Date());
+
+        post.setSolution(post.getSolution().replace("\n", "<br>"));
 
         List<Category> categories = categoryRepository.findAllById(selectedCategories);
         post.setCategories(categories);
