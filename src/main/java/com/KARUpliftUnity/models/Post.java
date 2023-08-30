@@ -20,11 +20,11 @@ public class Post {
     private String story;
     @Column(nullable = false, length = 2500)
     private String solution;
-    @Column
+    @Column(columnDefinition = "false")
     private boolean flagged;
     @Column
     private String reportReason;
-    @Column
+    @Column(columnDefinition = "false")
     private boolean archive;
     @Column
     private Date archiveDate;
