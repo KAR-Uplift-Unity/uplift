@@ -6,20 +6,22 @@
 </head>
 <body class="login-background">
 <div th:replace="~{partials/header :: header}"></div>
-<div class=" d-flex justify-content-center align-items-center vh-100 login-form">
-    <div class="login-form-background col-10 col-xl-3 pb-5 pt-3 px-4">
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="login-form-background col-11 col-lg-4 col-md-6 pb-5 pt-3 px-4">
         <h1 class="text-center pt-3 display-4 pb-2">UpliftUnity</h1>
         <h2 class="text-center pb-3">Welcome</h2>
 
         <form th:action="@{/login}" method="post">
             <div class="form-group">
                 <label for="username">Username:</label>
-                <input type="text" id="username" name="username" class="form-control" placeholder="Enter username" required/>
+                <input type="text" id="username" name="username" class="form-control" placeholder="Enter username"
+                       required/>
             </div>
 
             <div class="form-group">
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password" class="form-control" placeholder="Enter password" required/>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Enter password"
+                       required/>
             </div>
             <div class="form-group text-center sign-up-line pt-2">
                 <p>Don't have an account? <a href="/signup">Sign up</a></p>
@@ -36,6 +38,5 @@
         </form>
     </div>
 </div>
-
 </body>
 </html>

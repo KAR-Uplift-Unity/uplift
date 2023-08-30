@@ -17,13 +17,7 @@
     --on-click-color: #DD8840;
 }
 
-.index-body {
-    background-color: var(--off-white-color);
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    flex: 1;
-}
+
 
 /*NAVBAR START*/
 
@@ -67,6 +61,18 @@ nav {
 /*NAVBAR END*/
 
 /*HERO SECTION / INDEX PAGE START*/
+
+.index-body {
+    background-color: var(--off-white-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    flex: 1;
+}
+
+#wave {
+    margin-top: -3px;
+}
 
 .hero-section {
     background-color: var(--tan-color);
@@ -164,7 +170,7 @@ div.hero-section a.btn.btn-primary.custom-btn:active {
 }
 
 .right-panel {
-    background-color: #f0f3f7;
+    background-color: white;
 }
 
 .form-background {
@@ -695,33 +701,6 @@ footer .footer-background {
 }
 
 /*WELCOME MODAL END*/
-
-
-/*MEDIA QUERIES START*/
-
-/*Extra small devices (portrait phones, less than 576px)*/
-@media only screen and (max-width: 480px) {
-    .form-background {
-        width: 88%;
-    }
-
-}
-
-/*Mobile devices*/
-@media only screen and (min-width: 481px) and (max-width: 768px) {
-    .form-background {
-        width: 88%;
-    }
-}
-
-/*Large and up*/
-@media only screen and (min-width: 1201px) {
-    .form-background {
-        width: 55%;
-    }
-}
-
-/*MEDIA QUERIES END*/
 
 
 

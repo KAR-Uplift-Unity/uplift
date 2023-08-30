@@ -49,7 +49,8 @@
                             <h5 class="card-title index-card-title text-dark"
                                 th:text="${#strings.abbreviate(post.title, 35)}"></h5>
                         </a>
-                        <p class="card-text index-card-text flex-grow-1" th:text="${#strings.abbreviate(post.story, 130)}">Post
+                        <p class="card-text index-card-text flex-grow-1"
+                           th:text="${#strings.abbreviate(post.story, 130)}">Post
                             Content</p>
                         <div class="d-flex justify-content-end">
                             <a th:href="@{/posts/{id}(id=${post.id})}" class="read-more">Read More</a>
