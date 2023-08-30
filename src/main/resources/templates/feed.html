@@ -101,7 +101,7 @@
         </div>
 
         <div class="row" th:if="${category}">
-            <div th:each="post : ${category}" class="col-md-4">
+            <div th:each="post : ${category}" class="col-12 col-lg-8">
                 <div class="card mb-4">
                     <img th:if="${post.images.size() > 0}" th:src="${post.images.get(0).image}" class="card-img-top"
                          alt="Post Image">
