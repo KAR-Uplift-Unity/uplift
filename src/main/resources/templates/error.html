@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Error</title>
+    <div th:replace="~{partials/header :: header}"></div>
+</head>
+<body class="error-bg">
+<div class="container">
+    <div class="row vh-100 d-flex justify-content-center mt-5">
+        <div class="flex-column align-items-center col-12 text-center">
+            <h1 class="text-center mt-4 display-4">Oh no!</h1>
+            <h3 th:text="${message}" class="text-center mt-4"></h3>
+            <img th:src="@{/images/error.png}" alt="error illustration" class="mx-auto">
+        </div>
+    </div>
+</div>
+<div th:replace="~{partials/footer :: footerscripts}"></div>
+</body>
+</html>
