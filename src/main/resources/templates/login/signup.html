@@ -6,9 +6,9 @@
 </head>
 <body>
 <div th:replace="~{partials/header :: header}"></div>
-<div class="row vh-100">
-    <div class="col-lg-6 col-xs-12 left-panel d-flex justify-content-center align-items-center">
-        <div class="form-background my-5 py-5 px-3">
+<div class="row">
+    <div class="col-lg-6 left-panel d-flex justify-content-center align-items-center vh-100">
+        <div class="form-background col-10 col-lg-7 col-md-6 my-5 py-5 px-3">
             <div class="container">
                 <h3 class="text-center signup-h3 pb-2">Sign Up</h3>
                 <form th:action="@{/signup}" method="POST" th:object="${user}">
@@ -53,7 +53,7 @@
             </div>
         </div>
     </div>
-    <div class="col-6 right-panel">
+    <div class="col-6 right-panel d-none d-lg-block">
         <div class="container sign-up">
             <h1 class="display-3">UpliftUnity</h1>
             <h3 class="mt-4 signup-h3">Empowering communities, one story at a time.</h3>
