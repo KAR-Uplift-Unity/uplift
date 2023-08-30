@@ -160,7 +160,7 @@ public class ScheduledTasks {
 
         for (Post post: posts){
             long archiveTime = 0;
-            if (post.getArchive()){
+            if (post.getArchive() && post.getArchiveDate() != null){
                 archiveTime = post.getArchiveDate().getTime();
                 System.out.println("archiveTime = " + archiveTime);
             }
@@ -199,7 +199,7 @@ public class ScheduledTasks {
 
         for (User user: users){
             long archiveTime = 0;
-            if (user.getArchive()){
+            if (user.getArchive() && user.getArchiveDate() != null){
                 archiveTime = user.getArchiveDate().getTime();
             }
             long totalTime = curTimeLong - archiveTime;
