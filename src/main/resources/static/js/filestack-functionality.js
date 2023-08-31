@@ -20,7 +20,7 @@ const postOptions = {
 
         filestackUrls.forEach(url => {
             const imgDiv = document.createElement('div');
-            imgDiv.classList.add("image-preview-wrapper");  // A class for styling if needed
+            imgDiv.classList.add("image-preview-wrapper");
 
             const img = document.createElement('img');
             img.src = url;
