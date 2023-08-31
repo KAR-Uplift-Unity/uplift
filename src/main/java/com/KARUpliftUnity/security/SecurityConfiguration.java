@@ -1,5 +1,7 @@
 package com.KARUpliftUnity.security;
 
+import com.KARUpliftUnity.models.User;
+import com.KARUpliftUnity.repositories.UserRepository;
 import com.KARUpliftUnity.services.UserDetailsLoader;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,8 +28,11 @@ public class SecurityConfiguration {
 
     private UserDetailsLoader usersLoader;
 
-    public SecurityConfiguration(UserDetailsLoader usersLoader) {
+    private UserRepository userDao;
+
+    public SecurityConfiguration(UserDetailsLoader usersLoader, UserRepository userDao) {
         this.usersLoader = usersLoader;
+        this.userDao = userDao;
     }
 
     @Bean
@@ -53,10 +58,28 @@ public class SecurityConfiguration {
 
                 String redirectUrl = (String)request.getSession().getAttribute("redirectUrl");
 
+                User user = (User) authentication.getPrincipal();
+
+                long id = user.getId();
+                boolean userArchive = user.getArchive();
+
+
                 if(redirectUrl != null){
+                    if(userArchive){
+                        User user1 = userDao.findUserById(id);
+                        user1.setArchive(false);
+                        user1.setArchiveDate(null);
+                        userDao.save(user1);
+                    }
                     response.sendRedirect(redirectUrl);
                 }
                 else {
+                    if(userArchive){
+                        User user1 = userDao.findUserById(id);
+                        user1.setArchive(false);
+                        user1.setArchiveDate(null);
+                        userDao.save(user1);
+                    }
                     response.sendRedirect("/");
                 }
 
