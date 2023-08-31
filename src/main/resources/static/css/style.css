@@ -161,6 +161,29 @@ div.hero-section a.btn.btn-primary.custom-btn:active {
     color: #ee994a;
 }
 
+.landing-page h3 {
+    font-family: var(--logo-font);
+    font-weight: var(--weight-regular);
+    color: var(--logo-color);
+}
+
+.landing-page p {
+    font-family: var(--poppins-font);
+    color: var(--logo-color);
+    line-height: 28px;
+}
+
+.landing-page i {
+    color: var(--logo-color);
+}
+
+.line {
+    height: 2px;
+    border-radius: 50px;
+    width: 90%;
+    background-color: #dfdfd9;
+    margin-bottom: 30px;
+}
 
 /*HERO SECTION END / INDEX PAGE END*/
 
