@@ -3,9 +3,7 @@
 # step 2: (drop all tables in db in order 1.post_categories, 2.categories, 3.comments, 4.hearts, 5.images, 6.tags, 7.updates, 8.posts, 9.users)
 # step 2 continued: if you dont have tables in the db run the application (NOT THE SQL SEEDER) so that the tables are generated.
 # step 3: run this seeder file!
-# step 4; Please make sure that the "flagged" column on both the comments, and post are set to false. all should be good to go!
-
-
+# step 4; Please make sure that the "flagged" column on both the comments, and post are set to false. and on post set days to 0. all should be good to go!
 
 USE uplift_db;
 
@@ -27,7 +25,8 @@ INSERT INTO categories (id ,cat) VALUES
 (15,'Other');
 
 insert into users (archive, email, password, username, admin, profile_image_url, archive_date) values
-(false,'robert.j.mendez3@gmail.com','$2a$10$a7La9jCqVG/YTPIiS2G6m.Pw1.qR2x8vT8hNCu1X/rWWAQBB./mJO','rjmendez',true,'https://cdn.filestackcontent.com/XwB1S9aoR0Smkk9RQyB5',null),
+(false, 'JeyNoir1@gmail.com', '$2a$10$dZVoT/ClmHqeqgDmSf7qlOBm7IIWOYQcWI1W3W1nalWjQHIzt0LUm', 'JemalKnowles1', true, 'https://cdn.filestackcontent.com/LxaFGP7ERAm8kt7J6efL', null),
+(false, 'robert.j.mendez3@gmail.com', '$2a$10$a7La9jCqVG/YTPIiS2G6m.Pw1.qR2x8vT8hNCu1X/rWWAQBB./mJO', 'rjmendez', true, 'https://cdn.filestackcontent.com/XwB1S9aoR0Smkk9RQyB5', null),
 (false, 'aaron.reid.bond@gmail.com', '$2a$10$4WL6toxwoYnUbnHNULZiEufdnkN9N.EBkk63g2IS084MklIgVR7wi', 'Aaron', true, null, null),
 (false, 'rtucker0@over-blog.com', '$2a$04$RJcfB5a91pQnz.a3xy7RHOrNJUUyh/wwxsOp.xsnRBc1zVH/7Z552', 'dharms0', false, 'https://robohash.org/eiusquaeratexplicabo.png?size=250x250&set=set1', null),
 (false, 'awalasik1@imgur.com', '$2a$04$PtW./o7rlB/7qHlW9cVVrOcDwztfUmA4zN4DEinNUfHhORFgs3.Ba', 'hharmson1', false, 'https://robohash.org/idetvoluptatem.png?size=250x250&set=set1', null),
@@ -434,10 +433,6 @@ Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum
 Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.
 
 In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.', 'Vivamus vestibulum sagittis sapien.', 26);
-
-
-
-
 
 
 insert into hearts (heart, post_id, user_id) values (0, 27, 41);

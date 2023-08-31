@@ -15,8 +15,7 @@ public class Comment {
     private String comment;
     @Column
     private LocalDateTime timestamp;
-    @Column(columnDefinition = "false")
-//    @Column(name = "flagged")
+    @Column
     private boolean flagged;
     @Column
     private String reportReason;
