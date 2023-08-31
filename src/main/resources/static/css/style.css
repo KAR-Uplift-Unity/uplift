@@ -769,6 +769,24 @@ footer .footer-background {
 
 /*ERROR PAGE END*/
 
+/*MEDIA QUERIES START*/
+
+@media (max-width: 767.98px) {
+    .hero-section h1 {
+        font-size: 40px;
+        margin-top: 1rem;
+    }
+
+    .hero-section p {
+        font-size: 22px;
+    }
+
+    .hero-section .mission-button {
+        margin-bottom: 2.3rem;
+    }
+}
+
+
 
 
 
