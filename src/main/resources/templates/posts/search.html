@@ -17,7 +17,7 @@
             </div>
         </form>
 
-        <div class="row d-flex justify-content-center col-12 col-lg-8 col-md-6 mx-auto mb-4">
+        <div class="row d-flex justify-content-center col-12 col-lg-8 mx-auto mb-4">
             <div class="mr-2 mb-2">
                 <a class="btn category-button" th:href="@{/posts}">All Posts</a>
             </div>
@@ -68,7 +68,7 @@
             </div>
         </div>
 
-        <div class="col-12 col-lg-8 d-flex flex-column justify-content-center mx-auto">
+        <div class="col-12 col-lg-8 d-flex flex-column justify-content-center mx-auto mb-4">
             <div th:each="post : ${searchResultsTitle}" class="card mb-3">
                 <img th:if="${post.images.size() > 0}" th:src="${post.images.get(0).image}" class="card-img-top"
                      alt="Post Image">
@@ -84,7 +84,7 @@
             </div>
         </div>
 
-        <div class="col-12 col-lg-8 d-flex flex-column justify-content-center mx-auto">
+        <div class="col-12 col-lg-8 d-flex flex-column justify-content-center mx-auto mb-4">
             <div th:each="tag : ${searchResultsTags}" class="card mb-3">
                 <img th:if="${tag.post.images.size() > 0}" th:src="${tag.post.images.get(0).image}" class="card-img-top"
                      alt="Post Image">
@@ -100,7 +100,7 @@
             </div>
         </div>
 
-        <div class="col-12 col-lg-8 d-flex flex-column justify-content-center mx-auto">
+        <div class="col-12 col-lg-8 d-flex flex-column justify-content-center mx-auto mb-4">
             <div th:each="post : ${category}" class="card mb-3">
                 <img th:if="${post.images.size() > 0}" th:src="${post.images.get(0).image}" class="card-img-top"
                      alt="Post Image">
