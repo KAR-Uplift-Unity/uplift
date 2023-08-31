@@ -483,7 +483,7 @@ public class PostController {
         post.setFlagged(true);
         post.setReportReason(reportReason);
         postDao.save(post);
-        return "redirect:/posts/" + postId;
+        return "redirect:/posts";
     }
 
     @PostMapping("/report-comment")
