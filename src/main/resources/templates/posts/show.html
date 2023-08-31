@@ -108,7 +108,7 @@
                                 <button type="submit" class="btn btn-link">Delete</button>
                             </form>
                             <div class="row ml-2">
-                                <button class="btn btn-link mx-auto" data-toggle="modal" data-target="#reportModal1">
+                                <button th:if="${#authentication.name != comment.user.username}" class="btn btn-link mx-auto" data-toggle="modal" data-target="#reportModal1">
                                     Report Comment
                                 </button>
                             </div>
