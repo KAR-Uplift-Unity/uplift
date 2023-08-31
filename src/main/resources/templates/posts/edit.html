@@ -68,7 +68,7 @@
                 <div class="row">
                     <div th:each="image : ${images}" class="col-2">
                         <div class="image-preview-wrapper">
-                            <img th:src="${image.image}" alt="Existing image preview" width="90">
+                            <img th:src="${image.image}" alt="Existing image preview" class="edit-image">
                             <span class="remove-image-button" th:data-image-id="${image.id}"
                                   onclick="removeExistingImage(this)">X</span>
                         </div>

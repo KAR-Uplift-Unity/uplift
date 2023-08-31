@@ -21,14 +21,17 @@ public class Post {
     @Column(nullable = false, length = 2500)
     private String solution;
     @Column(columnDefinition = "false")
+//    @Column
     private boolean flagged;
     @Column
     private String reportReason;
     @Column(columnDefinition = "false")
+//    @Column
     private boolean archive;
     @Column
     private Date archiveDate;
     @Column(columnDefinition = "integer default 0")
+//    @Column
     private Integer days;
     @ManyToOne
     @JoinColumn (name = "user_id")
