@@ -161,6 +161,29 @@ div.hero-section a.btn.btn-primary.custom-btn:active {
     color: #ee994a;
 }
 
+.landing-page h3 {
+    font-family: var(--logo-font);
+    font-weight: var(--weight-regular);
+    color: var(--logo-color);
+}
+
+.landing-page p {
+    font-family: var(--poppins-font);
+    color: var(--logo-color);
+    line-height: 28px;
+}
+
+.landing-page i {
+    color: var(--logo-color);
+}
+
+.line {
+    height: 2px;
+    border-radius: 50px;
+    width: 90%;
+    background-color: #dfdfd9;
+    margin-bottom: 30px;
+}
 
 /*HERO SECTION END / INDEX PAGE END*/
 
@@ -492,6 +515,15 @@ button.btn.btn-primary.custom-btn:active {
 
 /*CREATE A POST END*/
 
+/*EDIT POSTS PAGE START*/
+
+#existingImagesContainer .edit-image {
+    width: 90px;
+    height: 90px;
+}
+
+/*EDIT POSTS PAGE END*/
+
 /*INDIVIDUAL POST PAGE START*/
 
 .individual-post {
@@ -745,6 +777,35 @@ footer .footer-background {
 }
 
 /*ERROR PAGE END*/
+
+/*MEDIA QUERIES START*/
+
+@media (max-width: 767.98px) {
+    .hero-section h1 {
+        font-size: 40px;
+        margin-top: 1rem;
+    }
+
+    .hero-section p {
+        font-size: 22px;
+    }
+
+    .hero-section .mission-button {
+        margin-bottom: 2.3rem;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .hero-section .mission-button {
+        margin-bottom: 2.3rem;
+    }
+
+    .hero-section h1 {
+        margin-top: 1rem;
+    }
+}
+
+
 
 
 

@@ -17,7 +17,7 @@
             </div>
         </form>
 
-        <div class="row d-flex justify-content-center col-12 col-lg-8 col-md-6 mx-auto mb-4">
+        <div class="row d-flex justify-content-center col-12 col-lg-8 mx-auto mb-4">
             <div class="mr-2 mb-2">
                 <a class="btn category-button" th:href="@{/posts}">All Posts</a>
             </div>
@@ -58,65 +58,64 @@
                 <a class="btn category-button" th:href="@{/posts/category/12}">Youth</a>
             </div>
             <div class="mr-2 mb-2">
-                <a class="btn category-button" th:href="@{/posts/category/13}">Other</a>
+                <a class="btn category-button" th:href="@{/posts/category/13}">Event</a>
+            </div>
+            <div class="mr-2 mb-2">
+                <a class="btn category-button" th:href="@{/posts/category/14}">Advice</a>
+            </div>
+            <div class="mr-2 mb-2">
+                <a class="btn category-button" th:href="@{/posts/category/15}">Other</a>
             </div>
         </div>
 
-        <div class="row" th:if="${searchResultsTitle}">
-            <div th:each="post : ${searchResultsTitle}"
-                 class="col-12 col-lg-8 d-flex flex-column justify-content-center mx-auto">
-                <div class="card mb-4">
-                    <img th:if="${post.images.size() > 0}" th:src="${post.images.get(0).image}" class="card-img-top"
-                         alt="Post Image">
-                    <div class="card-body">
-                        <a th:href="@{/posts/{id} (id= ${post.getId()})}" class="index-card-title">
-                            <h5 class="card-title index-card-title text-dark" th:text="${post.title}"></h5>
-                        </a>
-                        <p class="card-text" th:text="${#strings.abbreviate(post.story,150)}">Post Story</p>
-                        <div class="d-flex justify-content-end">
-                            <a th:href="@{/posts/{id}(id=${post.id})}" class="read-more">Read More</a>
-                        </div>
+        <div class="col-12 col-lg-8 d-flex flex-column justify-content-center mx-auto mb-4">
+            <div th:each="post : ${searchResultsTitle}" class="card mb-3">
+                <img th:if="${post.images.size() > 0}" th:src="${post.images.get(0).image}" class="card-img-top"
+                     alt="Post Image">
+                <div class="card-body">
+                    <a th:href="@{/posts/{id} (id= ${post.getId()})}" class="index-card-title">
+                        <h5 class="card-title index-card-title text-dark" th:text="${post.title}"></h5>
+                    </a>
+                    <p class="card-text" th:text="${#strings.abbreviate(post.story,150)}">Post Story</p>
+                    <div class="d-flex justify-content-end">
+                        <a th:href="@{/posts/{id}(id=${post.id})}" class="read-more">Read More</a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row" th:if="${searchResultsTags}">
-            <div th:each="tag : ${searchResultsTags}"
-                 class="col-12 col-lg-8 d-flex flex-column justify-content-center mx-auto">
-                <div class="card mb-4">
-                    <img th:if="${tag.post.images.size() > 0}" th:src="${tag.post.images.get(0).image}"
-                         class="card-img-top" alt="Post Image">
-                    <div class="card-body">
-                        <a th:href="@{/posts/{id} (id= ${tag.post.id})}" class="index-card-title">
-                            <h5 class="card-title index-card-title text-dark" th:text="${tag.post.title}"></h5>
-                        </a>
-                        <p class="card-text" th:text="${#strings.abbreviate(tag.post.story,150)}">Post Story</p>
-                        <div class="d-flex justify-content-end">
-                            <a th:href="@{/posts/{id}(id=${tag.post.id})}" class="read-more">Read More</a>
-                        </div>
+        <div class="col-12 col-lg-8 d-flex flex-column justify-content-center mx-auto mb-4">
+            <div th:each="tag : ${searchResultsTags}" class="card mb-3">
+                <img th:if="${tag.post.images.size() > 0}" th:src="${tag.post.images.get(0).image}" class="card-img-top"
+                     alt="Post Image">
+                <div class="card-body">
+                    <a th:href="@{/posts/{id} (id= ${tag.post.id})}" class="index-card-title">
+                        <h5 class="card-title index-card-title text-dark" th:text="${tag.post.title}"></h5>
+                    </a>
+                    <p class="card-text" th:text="${#strings.abbreviate(tag.post.story,150)}">Post Story</p>
+                    <div class="d-flex justify-content-end">
+                        <a th:href="@{/posts/{id}(id=${tag.post.id})}" class="read-more">Read More</a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row" th:if="${category}">
-            <div th:each="post : ${category}" class="col-12 col-lg-8 d-flex flex-column justify-content-center mx-auto">
-                <div class="card mb-4">
-                    <img th:if="${post.images.size() > 0}" th:src="${post.images.get(0).image}" class="card-img-top"
-                         alt="Post Image">
-                    <div class="card-body">
-                        <a th:href="@{/posts/{id} (id= ${post.getId()})}" class="index-card-title">
-                            <h5 class="card-title index-card-title text-dark" th:text="${post.title}"></h5>
-                        </a>
-                        <p class="card-text" th:text="${#strings.abbreviate(post.story,150)}">Post Story</p>
-                        <div class="d-flex justify-content-end">
-                            <a th:href="@{/posts/{id}(id=${post.id})}" class="read-more">Read More</a>
-                        </div>
+        <div class="col-12 col-lg-8 d-flex flex-column justify-content-center mx-auto mb-4">
+            <div th:each="post : ${category}" class="card mb-3">
+                <img th:if="${post.images.size() > 0}" th:src="${post.images.get(0).image}" class="card-img-top"
+                     alt="Post Image">
+                <div class="card-body">
+                    <a th:href="@{/posts/{id} (id= ${post.getId()})}" class="index-card-title">
+                        <h5 class="card-title index-card-title text-dark" th:text="${post.title}"></h5>
+                    </a>
+                    <p class="card-text" th:text="${#strings.abbreviate(post.story,150)}">Post Story</p>
+                    <div class="d-flex justify-content-end">
+                        <a th:href="@{/posts/{id}(id=${post.id})}" class="read-more">Read More</a>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 <div th:replace="~{partials/footer :: footer}"></div>

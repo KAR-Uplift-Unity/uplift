@@ -12,22 +12,22 @@
     <div class="hero-section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 col-xs-12 d-flex flex-column justify-content-center">
+                <div class="col-lg-6 col-xs-12 d-flex flex-column justify-content-center text-lg-left text-center">
                     <h1 class="display-3">UpliftUnity</h1>
                     <p class="pt-2">Where Stories Meet Support. Together, We Make a Difference.</p>
                     <a class="btn btn-primary custom-btn text-white d-flex align-items-center
-                     justify-content-center mt-3" th:href="@{/mission}">Our Mission</a>
+            justify-content-center mt-3 mx-auto mx-lg-0 mission-button" th:href="@{/mission}">Our Mission</a>
                 </div>
                 <div class="col-lg-6 col-xs-12 d-flex justify-content-end">
                     <img src="/images/earth.png" alt="Water color painting of earth"
-                         class="hero-section-image pt-4">
+                         class="hero-section-image pt-4 d-none d-lg-block">
                 </div>
             </div>
         </div>
     </div>
 
     <svg id="wave" style="transform:rotate(180deg); transition: 0.3s" viewBox="0 0 1440 100" version="1.1"
-         xmlns="http://www.w3.org/2000/svg">
+         xmlns="http://www.w3.org/2000/svg" class="d-none d-lg-block">
         <defs>
             <linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0">
                 <stop stop-color="rgba(252, 236, 220, 1)" offset="0%"></stop>
@@ -38,6 +38,79 @@
               d="M0,40L80,48.3C160,57,320,73,480,66.7C640,60,800,30,960,18.3C1120,7,1280,13,1440,16.7C1600,20,1760,20,1920,21.7C2080,23,2240,27,2400,23.3C2560,20,2720,10,2880,18.3C3040,27,3200,53,3360,53.3C3520,53,3680,27,3840,15C4000,3,4160,7,4320,10C4480,13,4640,17,4800,20C4960,23,5120,27,5280,31.7C5440,37,5600,43,5760,46.7C5920,50,6080,50,6240,55C6400,60,6560,70,6720,75C6880,80,7040,80,7200,70C7360,60,7520,40,7680,30C7840,20,8000,20,8160,21.7C8320,23,8480,27,8640,23.3C8800,20,8960,10,9120,6.7C9280,3,9440,7,9600,15C9760,23,9920,37,10080,36.7C10240,37,10400,23,10560,18.3C10720,13,10880,17,11040,25C11200,33,11360,47,11440,53.3L11520,60L11520,100L11440,100C11360,100,11200,100,11040,100C10880,100,10720,100,10560,100C10400,100,10240,100,10080,100C9920,100,9760,100,9600,100C9440,100,9280,100,9120,100C8960,100,8800,100,8640,100C8480,100,8320,100,8160,100C8000,100,7840,100,7680,100C7520,100,7360,100,7200,100C7040,100,6880,100,6720,100C6560,100,6400,100,6240,100C6080,100,5920,100,5760,100C5600,100,5440,100,5280,100C5120,100,4960,100,4800,100C4640,100,4480,100,4320,100C4160,100,4000,100,3840,100C3680,100,3520,100,3360,100C3200,100,3040,100,2880,100C2720,100,2560,100,2400,100C2240,100,2080,100,1920,100C1760,100,1600,100,1440,100C1280,100,1120,100,960,100C800,100,640,100,480,100C320,100,160,100,80,100L0,100Z"></path>
     </svg>
     <div class="container card-content">
+        <div class="row mt-5 mb-3 landing-page">
+            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                <div class="d-flex">
+                    <i class="fa-regular fa-lightbulb fa-2x mr-3 mt-1"></i>
+                    <div class="d-flex flex-column">
+                        <h3>Personal Uplift Stories</h3>
+                        <p>Share personal experiences that inspire, encourage, and spread positivity.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="d-block d-md-none line mx-auto"></div>
+            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                <div class="d-flex">
+                    <i class="fa-regular fa-face-smile fa-2x mr-3 mt-1"></i>
+                    <div class="d-flex flex-column">
+                        <h3>Community Outreach</h3>
+                        <p>Engage with a community that supports one another, shares resources, and collaborates on
+                            uplifting projects.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="line d-none d-md-block d-lg-none mx-auto"></div>
+            <div class="d-block d-md-none line mx-auto"></div>
+            <div class="col-12 col-md-6 col-lg-4 mb-3">
+                <div class="d-flex">
+                    <i class="fa-regular fa-calendar-check fa-2x mr-3 mt-1"></i>
+                    <div class="d-flex flex-column">
+                        <h3>Events & Gatherings</h3>
+                        <p>Stay updated on community-driven events, webinars, or gatherings aimed at promoting unity and
+                            positivity.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="d-block d-md-none line mx-auto"></div>
+            <div class="d-none d-lg-block line mx-auto"></div>
+            <div class="col-12 col-md-6 col-lg-4 mb-3">
+                <div class="d-flex">
+                    <i class="fa-regular fa-circle-question fa-2x mr-3 mt-1"></i>
+                    <div class="d-flex flex-column">
+                        <h3>Advice & Support</h3>
+                        <p>Seek guidance or offer words of wisdom. From life advice to professional tips, let's help
+                            each
+                            other thrive.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="line d-none d-md-block d-lg-none mx-auto"></div>
+            <div class="d-block d-md-none line mx-auto"></div>
+            <div class="col-12 col-md-6 col-lg-4 mb-3">
+                <div class="d-flex">
+                    <i class="fa-solid fa-coins fa-2x mr-3 mt-1"></i>
+                    <div class="d-flex flex-column">
+                        <h3>Fundraising Campaigns</h3>
+                        <p>Support fundraising campaigns for genuine causes. Whether it's for medical aid, educational support, or community projects, let's uplift one another through collective contributions.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="d-block d-md-none line mx-auto"></div>
+            <div class="col-12 col-md-6 col-lg-4 mb-3">
+                <div class="d-flex">
+                    <i class="fa-solid fa-arrow-up-right-dots fa-2x mr-3 mt-1"></i>
+                    <div class="d-flex flex-column">
+                        <h3>Professional Growth</h3>
+                        <p>Whether it's about career advice, personal development, or entrepreneurial endeavors, share
+                            and
+                            learn
+                            from the experiences of others.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="line d-none d-md-block d-lg-none mx-auto"></div>
+            <div class="d-block d-md-none line mx-auto"></div>
+        </div>
         <h2 class="text-center my-3 mb-4">Discover</h2>
         <div class="row d-flex">
             <div th:each="post : ${posts}" class="col-12 col-lg-4 col-md-6 d-flex">
@@ -62,7 +135,7 @@
     </div>
     <h2 class="text-center mb-5 mt-3">Browse By Category</h2>
     <div class="container">
-        <div class="row justify-content-center ">
+        <div class="row">
             <div class="col-lg-3 col-4">
                 <a th:href="@{/posts/category/1}" class="d-flex flex-column align-items-center text-decoration-none">
                     <i class="fas fa-paw mb-2 fa-3x icon-text-color"></i>
@@ -138,10 +211,23 @@
             </div>
             <div class="col-lg-3 col-4">
                 <a th:href="@{/posts/category/13}" class="d-flex flex-column align-items-center text-decoration-none">
+                    <i class="fa-regular fa-calendar-check mb-2 fa-3x icon-text-color"></i>
+                    <span class="mb-5 icon-text-color">Event</span>
+                </a>
+            </div>
+            <div class="col-lg-3 col-4">
+                <a th:href="@{/posts/category/14}" class="d-flex flex-column align-items-center text-decoration-none">
+                    <i class="fa-regular fa-circle-question mb-2 fa-3x icon-text-color"></i>
+                    <span class="mb-5 icon-text-color">Advice</span>
+                </a>
+            </div>
+            <div class="col-lg-3 col-4">
+                <a th:href="@{/posts/category/15}" class="d-flex flex-column align-items-center text-decoration-none">
                     <i class="fa-solid fa-ellipsis mb-2 fa-3x icon-text-color"></i>
                     <span class="mb-5 icon-text-color">Other</span>
                 </a>
             </div>
+        </div>
         </div>
     </div>
 

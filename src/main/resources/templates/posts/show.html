@@ -78,7 +78,7 @@
         <!-- Categories -->
         <h5 class="mt-4">Categories:</h5>
         <div>
-            <button th:each="category : ${post.categories}" type="button" class="btn btn-outline-primary m-1"
+            <button th:each="category : ${post.categories}" type="button" class="btn btn-outline-info m-1"
                     th:text="${category.cat}"></button>
         </div>
 
@@ -185,7 +185,7 @@
                 <textarea name="comment" class="form-control" rows="3" placeholder="Add your comment..."
                           required></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Add Comment</button>
+                <button type="submit" class="btn btn-info">Add Comment</button>
             </form>
         </div>
         <div class="row my-5">
