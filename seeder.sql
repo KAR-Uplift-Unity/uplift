@@ -22,8 +22,9 @@ INSERT INTO categories (id ,cat) VALUES
 (10,'Travel'),
 (11,'Volunteer'),
 (12,'Youth'),
-(13,'Other'),
-(14,'Advice');
+(13,'Event'),
+(14,'Advice'),
+(15,'Other');
 
 insert into users (archive, email, password, username, admin, profile_image_url, archive_date) values
 (false,'robert.j.mendez3@gmail.com','$2a$10$a7La9jCqVG/YTPIiS2G6m.Pw1.qR2x8vT8hNCu1X/rWWAQBB./mJO','rjmendez',true,'https://cdn.filestackcontent.com/XwB1S9aoR0Smkk9RQyB5',null),
@@ -571,18 +572,18 @@ insert into images (image, post_id) values ('http://dummyimage.com/1542x940.png/
 
 insert into post_categories (post_id, cat_id) values (38, 7);
 insert into post_categories (post_id, cat_id) values (2, 10);
-insert into post_categories (post_id, cat_id) values (47, 8);
+insert into post_categories (post_id, cat_id) values (47, 14);
 insert into post_categories (post_id, cat_id) values (5, 10);
 insert into post_categories (post_id, cat_id) values (38, 6);
 insert into post_categories (post_id, cat_id) values (41, 11);
 insert into post_categories (post_id, cat_id) values (43, 2);
-insert into post_categories (post_id, cat_id) values (18, 13);
+insert into post_categories (post_id, cat_id) values (18, 15);
 insert into post_categories (post_id, cat_id) values (12, 13);
 insert into post_categories (post_id, cat_id) values (17, 10);
 insert into post_categories (post_id, cat_id) values (24, 8);
 insert into post_categories (post_id, cat_id) values (35, 5);
 insert into post_categories (post_id, cat_id) values (4, 7);
-insert into post_categories (post_id, cat_id) values (12, 12);
+insert into post_categories (post_id, cat_id) values (12, 14);
 insert into post_categories (post_id, cat_id) values (31, 8);
 insert into post_categories (post_id, cat_id) values (34, 12);
 insert into post_categories (post_id, cat_id) values (27, 2);
@@ -602,8 +603,8 @@ insert into post_categories (post_id, cat_id) values (28, 3);
 insert into post_categories (post_id, cat_id) values (4, 3);
 insert into post_categories (post_id, cat_id) values (6, 5);
 insert into post_categories (post_id, cat_id) values (10, 2);
-insert into post_categories (post_id, cat_id) values (27, 10);
-insert into post_categories (post_id, cat_id) values (32, 9);
+insert into post_categories (post_id, cat_id) values (27, 15);
+insert into post_categories (post_id, cat_id) values (32, 14);
 insert into post_categories (post_id, cat_id) values (1, 11);
 insert into post_categories (post_id, cat_id) values (30, 13);
 insert into post_categories (post_id, cat_id) values (47, 11);
@@ -621,7 +622,7 @@ insert into post_categories (post_id, cat_id) values (27, 3);
 insert into post_categories (post_id, cat_id) values (28, 1);
 insert into post_categories (post_id, cat_id) values (31, 4);
 insert into post_categories (post_id, cat_id) values (9, 12);
-insert into post_categories (post_id, cat_id) values (28, 10);
+insert into post_categories (post_id, cat_id) values (28, 15);
 insert into post_categories (post_id, cat_id) values (27, 7);
 insert into post_categories (post_id, cat_id) values (28, 6);
 insert into post_categories (post_id, cat_id) values (12, 7);
@@ -629,7 +630,7 @@ insert into post_categories (post_id, cat_id) values (43, 12);
 insert into post_categories (post_id, cat_id) values (10, 4);
 insert into post_categories (post_id, cat_id) values (18, 8);
 insert into post_categories (post_id, cat_id) values (20, 8);
-insert into post_categories (post_id, cat_id) values (42, 1);
+insert into post_categories (post_id, cat_id) values (42, 14);
 insert into post_categories (post_id, cat_id) values (5, 1);
 insert into post_categories (post_id, cat_id) values (37, 9);
 insert into post_categories (post_id, cat_id) values (29, 5);
@@ -638,7 +639,7 @@ insert into post_categories (post_id, cat_id) values (40, 7);
 insert into post_categories (post_id, cat_id) values (3, 10);
 insert into post_categories (post_id, cat_id) values (32, 5);
 insert into post_categories (post_id, cat_id) values (42, 10);
-insert into post_categories (post_id, cat_id) values (44, 13);
+insert into post_categories (post_id, cat_id) values (44, 15);
 insert into post_categories (post_id, cat_id) values (25, 8);
 insert into post_categories (post_id, cat_id) values (49, 7);
 insert into post_categories (post_id, cat_id) values (21, 3);
@@ -658,7 +659,7 @@ insert into post_categories (post_id, cat_id) values (38, 4);
 insert into post_categories (post_id, cat_id) values (34, 5);
 insert into post_categories (post_id, cat_id) values (33, 3);
 insert into post_categories (post_id, cat_id) values (1, 10);
-insert into post_categories (post_id, cat_id) values (29, 13);
+insert into post_categories (post_id, cat_id) values (29, 14);
 insert into post_categories (post_id, cat_id) values (16, 13);
 insert into post_categories (post_id, cat_id) values (9, 3);
 insert into post_categories (post_id, cat_id) values (21, 4);
@@ -675,7 +676,7 @@ insert into post_categories (post_id, cat_id) values (27, 2);
 insert into post_categories (post_id, cat_id) values (26, 13);
 insert into post_categories (post_id, cat_id) values (49, 2);
 insert into post_categories (post_id, cat_id) values (2, 8);
-insert into post_categories (post_id, cat_id) values (42, 10);
+insert into post_categories (post_id, cat_id) values (42, 15);
 insert into post_categories (post_id, cat_id) values (1, 3);
 insert into post_categories (post_id, cat_id) values (16, 3);
 insert into post_categories (post_id, cat_id) values (29, 10);
