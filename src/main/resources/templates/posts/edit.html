@@ -15,7 +15,7 @@
         <h1 class="text-center mt-4">Create A Post</h1>
         <form th:action="@{/posts/{id}/edit(id=${post.id})}" th:object="${post}" method="post"
               enctype="multipart/form-data"
-              class="mx-auto col-12 col-lg-8 col-md-10 mb-4">
+              class="mx-auto col-12 col-lg-8 col-md-10 mb-5">
             <h5 class="mt-4 text-center mb-4">Select the categories that best describe your post:</h5>
 
             <!-- Categories -->
