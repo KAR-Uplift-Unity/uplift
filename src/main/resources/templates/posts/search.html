@@ -36,13 +36,13 @@
                         <option value="15" th:selected="${selectedCategoryId == 15}">Other</option>
                     </select>
                 </div>
-                <input type="text" name="query" placeholder="Search by story, tag, or category..." class="custom-search-input w-100">
+                <input type="text" name="query" placeholder="Search by title, story, or tag" class="custom-search-input w-100">
             </div>
         </form>
 
-        <div th:if="${#lists.isEmpty(searchResultsTitle) and #lists.isEmpty(searchResultsTags) and #lists.isEmpty(category)}" class="text-center mt-5">
+        <div th:if="${#lists.isEmpty(searchResultsTitle) and #lists.isEmpty(searchResultsTags) and #lists.isEmpty(category)}" class="text-center my-5">
             <h3 class="greyish-color">No results found.</h3>
-            <p>Try a different search or browse our categories.</p>
+            <p class="mb-5">Try a different search or browse our categories.</p>
         </div>
 
         <div class="col-12 col-lg-8 d-flex flex-column justify-content-center mx-auto mb-4 p-0">
