@@ -15,11 +15,11 @@
                 <h4 th:text="${user.username}" class="pl-1"></h4>
             </div>
             <div class="col d-flex justify-content-end">
-                <a href="/settings">Profile Settings</a>
+                <a th:href="@{/settings}" class="profile-setting-btn">Profile Settings</a>
             </div>
         </div>
         <div class="mt-2">
-            <h3 class="mb-2">Your active posts</h3>
+            <h3 class="mb-4">Your active posts</h3>
             <div th:if="${activePosts.isEmpty()}" class="mb-5">
                 No active posts to show.
             </div>
@@ -43,8 +43,8 @@
                             <!-- Edit and Archive buttons -->
                             <div class="buttons d-flex justify-content-end">
                                 <a th:href="@{/posts/{id}/edit(id=${post.id})}"
-                                   class="btn btn-outline-info w-50 mr-2">Edit</a>
-                                <button type="button" class="btn btn-outline-secondary w-50" data-toggle="modal"
+                                   class="btn btn-outline-info w-50 mr-2 category-show">Edit</a>
+                                <button type="button" class="btn btn-outline-secondary w-50 archive-button" data-toggle="modal"
                                         th:attr="data-target='#archiveModal' + ${post.id}">Archive
                                 </button>
                             </div>
@@ -67,9 +67,9 @@
                                     <p>Are you sure you want to archive this post?</p>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                    <button type="button" class="btn btn-secondary close-button" data-dismiss="modal">Cancel</button>
                                     <form th:action="@{/posts/{id}/archive(id=${post.id})}" method="post">
-                                        <input type="submit" class="btn btn-danger" value="Confirm Archive">
+                                        <input type="submit" class="btn btn-danger report-modal" value="Confirm Archive">
                                     </form>
                                 </div>
 
@@ -81,7 +81,7 @@
         </div>
 
 
-        <h3 class="mb-2">Your archived posts</h3>
+        <h3 class="mb-4">Your archived posts</h3>
         <div th:if="${archivedPosts.isEmpty()}" class="mb-5">
             No archived posts to show.
         </div>
@@ -100,16 +100,16 @@
                         </a>
                         <p class="card-text index-card-text flex-grow-1"
                            th:text="${#strings.abbreviate(post.story,75)}"></p>
-                            <p class="card-text font-weight-lighter" th:if="${post.days == 1}">1 Day until deletion</p>
-                            <p class="card-text font-weight-lighter" th:if="${post.days == 2}">2 Days until deletion</p>
-                            <p class="card-text font-weight-lighter" th:if="${post.days == 3}">3 Days until deletion</p>
-                            <p class="card-text font-weight-lighter" th:if="${post.days == 4}">4 Days until deletion</p>
-                            <p class="card-text font-weight-lighter" th:if="${post.days == 5}">5 Days until deletion</p>
-                            <p class="card-text font-weight-lighter" th:if="${post.days == 6}">6 Days until deletion</p>
-                            <p class="card-text font-weight-lighter" th:if="${post.days == 7}">7 Days until deletion</p>
+                            <p class="card-text font-weight-lighter" th:if="${post.days == 1}">1 day until deletion</p>
+                            <p class="card-text font-weight-lighter" th:if="${post.days == 2}">2 days until deletion</p>
+                            <p class="card-text font-weight-lighter" th:if="${post.days == 3}">3 days until deletion</p>
+                            <p class="card-text font-weight-lighter" th:if="${post.days == 4}">4 days until deletion</p>
+                            <p class="card-text font-weight-lighter" th:if="${post.days == 5}">5 days until deletion</p>
+                            <p class="card-text font-weight-lighter" th:if="${post.days == 6}">6 days until deletion</p>
+                            <p class="card-text font-weight-lighter" th:if="${post.days == 7}">7 days until deletion</p>
                         <div class="buttons d-flex">
                             <form th:action="@{/posts/{id}/unarchive(id=${post.id})}" method="post" class="w-100">
-                                <input type="submit" class="btn btn-outline-secondary mt-2 w-100" value="Restore">
+                                <input type="submit" class="btn btn-outline-secondary mt-2 w-100 restore-button" value="Restore">
                             </form>
                         </div>
                     </div>

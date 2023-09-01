@@ -8,7 +8,6 @@
     <meta th:name="'_csrf'" th:content="${_csrf.token}"/>
     <meta th:name="'_csrf_header'" th:content="${_csrf.headerName}"/>
     <div th:replace="~{partials/header :: header}"></div>
-
 </head>
 <body class="individual-post">
 <div th:replace="~{partials/navbar :: navbar}"></div>
@@ -75,10 +74,20 @@
             <p th:utext="${post.solution}"></p>
         </div>
 
+
+        <div class="row my-2" th:if="${#authentication.name != post.user.username}">
+            <a class="btn btn-link text-muted" data-toggle="modal" data-target="#reportModal">
+                <i class="fas fa-flag flag-text pl-1"></i> Report Post
+            </a>
+        </div>
+
+
+
+
         <!-- Categories -->
         <h5 class="mt-4">Categories:</h5>
         <div>
-            <button th:each="category : ${post.categories}" type="button" class="btn btn-outline-info m-1"
+            <button th:each="category : ${post.categories}" type="button" class="btn btn-outline-info m-1 category-show"
                     th:text="${category.cat}"></button>
         </div>
 
@@ -97,22 +106,22 @@
 
                             <!-- Edit button for the comment -->
                             <button th:if="${#authentication.name == comment.user.username}"
-                                    class="btn btn-link"
+                                    class="btn btn-link comment-link"
                                     data-toggle="modal"
-                                    th:data-target="'#editCommentModal-' + ${comment.id}">Edit
+                                    th:data-target="'#editCommentModal-' + ${comment.id}"><i class="fa-regular fa-pen-to-square"></i>
                             </button>
 
                             <!-- Delete button for the comment -->
-                            <div class="row ml-2">
-                                <button th:if="${#authentication.name == comment.user.username}" class="btn btn-link mx-auto" data-toggle="modal" data-target="#deleteModal1">
-                                    Delete
+                            <div class="row">
+                                <button th:if="${#authentication.name == comment.user.username}" class="btn btn-link" data-toggle="modal" data-target="#deleteModal1">
+                                    <i class="fa-regular fa-trash-can comment-link"></i>
                                 </button>
                             </div>
 
                             <!-- Report for comment -->
-                            <div class="row ml-2">
-                                <button th:if="${#authentication.name != comment.user.username}" class="btn btn-link mx-auto" data-toggle="modal" data-target="#reportModal1">
-                                    Report
+                            <div class="row ml-4">
+                                <button th:if="${#authentication.name != comment.user.username}" class="btn btn-link mx-auto comment-link" data-toggle="modal" data-target="#reportModal1">
+                                    <i class="fas fa-flag flag-text pl-1"></i> Report
                                 </button>
                             </div>
                         </div>
@@ -132,9 +141,9 @@
                                     <form th:action="@{/comments/{id}/delete(id=${comment.id})}" method="post">
                                         <p>Are you sure you want to delete your comment?</p>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                            <button type="button" class="btn btn-secondary close-button" data-dismiss="modal">Close
                                             </button>
-                                            <button type="submit" class="btn btn-primary">Delete</button>
+                                            <button type="submit" class="btn btn-primary report-modal">Delete</button>
                                         </div>
                                     </form>
                                 </div>
@@ -161,9 +170,9 @@
 
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                            <button type="button" class="btn btn-secondary close-button" data-dismiss="modal">Close
                                             </button>
-                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                            <button type="submit" class="btn btn-primary comment-button">Save changes</button>
                                         </div>
                                     </form>
                                 </div>
@@ -178,7 +187,7 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="reportModalLabel1">Report Post</h5>
+                                    <h5 class="modal-title" id="reportModalLabel1">Report Comment</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -196,7 +205,7 @@
                                         </div>
                                         <input type="hidden" name="postId" th:value="${post.id}"/>
                                         <input type="hidden" name="commentId" th:value="${comment.id}"/>
-                                        <button type="submit" class="btn btn-danger">Submit Report</button>
+                                        <button type="submit" class="btn btn-danger comment-button">Submit Report</button>
                                     </form>
                                 </div>
                             </div>
@@ -206,17 +215,18 @@
             </div>
 
             <!-- Add Comment Form -->
-            <form th:action="@{/posts/{id}/comments(id=${post.id})}" method="post" class="mt-4">
+            <form th:action="@{/posts/{id}/comments(id=${post.id})}" method="post" class="my-4">
                 <div class="form-group">
                 <textarea name="comment" class="form-control" rows="3" placeholder="Add your comment..."
                           required></textarea>
                 </div>
-                <button type="submit" class="btn btn-info">Add Comment</button>
+                <button type="submit" class="btn btn-info comment-button">Add Comment</button>
             </form>
         </div>
-        <div class="row my-5">
-            <button class="btn btn-outline-danger mx-auto" data-toggle="modal" data-target="#reportModal">Report Post</button>
-        </div>
+<!--        <div class="row my-5">-->
+<!--            <button class="btn btn-outline-danger mx-auto" data-toggle="modal" data-target="#reportModal">Report Post</button>-->
+<!--        </div>-->
+
     </div>
 
     <!-- Report Modal -->
@@ -242,7 +252,7 @@
                             </select>
                         </div>
                         <input type="hidden" name="postId" th:value="${post.id}"/>
-                        <button type="submit" class="btn btn-danger">Submit Report</button>
+                        <button type="submit" class="btn btn-danger comment-button">Submit Report</button>
                     </form>
                 </div>
             </div>

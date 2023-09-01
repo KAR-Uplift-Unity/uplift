@@ -62,6 +62,10 @@ nav {
 
 /*HERO SECTION / INDEX PAGE START*/
 
+.custom-modal-width {
+    max-width: 25%;
+}
+
 .index-body {
     background-color: var(--off-white-color);
     display: flex;
@@ -99,7 +103,7 @@ div.hero-section a.btn.btn-primary.custom-btn:focus {
     background-color: var(--primary-button-color);
     border: none;
     color: white;
-    border-radius: 14px;
+    border-radius: 8px;
     width: 200px;
     box-shadow: none;
     outline: none;
@@ -216,7 +220,6 @@ div.hero-section a.btn.btn-primary.custom-btn:active {
 
 .left-panel .form-background form input {
     background-color: transparent;
-    border-radius: 15px;
 }
 
 button.btn.btn-primary.custom-btn,
@@ -225,7 +228,7 @@ button.btn.btn-primary.custom-btn:focus {
     background-color: var(--primary-button-color);
     border: none;
     color: white;
-    border-radius: 14px;
+    border-radius: 8px;
     box-shadow: none;
     outline: none;
     height: 40px;
@@ -493,7 +496,8 @@ button.btn.btn-primary.custom-btn:active {
     position: absolute;
     top: 0;
     right: 0;
-    background: darkgray;
+    background: red;
+    opacity: 0.7;
     color: white;
     cursor: pointer;
     padding: 2px 5px;
@@ -570,9 +574,99 @@ button.btn.btn-primary.custom-btn:active {
     font-size: 12px;
 }
 
+.comment-button {
+    background-color: #00917A;
+    border: none;
+    border-radius:8px;
+    height: 38px;
+}
+
+.comment-button:hover, .comment-button:focus, .comment-button:active {
+    background-color: #007562;
+    box-shadow: none;
+}
+
+.category-show {
+    border: 1px solid #00917A;
+    color: #00917A;
+    border-radius: 8px;
+}
+
+.category-show:hover {
+    background-color: #00917A;
+    border-color: #00917A;
+}
+
+.report-modal {
+    background-color: #bb3922;
+    border: none;
+    border-radius: 8px;
+    height: 38px;
+}
+
+.report-modal:hover {
+    background-color: #a8331e;
+}
+
+.close-button {
+    border-radius: 8px;
+}
+
+.comment-link {
+    color: grey;
+}
+
+.comment-link:hover {
+    color: #00917A;
+}
+
+.modal {
+    font-family: var(--poppins-font);
+}
+
 /*INDIVIDUAL POST PAGE END*/
 
 /*POSTS/FEED PAGE START*/
+
+.custom-search {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border-radius: 50px;
+    border: 1px solid #ccc;
+    padding: 5px 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 500px;
+    margin: 0 auto;
+}
+
+.dropdown-section {
+    display: flex;
+    align-items: center;
+    border-right: 2px solid #ccc;
+    padding-right: 10px;
+    margin-right: 10px;
+}
+
+.custom-dropdown {
+    border: none;
+    background-color: transparent;
+    padding: 5px 10px;
+    border-radius: 20px;
+    outline: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.custom-search-input {
+    border: none;
+    background-color: transparent;
+    flex: 1;
+    padding: 10px 5px;
+    border-radius: 20px;
+    font-size: 16px;
+    outline: none;
+}
 
 .feed-background {
     background-color: var(--off-white-color);
@@ -605,6 +699,18 @@ button.btn.btn-primary.custom-btn:active {
 
 }
 
+.all-posts-button {
+    border: 1px solid var(--logo-color);
+    border-radius: 20px;
+}
+
+.all-posts-button:hover{
+    color: white;
+    background-color: var(--primary-button-color);
+    border-color: var(--primary-button-color);
+
+}
+
 /*POSTS/FEED PAGE END*/
 
 /*PROFILE SETTING PAGE START */
@@ -626,6 +732,10 @@ button.btn.btn-primary.custom-btn:active {
 /*PROFILE SETTING PAGE END*/
 
 /*FOOTER START*/
+
+.footer-heart {
+    color: crimson;
+}
 
 .content-wrapper {
     flex: 1;
@@ -722,6 +832,30 @@ footer .footer-background {
     min-height: 100vh;
     flex: 1;
     font-family: var(--poppins-font);
+}
+
+.profile-setting-btn {
+    color: #00917A;
+}
+
+.profile-setting-btn:hover {
+    color: #007562;
+}
+
+.archive-button {
+    border-radius: 8px;
+    border-color: #bb3922;
+    color: #bb3922;
+}
+
+.archive-button:hover {
+    background-color: #a8331e;
+    color: white;
+    border-color: #a8331e;
+}
+
+.restore-button {
+    border-radius: 8px;
 }
 
 /*PROFILE PAGE END*/
