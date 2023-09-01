@@ -7,6 +7,9 @@
 
     <meta th:name="'_csrf'" th:content="${_csrf.token}"/>
     <meta th:name="'_csrf_header'" th:content="${_csrf.headerName}"/>
+    <script th:inline="javascript">
+        const FILESTACK_API_KEY = [[${fileStackKey}]];
+    </script>
 </head>
 <body class="profile-settings-bg">
 <div th:replace="~{partials/navbar :: navbar}"></div>
@@ -181,7 +184,7 @@
 </div>
 <div th:replace="~{partials/footer :: footer}"></div>
 <div th:replace="~{partials/footer :: footerscripts}"></div>
-<script th:src="@{/js/filestack-api-key.js}"></script>
+
 <script th:src="@{/js/filestack-functionality.js}"></script>
 </body>
 </html>

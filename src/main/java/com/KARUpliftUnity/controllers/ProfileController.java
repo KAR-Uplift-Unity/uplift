@@ -8,6 +8,7 @@ import com.KARUpliftUnity.repositories.UserRepository;
 import com.KARUpliftUnity.services.EmailService;
 import com.KARUpliftUnity.services.UserDetailsLoader;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -41,7 +42,8 @@ public class ProfileController {
     @Autowired
     private UserDetailsLoader userDetailsLoader;
 
-
+    @Value("${filestack.key}")
+    private String fileStackKey;
 
 
     public ProfileController(PostRepository postDao, UserRepository userDao) {
@@ -105,7 +107,7 @@ public class ProfileController {
         model.addAttribute("activePosts", postDao.findByUserIdAndArchiveFalse(user.getId()));
         model.addAttribute("archivedPosts", posts);
 
-        return "/users/profile";
+        return "users/profile";
     }
 
     @PostMapping("/posts/{id}/archive")
@@ -144,9 +146,10 @@ public class ProfileController {
             imageUrl = "/images/default-image.png";
         }
 
+        model.addAttribute("fileStackKey", fileStackKey);
         model.addAttribute("profileImage", imageUrl);
         model.addAttribute("user", user);
-        return "/users/profile_settings";
+        return "users/profile_settings";
     }
 
     @PostMapping("/update-details")

@@ -3,6 +3,7 @@ package com.KARUpliftUnity.controllers;
 import com.KARUpliftUnity.models.*;
 import com.KARUpliftUnity.repositories.*;
 import com.KARUpliftUnity.services.EmailService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -32,6 +33,9 @@ public class PostController {
     private final CategoryRepository categoryRepository;
 
     private final LikeRepository likeDao;
+
+    @Value("${filestack.key}")
+    private String fileStackKey;
 
 
     public PostController(PostRepository postDao, UserRepository userDao, ImageRepository imageDao, TagRepository tagDao, EmailService emailService, CommentRepository commentDao, CategoryRepository categoryRepository, LikeRepository likeDao) {
@@ -276,6 +280,7 @@ public class PostController {
             selectedCategories.add(category.getId());
         }
         model.addAttribute("selectedCategories", selectedCategories);
+        model.addAttribute("fileStackKey", fileStackKey);
 
         // get tags
         String tags = "";
@@ -383,6 +388,7 @@ public class PostController {
 
         List<Category> allCategories = categoryRepository.findAll();
         model.addAttribute("allCategories", allCategories);
+        model.addAttribute("fileStackKey", fileStackKey);
 
 
         if (!model.containsAttribute("selectedCategoriesForm")) {

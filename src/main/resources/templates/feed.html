@@ -69,31 +69,31 @@
             </div>
         </div>
 
-<!--        <form th:action="@{/posts/search}" method="post" class="d-flex justify-content-center mt-5">-->
-<!--            <div class="col-12 col-lg-8 mb-4 custom-search">-->
-<!--                <div class="dropdown-section">-->
-<!--                    <select name="category" class="custom-dropdown">-->
-<!--                        <option value="0" selected>All Posts</option>-->
-<!--                        <option value="1">Animals</option>-->
-<!--                        <option value="2">Community</option>-->
-<!--                        <option value="3">Education</option>-->
-<!--                        <option value="4">Emergencies</option>-->
-<!--                        <option value="5">Environment</option>-->
-<!--                        <option value="6">Family</option>-->
-<!--                        <option value="7">Medical</option>-->
-<!--                        <option value="8">Monthly Bills</option>-->
-<!--                        <option value="9">Recovery</option>-->
-<!--                        <option value="10">Travel</option>-->
-<!--                        <option value="11">Volunteer</option>-->
-<!--                        <option value="12">Youth</option>-->
-<!--                        <option value="13">Event</option>-->
-<!--                        <option value="14">Advice</option>-->
-<!--                        <option value="15">Other</option>-->
-<!--                    </select>-->
-<!--                </div>-->
-<!--                <input type="text" name="query" placeholder="Search by story, tag, or category..." class="custom-search-input">-->
-<!--            </div>-->
-<!--        </form>-->
+        <form th:action="@{/posts/search}" method="post" class="d-flex justify-content-center mt-5">
+            <div class="col-12 col-lg-8 mb-4 custom-search">
+                <div class="dropdown-section">
+                    <select name="category" class="custom-dropdown">
+                        <option value="0" selected>All Posts</option>
+                        <option value="1">Animals</option>
+                        <option value="2">Community</option>
+                        <option value="3">Education</option>
+                        <option value="4">Emergencies</option>
+                        <option value="5">Environment</option>
+                        <option value="6">Family</option>
+                        <option value="7">Medical</option>
+                        <option value="8">Monthly Bills</option>
+                        <option value="9">Recovery</option>
+                        <option value="10">Travel</option>
+                        <option value="11">Volunteer</option>
+                        <option value="12">Youth</option>
+                        <option value="13">Event</option>
+                        <option value="14">Advice</option>
+                        <option value="15">Other</option>
+                    </select>
+                </div>
+                <input type="text" name="query" placeholder="Search by story, tag, or category..." class="custom-search-input">
+            </div>
+        </form>
 
         <div class="row" th:if="${searchResultsTitle}">
             <div th:each="post : ${searchResultsTitle}"
