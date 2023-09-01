@@ -139,6 +139,12 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-4">
+                <a th:href="@{/posts}" class="d-flex flex-column align-items-center text-decoration-none">
+                    <i class="fa-solid fa-magnifying-glass mb-2 fa-3x icon-text-color"></i>
+                    <span class="mb-5 icon-text-color">All Posts</span>
+                </a>
+            </div>
+            <div class="col-lg-3 col-4">
                 <a th:href="@{/posts/category/1}" class="d-flex flex-column align-items-center text-decoration-none">
                     <i class="fas fa-paw mb-2 fa-3x icon-text-color"></i>
                     <span class="mb-5 icon-text-color">Animals</span>
@@ -227,12 +233,6 @@
                 <a th:href="@{/posts/category/15}" class="d-flex flex-column align-items-center text-decoration-none">
                     <i class="fa-solid fa-ellipsis mb-2 fa-3x icon-text-color"></i>
                     <span class="mb-5 icon-text-color">Other</span>
-                </a>
-            </div>
-            <div class="col-lg-3 col-4">
-                <a th:href="@{/posts}" class="d-flex flex-column align-items-center text-decoration-none">
-                    <i class="fa-solid fa-magnifying-glass mb-2 fa-3x icon-text-color"></i>
-                    <span class="mb-5 icon-text-color">All Posts</span>
                 </a>
             </div>
         </div>

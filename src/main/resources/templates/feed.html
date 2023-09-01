@@ -10,94 +10,37 @@
 <div class="content-wrapper">
     <div class="container">
         <!--    <h2 class="text-center">Search Results for "<span th:text="${query}">Your Query</span>"</h2>-->
-
-        <form th:action="@{/posts/search}" method="post" class="d-flex justify-content-center mt-5">
-            <div class="col-12 col-lg-8 mb-4">
-                <input type="text" name="query" placeholder="Search by story, tag, or category..." class="search-bar">
-            </div>
-        </form>
-
-        <div class="row d-flex justify-content-center col-12 col-lg-8 mx-auto mb-4">
-
-            <div class="mr-2 mb-2 mx-auto">
-                <a class="btn category-button" th:href="@{/posts}">All Posts</a>
-            </div>
-            <div class="mr-2 mb-2 mx-auto">
-                <a class="btn category-button" th:href="@{/posts/category/1}">Animals</a>
-            </div>
-            <div class="mr-2 mb-2 mx-auto">
-                <a class="btn category-button" th:href="@{/posts/category/2}">Community</a>
-            </div>
-            <div class="mr-2 mb-2 mx-auto">
-                <a class="btn category-button" th:href="@{/posts/category/3}">Education</a>
-            </div>
-            <div class="mr-2 mb-2 mx-auto">
-                <a class="btn category-button" th:href="@{/posts/category/4}">Emergencies</a>
-            </div>
-            <div class="mr-2 mb-2 mx-auto">
-                <a class="btn category-button" th:href="@{/posts/category/5}">Environment</a>
-            </div>
-            <div class="mr-2 mb-2 mx-auto">
-                <a class="btn category-button" th:href="@{/posts/category/6}">Family</a>
-            </div>
-            <div class="mr-2 mb-2 mx-auto">
-                <a class="btn category-button" th:href="@{/posts/category/7}">Medical</a>
-            </div>
-            <div class="mr-2 mb-2 mx-auto">
-                <a class="btn category-button" th:href="@{/posts/category/8}">Monthly Bills</a>
-            </div>
-            <div class="mr-2 mb-2 mx-auto">
-                <a class="btn category-button" th:href="@{/posts/category/9}">Recovery</a>
-            </div>
-            <div class="mr-2 mb-2 mx-auto">
-                <a class="btn category-button" th:href="@{/posts/category/10}">Travel</a>
-            </div>
-            <div class="mr-2 mb-2 mx-auto">
-                <a class="btn category-button" th:href="@{/posts/category/11}">Volunteer</a>
-            </div>
-            <div class="mr-2 mb-2 mx-auto">
-                <a class="btn category-button" th:href="@{/posts/category/12}">Youth</a>
-            </div>
-            <div class="mr-2 mb-2 mx-auto">
-                <a class="btn category-button" th:href="@{/posts/category/13}">Event</a>
-            </div>
-            <div class="mr-2 mb-2 mx-auto">
-                <a class="btn category-button" th:href="@{/posts/category/14}">Advice</a>
-            </div>
-            <div class="mr-2 mb-2 mx-auto">
-                <a class="btn category-button" th:href="@{/posts/category/15}">Other</a>
-            </div>
-        </div>
-
-        <form th:action="@{/posts/search}" method="post" class="d-flex justify-content-center mt-5">
+        <h1 class="text-center header-item mt-4 mb-1">Search & Browse</h1>
+        <form th:action="@{/posts/search}" method="post" class="d-flex justify-content-center mt-4 mb-3">
             <div class="col-12 col-lg-8 mb-4 custom-search">
                 <div class="dropdown-section">
-                    <select name="category" class="custom-dropdown">
-                        <option value="0" selected>All Posts</option>
-                        <option value="1">Animals</option>
-                        <option value="2">Community</option>
-                        <option value="3">Education</option>
-                        <option value="4">Emergencies</option>
-                        <option value="5">Environment</option>
-                        <option value="6">Family</option>
-                        <option value="7">Medical</option>
-                        <option value="8">Monthly Bills</option>
-                        <option value="9">Recovery</option>
-                        <option value="10">Travel</option>
-                        <option value="11">Volunteer</option>
-                        <option value="12">Youth</option>
-                        <option value="13">Event</option>
-                        <option value="14">Advice</option>
-                        <option value="15">Other</option>
+                    <select name="category" class="custom-dropdown w-100">
+                        <option value="default" th:selected="${selectedCategoryId == null}">Select Category</option>
+                        <option value="0" th:selected="${selectedCategoryId == null ||selectedCategoryId == 0}">All Posts</option>
+                        <option value="1" th:selected="${selectedCategoryId == 1}">Animals</option>
+                        <option value="2" th:selected="${selectedCategoryId == 2}">Community</option>
+                        <option value="3" th:selected="${selectedCategoryId == 3}">Education</option>
+                        <option value="4" th:selected="${selectedCategoryId == 4}">Emergencies</option>
+                        <option value="5" th:selected="${selectedCategoryId == 5}">Environment</option>
+                        <option value="6" th:selected="${selectedCategoryId == 6}">Family</option>
+                        <option value="7" th:selected="${selectedCategoryId == 7}">Medical</option>
+                        <option value="8" th:selected="${selectedCategoryId == 8}">Monthly Bills</option>
+                        <option value="9" th:selected="${selectedCategoryId == 9}">Recovery</option>
+                        <option value="10" th:selected="${selectedCategoryId == 10}">Travel</option>
+                        <option value="11" th:selected="${selectedCategoryId == 11}">Volunteer</option>
+                        <option value="12" th:selected="${selectedCategoryId == 12}">Youth</option>
+                        <option value="13" th:selected="${selectedCategoryId == 13}">Event</option>
+                        <option value="14" th:selected="${selectedCategoryId == 14}">Advice</option>
+                        <option value="15" th:selected="${selectedCategoryId == 15}">Other</option>
                     </select>
                 </div>
-                <input type="text" name="query" placeholder="Search by story, tag, or category..." class="custom-search-input">
+                <input type="text" name="query" placeholder="Search by story, tag, or category..." class="custom-search-input w-100">
             </div>
         </form>
 
         <div class="row" th:if="${searchResultsTitle}">
             <div th:each="post : ${searchResultsTitle}"
-                 class="col-12 col-lg-8 d-flex flex-column justify-content-center mx-auto mb-4">
+                 class="col-12 col-lg-8 d-flex flex-column justify-content-center mx-auto mb-4 p-0">
                 <div class="card mb-4">
                     <img th:if="${post.images.size() > 0}" th:src="${post.images.get(0).image}" class="card-img-top"
                          alt="Post Image">
@@ -116,7 +59,7 @@
 
         <div class="row" th:if="${searchResultsTags}">
             <div th:each="tag : ${searchResultsTags}"
-                 class="col-12 col-lg-8 d-flex flex-column justify-content-center mx-auto mb-4">
+                 class="col-12 col-lg-8 d-flex flex-column justify-content-center mx-auto mb-4 p-0">
                 <div class="card mb-4">
                     <img th:if="${tag.post.images.size() > 0}" th:src="${tag.post.images.get(0).image}"
                          class="card-img-top" alt="Post Image">
@@ -134,7 +77,7 @@
         </div>
 
         <div class="row" th:if="${category}">
-            <div th:each="post : ${category}" class="col-12 col-lg-8 mb-4">
+            <div th:each="post : ${category}" class="col-12 col-lg-8 mb-4 p-0">
                 <div class="card mb-4">
                     <img th:if="${post.images.size() > 0}" th:src="${post.images.get(0).image}" class="card-img-top"
                          alt="Post Image">
@@ -151,7 +94,7 @@
             </div>
         </div>
 
-        <div class="col-12 col-lg-8 d-flex flex-column justify-content-center mx-auto mb-4">
+        <div class="col-12 col-lg-8 d-flex flex-column justify-content-center mx-auto mb-4 p-0">
             <div th:each="post : ${posts}" class="card mb-3" id="Latest posts">
                 <img th:if="${post.images.size() > 0}" th:src="${post.images.get(0).image}" class="card-img-top"
                      alt="Post Image">
@@ -166,6 +109,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 <div th:replace="~{partials/footer :: footer}"></div>

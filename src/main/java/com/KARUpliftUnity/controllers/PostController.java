@@ -258,12 +258,16 @@ public class PostController {
             }
         }
 
+        model.addAttribute("selectedCategoryId", id);
+
         if (catPost != null){
             model.addAttribute("category", catPost);
             return "posts/search";
         }
         return "redirect:/posts";
     }
+
+
 
     @GetMapping("/posts/{id}/edit")
     public String postEdit(@PathVariable long id, Model model) {
