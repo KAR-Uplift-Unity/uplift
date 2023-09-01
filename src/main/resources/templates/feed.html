@@ -16,57 +16,84 @@
                 <input type="text" name="query" placeholder="Search by story, tag, or category..." class="search-bar">
             </div>
         </form>
+
         <div class="row d-flex justify-content-center col-12 col-lg-8 mx-auto mb-4">
 
-            <div class="mr-2 mb-2">
+            <div class="mr-2 mb-2 mx-auto">
                 <a class="btn category-button" th:href="@{/posts}">All Posts</a>
             </div>
-            <div class="mr-2 mb-2">
+            <div class="mr-2 mb-2 mx-auto">
                 <a class="btn category-button" th:href="@{/posts/category/1}">Animals</a>
             </div>
-            <div class="mr-2 mb-2">
+            <div class="mr-2 mb-2 mx-auto">
                 <a class="btn category-button" th:href="@{/posts/category/2}">Community</a>
             </div>
-            <div class="mr-2 mb-2">
+            <div class="mr-2 mb-2 mx-auto">
                 <a class="btn category-button" th:href="@{/posts/category/3}">Education</a>
             </div>
-            <div class="mr-2 mb-2">
+            <div class="mr-2 mb-2 mx-auto">
                 <a class="btn category-button" th:href="@{/posts/category/4}">Emergencies</a>
             </div>
-            <div class="mr-2 mb-2">
+            <div class="mr-2 mb-2 mx-auto">
                 <a class="btn category-button" th:href="@{/posts/category/5}">Environment</a>
             </div>
-            <div class="mr-2 mb-2">
+            <div class="mr-2 mb-2 mx-auto">
                 <a class="btn category-button" th:href="@{/posts/category/6}">Family</a>
             </div>
-            <div class="mr-2 mb-2">
+            <div class="mr-2 mb-2 mx-auto">
                 <a class="btn category-button" th:href="@{/posts/category/7}">Medical</a>
             </div>
-            <div class="mr-2 mb-2">
+            <div class="mr-2 mb-2 mx-auto">
                 <a class="btn category-button" th:href="@{/posts/category/8}">Monthly Bills</a>
             </div>
-            <div class="mr-2 mb-2">
+            <div class="mr-2 mb-2 mx-auto">
                 <a class="btn category-button" th:href="@{/posts/category/9}">Recovery</a>
             </div>
-            <div class="mr-2 mb-2">
+            <div class="mr-2 mb-2 mx-auto">
                 <a class="btn category-button" th:href="@{/posts/category/10}">Travel</a>
             </div>
-            <div class="mr-2 mb-2">
+            <div class="mr-2 mb-2 mx-auto">
                 <a class="btn category-button" th:href="@{/posts/category/11}">Volunteer</a>
             </div>
-            <div class="mr-2 mb-2">
+            <div class="mr-2 mb-2 mx-auto">
                 <a class="btn category-button" th:href="@{/posts/category/12}">Youth</a>
             </div>
-            <div class="mr-2 mb-2">
+            <div class="mr-2 mb-2 mx-auto">
                 <a class="btn category-button" th:href="@{/posts/category/13}">Event</a>
             </div>
-            <div class="mr-2 mb-2">
+            <div class="mr-2 mb-2 mx-auto">
                 <a class="btn category-button" th:href="@{/posts/category/14}">Advice</a>
             </div>
-            <div class="mr-2 mb-2">
+            <div class="mr-2 mb-2 mx-auto">
                 <a class="btn category-button" th:href="@{/posts/category/15}">Other</a>
             </div>
         </div>
+
+<!--        <form th:action="@{/posts/search}" method="post" class="d-flex justify-content-center mt-5">-->
+<!--            <div class="col-12 col-lg-8 mb-4 custom-search">-->
+<!--                <div class="dropdown-section">-->
+<!--                    <select name="category" class="custom-dropdown">-->
+<!--                        <option value="0" selected>All Posts</option>-->
+<!--                        <option value="1">Animals</option>-->
+<!--                        <option value="2">Community</option>-->
+<!--                        <option value="3">Education</option>-->
+<!--                        <option value="4">Emergencies</option>-->
+<!--                        <option value="5">Environment</option>-->
+<!--                        <option value="6">Family</option>-->
+<!--                        <option value="7">Medical</option>-->
+<!--                        <option value="8">Monthly Bills</option>-->
+<!--                        <option value="9">Recovery</option>-->
+<!--                        <option value="10">Travel</option>-->
+<!--                        <option value="11">Volunteer</option>-->
+<!--                        <option value="12">Youth</option>-->
+<!--                        <option value="13">Event</option>-->
+<!--                        <option value="14">Advice</option>-->
+<!--                        <option value="15">Other</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--                <input type="text" name="query" placeholder="Search by story, tag, or category..." class="custom-search-input">-->
+<!--            </div>-->
+<!--        </form>-->
 
         <div class="row" th:if="${searchResultsTitle}">
             <div th:each="post : ${searchResultsTitle}"
@@ -143,5 +170,6 @@
 </div>
 <div th:replace="~{partials/footer :: footer}"></div>
 <div th:replace="~{partials/footer :: footerscripts}"></div>
+<script src="/js/searchbar-functionality.js"></script>
 </body>
 </html>

@@ -91,7 +91,9 @@
                     <i class="fa-solid fa-coins fa-2x mr-3 mt-1"></i>
                     <div class="d-flex flex-column">
                         <h3>Fundraising Campaigns</h3>
-                        <p>Support fundraising campaigns for genuine causes. Whether it's for medical aid, educational support, or community projects, let's uplift one another through collective contributions.</p>
+                        <p>Support fundraising campaigns for genuine causes. Whether it's for medical aid, educational
+                            support, or community projects, let's uplift one another through collective
+                            contributions.</p>
                     </div>
                 </div>
             </div>
@@ -227,16 +229,22 @@
                     <span class="mb-5 icon-text-color">Other</span>
                 </a>
             </div>
-        </div>
+            <div class="col-lg-3 col-4">
+                <a th:href="@{/posts}" class="d-flex flex-column align-items-center text-decoration-none">
+                    <i class="fa-solid fa-magnifying-glass mb-2 fa-3x icon-text-color"></i>
+                    <span class="mb-5 icon-text-color">All Posts</span>
+                </a>
+            </div>
         </div>
     </div>
+</div>
 
 </div>
 
 <!-- First Time Visitor Modal -->
 <div class="modal fade" id="firstTimeVisitorModal" tabindex="-1" role="dialog"
      aria-labelledby="firstTimeVisitorModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-centered custom-modal-width" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="firstTimeVisitorModalLabel">Welcome to <span
