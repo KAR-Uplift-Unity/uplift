@@ -49,20 +49,30 @@ public class PostController {
         this.likeDao = likeDao;
     }
 
-    @GetMapping("/posts")
+    @RequestMapping("/posts")
     public String index(Model model) {
         List<Post> posts = postDao.findByArchiveFalseOrderByDateDesc();
-
         List<Post> postsFlag = new ArrayList<>();
-        for (Post post: posts){
-            if (!post.isFlagged()){
+
+        Map<Long, Integer> likeCounts = new HashMap<>();
+        Map<Long, Integer> commentCounts = new HashMap<>();
+        Map<Long, Date> creationDates = new HashMap<>();
+
+        for (Post post : posts) {
+            if (!post.isFlagged()) {
+                likeCounts.put(post.getId(), post.getLikes().size());
+                commentCounts.put(post.getId(), post.getComment().size());
+                creationDates.put(post.getId(), post.getDate());
                 postsFlag.add(post);
             }
         }
         model.addAttribute("posts", postsFlag);
+        model.addAttribute("likeCounts", likeCounts);
+        model.addAttribute("commentCounts", commentCounts);
+        model.addAttribute("creationDates", creationDates);
+
         return "feed";
     }
-
 
     @GetMapping("/posts/{id}")
     public String postId(@PathVariable long id, Model model) {
@@ -217,6 +227,10 @@ public class PostController {
         Set<Long> uniquePostIds = new HashSet<>();
         List<Post> searchTitle = new ArrayList<>();
         List<Tag> searchTag = new ArrayList<>();
+        Map<Long, Date> creationDates = new HashMap<>();
+        Map<Long, Integer> likeCounts = new HashMap<>();
+        Map<Long, Integer> commentCounts = new HashMap<>();
+
         for (Post post: searchResultsTitle) {
             if(!post.getArchive() && !post.isFlagged() && !uniquePostIds.contains(post.getId())) {
                 searchTitle.add(post);
@@ -230,6 +244,25 @@ public class PostController {
             }
         }
 
+        for (Post post : searchTitle) {
+            creationDates.put(post.getId(), post.getDate());
+        }
+        for (Tag tag : searchTag) {
+            creationDates.put(tag.getPost().getId(), tag.getPost().getDate());
+        }
+
+        for (Post post : searchTitle) {
+            likeCounts.put(post.getId(), post.getLikes().size());
+            commentCounts.put(post.getId(), post.getComment().size());
+        }
+        for (Tag tag : searchTag) {
+            likeCounts.put(tag.getPost().getId(), tag.getPost().getLikes().size());
+            commentCounts.put(tag.getPost().getId(), tag.getPost().getComment().size());
+        }
+
+        model.addAttribute("likeCounts", likeCounts);
+        model.addAttribute("commentCounts", commentCounts);
+        model.addAttribute("creationDates", creationDates);
         model.addAttribute("searchResultsTitle", searchTitle);
         model.addAttribute("searchResultsTags", searchTag);
 
@@ -242,6 +275,9 @@ public class PostController {
 
         List<Post> catPost = new ArrayList<>();
         List<Post> posts = new ArrayList<>();
+        Map<Long, Date> creationDates = new HashMap<>();
+        Map<Long, Integer> likeCounts = new HashMap<>();
+        Map<Long, Integer> commentCounts = new HashMap<>();
 
         for (Post post : postsArc) {
             if (!post.isFlagged()) {
@@ -258,6 +294,18 @@ public class PostController {
             }
         }
 
+        for (Post post : catPost) {
+            creationDates.put(post.getId(), post.getDate());
+        }
+
+        for (Post post : catPost) {
+            likeCounts.put(post.getId(), post.getLikes().size());
+            commentCounts.put(post.getId(), post.getComment().size());
+        }
+
+        model.addAttribute("likeCounts", likeCounts);
+        model.addAttribute("commentCounts", commentCounts);
+        model.addAttribute("creationDates", creationDates);
         model.addAttribute("selectedCategoryId", id);
 
         if (catPost != null){
