@@ -55,14 +55,19 @@
                      alt="Post Image">
                 <div class="card-body feed-card-body">
                     <div class="card-text row likes-comments mb-3">
-                        <div class="col-4 border-right">
-                            <span>Posted: <span th:text="${#dates.format(creationDates[post.id], 'MM/dd/yyyy')}">Date Placeholder</span></span>
+                        <div class="col-4 border-right shrink">
+                            <span class="shrink-text align-items-center">
+                                <span class="posted-text">Posted:</span>
+                                <span th:text="${#dates.format(creationDates[post.id], 'MM/dd/yyyy')}">Date Placeholder</span>
+                            </span>
                         </div>
-                        <div class="col-4 d-flex justify-content-center border-right">
-                            <span th:text="${likeCounts[post.id] + (likeCounts[post.id] == 1 ? ' Like' : ' Likes')}"></span>
+                        <div class="col-4 d-flex justify-content-center border-right align-items-center">
+                            <span class="shrink-text"
+                                  th:text="${likeCounts[post.id] + (likeCounts[post.id] == 1 ? ' Like' : ' Likes')}"></span>
                         </div>
-                        <div class="col-4 d-flex justify-content-center">
-                            <span th:text="${commentCounts[post.id] + (commentCounts[post.id] == 1 ? ' Comment' : ' Comments')}"></span>
+                        <div class="col-4 d-flex justify-content-center align-items-center">
+                            <span class="shrink-text"
+                                  th:text="${commentCounts[post.id] + (commentCounts[post.id] == 1 ? ' Comment' : ' Comments')}"></span>
                         </div>
                     </div>
                     <a th:href="@{/posts/{id} (id= ${post.id})}" class="index-card-title">
@@ -82,14 +87,19 @@
                      alt="Post Image">
                 <div class="card-body feed-card-body">
                     <div class="card-text row likes-comments mb-3">
-                        <div class="col-4 border-right">
-                            <span>Posted: <span th:text="${#dates.format(creationDates[post.id], 'MM/dd/yyyy')}">Date Placeholder</span></span>
+                        <div class="col-4 border-right shrink">
+                            <span class="shrink-text align-items-center">
+                                <span class="posted-text">Posted:</span>
+                                <span th:text="${#dates.format(creationDates[post.id], 'MM/dd/yyyy')}">Date Placeholder</span>
+                            </span>
                         </div>
-                        <div class="col-4 d-flex justify-content-center border-right">
-                            <span th:text="${likeCounts[post.id] + (likeCounts[post.id] == 1 ? ' Like' : ' Likes')}">Likes Placeholder</span>
+                        <div class="col-4 d-flex justify-content-center border-right align-items-center">
+                            <span class="shrink-text"
+                                  th:text="${likeCounts[post.id] + (likeCounts[post.id] == 1 ? ' Like' : ' Likes')}"></span>
                         </div>
-                        <div class="col-4 d-flex justify-content-center">
-                            <span th:text="${commentCounts[post.id] + (commentCounts[post.id] == 1 ? ' Comment' : ' Comments')}">Comments Placeholder</span>
+                        <div class="col-4 d-flex justify-content-center align-items-center">
+                            <span class="shrink-text"
+                                  th:text="${commentCounts[post.id] + (commentCounts[post.id] == 1 ? ' Comment' : ' Comments')}"></span>
                         </div>
                     </div>
                     <a th:href="@{/posts/{id} (id= ${post.getId()})}" class="index-card-title">
@@ -109,14 +119,19 @@
                      alt="Post Image">
                 <div class="card-body feed-card-body">
                     <div class="card-text row likes-comments mb-3">
-                        <div class="col-4 border-right">
-                            <span>Posted: <span th:text="${#dates.format(creationDates[tag.post.id], 'MM/dd/yyyy')}">Date Placeholder</span></span>
+                        <div class="col-4 border-right shrink">
+                            <span class="shrink-text align-items-center">
+                                <span class="posted-text">Posted:</span>
+                                <span th:text="${#dates.format(creationDates[tag.post.id], 'MM/dd/yyyy')}">Date Placeholder</span>
+                            </span>
                         </div>
-                        <div class="col-4 d-flex justify-content-center border-right">
-                            <span th:text="${likeCounts[tag.post.id] + (likeCounts[tag.post.id] == 1 ? ' Like' : ' Likes')}"></span>
+                        <div class="col-4 d-flex justify-content-center border-right align-items-center">
+                            <span class="shrink-text"
+                                  th:text="${likeCounts[tag.post.id] + (likeCounts[tag.post.id] == 1 ? ' Like' : ' Likes')}"></span>
                         </div>
-                        <div class="col-4 d-flex justify-content-center">
-                            <span th:text="${commentCounts[tag.post.id] + (commentCounts[tag.post.id] == 1 ? ' Comment' : ' Comments')}"></span>
+                        <div class="col-4 d-flex justify-content-center align-items-center">
+                            <span class="shrink-text"
+                                  th:text="${commentCounts[tag.post.id] + (commentCounts[tag.post.id] == 1 ? ' Comment' : ' Comments')}"></span>
                         </div>
                     </div>
                     <a th:href="@{/posts/{id} (id= ${tag.post.id})}" class="index-card-title">
