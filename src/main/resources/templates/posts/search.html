@@ -9,7 +9,7 @@
 <div th:replace="~{partials/navbar :: navbar}"></div>
 <div class="content-wrapper">
     <div class="container">
-<!--        <h2 th:if="${query}">Search Results for "<span th:text="${query}">Your Query</span>"</h2>-->
+        <!--        <h2 th:if="${query}">Search Results for "<span th:text="${query}">Your Query</span>"</h2>-->
 
         <h1 class="text-center header-item mt-4 mb-1">Search & Browse</h1>
 
@@ -18,7 +18,9 @@
                 <div class="dropdown-section">
                     <select name="category" class="custom-dropdown w-100">
                         <option value="default" th:selected="${selectedCategoryId == null}">Select Category</option>
-                        <option value="0" th:selected="${selectedCategoryId == null ||selectedCategoryId == 0}">All Posts</option>
+                        <option value="0" th:selected="${selectedCategoryId == null ||selectedCategoryId == 0}">All
+                            Posts
+                        </option>
                         <option value="1" th:selected="${selectedCategoryId == 1}">Animals</option>
                         <option value="2" th:selected="${selectedCategoryId == 2}">Community</option>
                         <option value="3" th:selected="${selectedCategoryId == 3}">Education</option>
@@ -36,11 +38,13 @@
                         <option value="15" th:selected="${selectedCategoryId == 15}">Other</option>
                     </select>
                 </div>
-                <input type="text" name="query" placeholder="Search by title, story, or tag" class="custom-search-input w-100">
+                <input type="text" name="query" placeholder="Search by title, story, or tag"
+                       class="custom-search-input w-100">
             </div>
         </form>
 
-        <div th:if="${#lists.isEmpty(searchResultsTitle) and #lists.isEmpty(searchResultsTags) and #lists.isEmpty(category)}" class="text-center my-5">
+        <div th:if="${#lists.isEmpty(searchResultsTitle) and #lists.isEmpty(searchResultsTags) and #lists.isEmpty(category)}"
+             class="text-center my-5">
             <h3 class="greyish-color">No results found.</h3>
             <p class="mb-5">Try a different search or browse our categories.</p>
         </div>
@@ -49,11 +53,22 @@
             <div th:each="post : ${category}" class="card mb-3">
                 <img th:if="${post.images.size() > 0}" th:src="${post.images.get(0).image}" class="card-img-top"
                      alt="Post Image">
-                <div class="card-body">
-                    <a th:href="@{/posts/{id} (id= ${post.getId()})}" class="index-card-title">
+                <div class="card-body feed-card-body">
+                    <div class="card-text row likes-comments mb-3">
+                        <div class="col-4 border-right">
+                            <span>Posted: <span th:text="${#dates.format(creationDates[post.id], 'MM/dd/yyyy')}">Date Placeholder</span></span>
+                        </div>
+                        <div class="col-4 d-flex justify-content-center border-right">
+                            <span th:text="${likeCounts[post.id] + (likeCounts[post.id] == 1 ? ' Like' : ' Likes')}"></span>
+                        </div>
+                        <div class="col-4 d-flex justify-content-center">
+                            <span th:text="${commentCounts[post.id] + (commentCounts[post.id] == 1 ? ' Comment' : ' Comments')}"></span>
+                        </div>
+                    </div>
+                    <a th:href="@{/posts/{id} (id= ${post.id})}" class="index-card-title">
                         <h5 class="card-title index-card-title text-dark" th:text="${post.title}"></h5>
                     </a>
-                    <p class="card-text" th:text="${#strings.abbreviate(post.story,150)}">Post Story</p>
+                    <p class="card-text" th:text="${#strings.abbreviate(post.story,225)}"></p>
                     <div class="d-flex justify-content-end">
                         <a th:href="@{/posts/{id}(id=${post.id})}" class="read-more">Read More</a>
                     </div>
@@ -65,11 +80,22 @@
             <div th:each="post : ${searchResultsTitle}" class="card mb-3">
                 <img th:if="${post.images.size() > 0}" th:src="${post.images.get(0).image}" class="card-img-top"
                      alt="Post Image">
-                <div class="card-body">
+                <div class="card-body feed-card-body">
+                    <div class="card-text row likes-comments mb-3">
+                        <div class="col-4 border-right">
+                            <span>Posted: <span th:text="${#dates.format(creationDates[post.id], 'MM/dd/yyyy')}">Date Placeholder</span></span>
+                        </div>
+                        <div class="col-4 d-flex justify-content-center border-right">
+                            <span th:text="${likeCounts[post.id] + (likeCounts[post.id] == 1 ? ' Like' : ' Likes')}">Likes Placeholder</span>
+                        </div>
+                        <div class="col-4 d-flex justify-content-center">
+                            <span th:text="${commentCounts[post.id] + (commentCounts[post.id] == 1 ? ' Comment' : ' Comments')}">Comments Placeholder</span>
+                        </div>
+                    </div>
                     <a th:href="@{/posts/{id} (id= ${post.getId()})}" class="index-card-title">
-                        <h5 class="card-title index-card-title text-dark" th:text="${post.title}"></h5>
+                        <h5 class="card-title index-card-title text-dark" th:text="${post.title}">Title Placeholder</h5>
                     </a>
-                    <p class="card-text" th:text="${#strings.abbreviate(post.story,150)}">Post Story</p>
+                    <p class="card-text" th:text="${#strings.abbreviate(post.story,225)}">Post Story</p>
                     <div class="d-flex justify-content-end">
                         <a th:href="@{/posts/{id}(id=${post.id})}" class="read-more">Read More</a>
                     </div>
@@ -81,11 +107,22 @@
             <div th:each="tag : ${searchResultsTags}" class="card mb-3">
                 <img th:if="${tag.post.images.size() > 0}" th:src="${tag.post.images.get(0).image}" class="card-img-top"
                      alt="Post Image">
-                <div class="card-body">
+                <div class="card-body feed-card-body">
+                    <div class="card-text row likes-comments mb-3">
+                        <div class="col-4 border-right">
+                            <span>Posted: <span th:text="${#dates.format(creationDates[tag.post.id], 'MM/dd/yyyy')}">Date Placeholder</span></span>
+                        </div>
+                        <div class="col-4 d-flex justify-content-center border-right">
+                            <span th:text="${likeCounts[tag.post.id] + (likeCounts[tag.post.id] == 1 ? ' Like' : ' Likes')}"></span>
+                        </div>
+                        <div class="col-4 d-flex justify-content-center">
+                            <span th:text="${commentCounts[tag.post.id] + (commentCounts[tag.post.id] == 1 ? ' Comment' : ' Comments')}"></span>
+                        </div>
+                    </div>
                     <a th:href="@{/posts/{id} (id= ${tag.post.id})}" class="index-card-title">
                         <h5 class="card-title index-card-title text-dark" th:text="${tag.post.title}"></h5>
                     </a>
-                    <p class="card-text" th:text="${#strings.abbreviate(tag.post.story,150)}">Post Story</p>
+                    <p class="card-text" th:text="${#strings.abbreviate(tag.post.story,225)}"></p>
                     <div class="d-flex justify-content-end">
                         <a th:href="@{/posts/{id}(id=${tag.post.id})}" class="read-more">Read More</a>
                     </div>

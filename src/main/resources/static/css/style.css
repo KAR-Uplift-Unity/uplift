@@ -17,8 +17,6 @@
     --on-click-color: #DD8840;
 }
 
-
-
 /*NAVBAR START*/
 
 nav {
@@ -428,7 +426,21 @@ button.btn.btn-primary.custom-btn:active {
 
 /*CREATE A POST START */
 
+.btn-group-toggle .btn.btn-outline-primary.active {
+    background-color: #EE9949;
+    border-color: #EE9949;
+    box-shadow: none;
+    filter: brightness(98%);
+}
 
+.btn-group-toggle .btn.btn-outline-primary:hover {
+    background-color: #EE9949;
+    border-color: #EE9949;
+}
+
+.btn-group-toggle .btn.btn-outline-primary:not(.active) {
+    box-shadow: none;
+}
 
 .create-page-bg {
     background-color: var(--off-white-color);
@@ -638,6 +650,15 @@ button.btn.btn-primary.custom-btn:active {
 
 /*POSTS/FEED PAGE START*/
 
+.likes-comments {
+    border-bottom: .8px solid #D3D3D3;
+    padding: 10px 0;
+}
+
+.feed-card-body {
+    padding-top: 0;
+}
+
 .search-card {
     margin-top: -24px;
 }
@@ -812,7 +833,7 @@ footer .footer-background {
     column-gap: 10px;
     width: max-content;
     padding: 6px;
-    background-color: var(--secondary-button-color);
+    background-color: var(--primary-button-color);
     color: #fff;
     border-radius: 15px;
     font-size: 16px;

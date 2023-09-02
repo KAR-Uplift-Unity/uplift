@@ -16,7 +16,9 @@
                 <div class="dropdown-section">
                     <select name="category" class="custom-dropdown w-100">
                         <option value="default" th:selected="${selectedCategoryId == null}">Select Category</option>
-                        <option value="0" th:selected="${selectedCategoryId == null ||selectedCategoryId == 0}">All Posts</option>
+                        <option value="0" th:selected="${selectedCategoryId == null ||selectedCategoryId == 0}">All
+                            Posts
+                        </option>
                         <option value="1" th:selected="${selectedCategoryId == 1}">Animals</option>
                         <option value="2" th:selected="${selectedCategoryId == 2}">Community</option>
                         <option value="3" th:selected="${selectedCategoryId == 3}">Education</option>
@@ -34,7 +36,8 @@
                         <option value="15" th:selected="${selectedCategoryId == 15}">Other</option>
                     </select>
                 </div>
-                <input type="text" name="query" placeholder="Search by title, story, or tag" class="custom-search-input w-100">
+                <input type="text" name="query" placeholder="Search by title, story, or tag"
+                       class="custom-search-input w-100">
             </div>
         </form>
 
@@ -98,18 +101,28 @@
             <div th:each="post : ${posts}" class="card mb-3" id="Latest posts">
                 <img th:if="${post.images.size() > 0}" th:src="${post.images.get(0).image}" class="card-img-top"
                      alt="Post Image">
-                <div class="card-body">
+                <div class="card-body feed-card-body">
+                    <div class="card-text row likes-comments mb-3">
+                        <div class="col-4 border-right">
+                            <span>Posted: <span th:text="${#dates.format(creationDates[post.id], 'MM/dd/yyyy')}">Date Placeholder</span></span>
+                        </div>
+                        <div class="col-4 d-flex justify-content-center border-right">
+                            <span th:text="${likeCounts[post.id] + (likeCounts[post.id] == 1 ? ' Like' : ' Likes')}"></span>
+                        </div>
+                        <div class="col-4 d-flex justify-content-center">
+                            <span th:text="${commentCounts[post.id] + (commentCounts[post.id] == 1 ? ' Comment' : ' Comments')}"></span>
+                        </div>
+                    </div>
                     <a th:href="@{/posts/{id} (id= ${post.getId()})}" class="index-card-title">
                         <h5 class="card-title index-card-title text-dark" th:text="${post.title}"></h5>
                     </a>
-                    <p class="card-text" th:text="${#strings.abbreviate(post.story,150)}"></p>
+                    <p class="card-text" th:text="${#strings.abbreviate(post.story,225)}"></p>
                     <div class="d-flex justify-content-end">
                         <a th:href="@{/posts/{id}(id=${post.id})}" class="read-more">Read More</a>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 <div th:replace="~{partials/footer :: footer}"></div>
