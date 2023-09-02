@@ -69,10 +69,6 @@ nav {
     border-radius: 8px;
 }
 
-.custom-modal-width {
-    max-width: 25%;
-}
-
 .index-body {
     background-color: var(--off-white-color);
     display: flex;
@@ -993,6 +989,8 @@ footer .footer-background {
         margin-top: 1rem;
     }
 }
+
+
 
 
 
