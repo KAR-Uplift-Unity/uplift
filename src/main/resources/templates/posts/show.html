@@ -109,7 +109,7 @@
 
                             <!-- Delete button for the comment -->
                             <div class="row">
-                                <button th:if="${#authentication.name == comment.user.username}" class="btn btn-link" data-toggle="modal" data-target="#deleteModal1">
+                                <button th:if="${#authentication.name == comment.user.username}" class="btn btn-link" data-toggle="modal" th:data-target="'#deleteModal-' + ${comment.id}">
                                     <i class="fa-regular fa-trash-can comment-link"></i>
                                 </button>
                             </div>
@@ -124,7 +124,7 @@
                     </div>
 
                     <!-- Modal for deleting the comment -->
-                    <div id="deleteModal1" class="modal fade" tabindex="-1" role="dialog">
+                    <div th:id="'deleteModal-' + ${comment.id}" class="modal fade" tabindex="-1" role="dialog">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">

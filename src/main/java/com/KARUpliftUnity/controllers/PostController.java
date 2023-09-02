@@ -505,9 +505,7 @@ public class PostController {
         }
 
         System.out.println("postId = " + postId);
-        emailService.prepareAndSend(post, user.getUsername()
-                + " thanks for creating a post!", user.getUsername()
-                + " thanks for creating the post: " + post.getTitle() + "You can view your post at https://upliftunity.com/posts/" + postId);
+
         return "redirect:/posts";
     }
 

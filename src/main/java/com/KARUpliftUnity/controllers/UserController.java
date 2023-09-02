@@ -2,12 +2,14 @@ package com.KARUpliftUnity.controllers;
 
 import com.KARUpliftUnity.models.User;
 import com.KARUpliftUnity.repositories.UserRepository;
+import com.KARUpliftUnity.services.EmailService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.context.Context;
 
 import java.util.Date;
 import java.util.regex.Pattern;
@@ -16,10 +18,12 @@ import java.util.regex.Pattern;
 public class UserController {
     private UserRepository userDao;
     private PasswordEncoder passwordEncoder;
+    private final EmailService emailService;
 
-    public UserController(UserRepository userDao, PasswordEncoder passwordEncoder) {
+    public UserController(UserRepository userDao, PasswordEncoder passwordEncoder, EmailService emailService) {
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
+        this.emailService = emailService;
     }
 
     @GetMapping("/signup")
@@ -75,6 +79,12 @@ public class UserController {
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
         userDao.save(user);
+
+        Context context = new Context();
+        context.setVariable("username", user.getUsername());
+
+        emailService.sendEmailWithHtmlTemplate(user.getEmail(),"Welcome to UpliftUnity", "email-template", context);
+
         return "redirect:/login";
     }
 
