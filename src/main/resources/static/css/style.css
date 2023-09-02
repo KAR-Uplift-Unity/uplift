@@ -974,6 +974,14 @@ footer .footer-background {
     .custom-dropdown, .custom-search-input {
         font-size: 0.8rem;
     }
+
+    .shrink-text {
+        font-size: 12px;
+    }
+
+    .posted-text {
+        display: none;
+    }
 }
 
 @media (max-width: 991.98px) {
