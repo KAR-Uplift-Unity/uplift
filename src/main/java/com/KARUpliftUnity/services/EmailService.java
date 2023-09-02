@@ -2,12 +2,17 @@ package com.KARUpliftUnity.services;
 
 import com.KARUpliftUnity.models.ContactForm;
 import com.KARUpliftUnity.models.Post;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
 
 @Service("emailService")
 public class EmailService {
@@ -15,8 +20,15 @@ public class EmailService {
     @Autowired
     public JavaMailSender emailSender;
 
+    private final TemplateEngine templateEngine;
+
     @Value("${spring.mail.from}")
     private String from;
+
+    public EmailService(TemplateEngine templateEngine) {
+        this.templateEngine = templateEngine;
+    }
+
 
     public void sendContactFormEmail(ContactForm form) {
         String subject = "Contact Us Form Submission";
@@ -56,6 +68,21 @@ public class EmailService {
         catch (MailException ex) {
             // simply log it and go on...
             System.err.println(ex.getMessage());
+        }
+    }
+
+    public void sendEmailWithHtmlTemplate(String to, String subject, String templateName, Context context) {
+        MimeMessage mimeMessage = emailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "UTF-8");
+
+        try {
+            helper.setTo(to);
+            helper.setSubject(subject);
+            String htmlContent = templateEngine.process(templateName, context);
+            helper.setText(htmlContent, true);
+            emailSender.send(mimeMessage);
+        } catch (MessagingException e) {
+            // Handle exception
         }
     }
 }
