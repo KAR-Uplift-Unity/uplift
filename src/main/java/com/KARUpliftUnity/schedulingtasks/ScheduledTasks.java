@@ -64,7 +64,6 @@ public class ScheduledTasks {
             long archiveTime = 0;
             if (post.getArchive()){
                 archiveTime = post.getArchiveDate().getTime();
-                System.out.println("archiveTime = " + archiveTime);
             }
             long totalTime = curTimeLong - archiveTime;
             long sevenDays = 604800000;

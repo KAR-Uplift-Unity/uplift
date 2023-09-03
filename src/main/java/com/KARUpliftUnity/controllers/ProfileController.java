@@ -73,7 +73,6 @@ public class ProfileController {
             long archiveTime = 0;
             if (post.getArchive()){
                 archiveTime = post.getArchiveDate().getTime();
-                System.out.println("archiveTime = " + archiveTime);
             }
             long totalTime = curTimeLong - archiveTime;
 
