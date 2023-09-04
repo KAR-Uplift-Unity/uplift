@@ -17,15 +17,16 @@ import org.thymeleaf.context.Context;
 @Service("emailService")
 public class EmailService {
 
-    @Autowired
-    public JavaMailSender emailSender;
+
+    public final JavaMailSender emailSender;
 
     private final TemplateEngine templateEngine;
 
     @Value("${spring.mail.from}")
     private String from;
-
-    public EmailService(TemplateEngine templateEngine) {
+    @Autowired
+    public EmailService(JavaMailSender emailSender, TemplateEngine templateEngine) {
+        this.emailSender = emailSender;
         this.templateEngine = templateEngine;
     }
 
