@@ -295,6 +295,10 @@ button.btn.btn-primary.custom-btn:active {
     color: var(--logo-color);
 }
 
+.login-form-background label {
+    font-family: var(--poppins-font);
+}
+
 .login-form-background h2 {
     font-family: var(--poppins-font);
     font-weight: var(--weight-light);
