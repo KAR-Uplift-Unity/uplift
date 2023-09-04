@@ -82,7 +82,7 @@ public class EmailService {
             helper.setText(htmlContent, true);
             emailSender.send(mimeMessage);
         } catch (MessagingException e) {
-            // Handle exception
+            System.out.println("e = " + e);
         }
     }
 }
