@@ -52,4 +52,4 @@ For database migrations, use the `uplift-db-migration.sql` script.
 
 ## Live Site
 
-[Link to the live site will be updated soon]
+[Link to the live site](https://upliftunity.com/)
