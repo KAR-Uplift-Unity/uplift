@@ -14,6 +14,7 @@ public class GlobalExceptionHandler {
     public ModelAndView handleAllExceptions(Exception ex) {
         ModelAndView modelAndView = new ModelAndView("error/error");
         modelAndView.addObject("message", "An unexpected error occurred. Please try again later.");
+        System.out.println("error = " + ex.getMessage());
         return modelAndView;
     }
 
@@ -21,6 +22,7 @@ public class GlobalExceptionHandler {
     public ModelAndView handleMailException(MailException ex) {
         ModelAndView modelAndView = new ModelAndView("error/error");
         modelAndView.addObject("message", "There was an issue sending the email. Please try again later.");
+        System.out.println("error = " + ex.getMessage());
         return modelAndView;
     }
 
@@ -28,6 +30,7 @@ public class GlobalExceptionHandler {
     public ModelAndView handleUsernameNotFoundException(UsernameNotFoundException ex) {
         ModelAndView modelAndView = new ModelAndView("error/error");
         modelAndView.addObject("message", "The specified username was not found. Please check your credentials and try again.");
+        System.out.println("error = " + ex.getMessage());
         return modelAndView;
     }
 
@@ -35,6 +38,7 @@ public class GlobalExceptionHandler {
     public ModelAndView handleJDBCConnectionException(JDBCConnectionException ex) {
         ModelAndView modelAndView = new ModelAndView("error/error");
         modelAndView.addObject("message", "We're experiencing technical difficulties. Please try again later.");
+        System.out.println("error = " + ex.getMessage());
         return modelAndView;
     }
 }
