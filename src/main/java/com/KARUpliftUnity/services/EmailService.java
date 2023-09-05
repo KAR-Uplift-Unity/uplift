@@ -83,7 +83,10 @@ public class EmailService {
             helper.setText(htmlContent, true);
             emailSender.send(mimeMessage);
         } catch (MessagingException e) {
-            System.out.println("e = " + e.getMessage());
+            String error = e.toString();
+            System.out.println("error = " + error);
+            error += e.getStackTrace();
+            System.out.println("error trace = " + error);
         }
     }
 }
