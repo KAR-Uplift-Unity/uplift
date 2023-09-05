@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Arrays;
+
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -15,6 +17,7 @@ public class GlobalExceptionHandler {
         ModelAndView modelAndView = new ModelAndView("error/error");
         modelAndView.addObject("message", "An unexpected error occurred. Please try again later.");
         System.out.println("error = " + ex.getMessage());
+        System.out.println("error stack = " + Arrays.toString(ex.getStackTrace()));
         return modelAndView;
     }
 
