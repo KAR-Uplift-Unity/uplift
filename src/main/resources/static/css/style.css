@@ -375,6 +375,10 @@ button.btn.btn-primary.custom-btn:active {
     object-fit: cover;
 }
 
+.aaron-image.brighter {
+    filter: brightness(1.35);
+}
+
 
 /*ABOUT US PAGE END*/
 
