@@ -364,6 +364,7 @@ button.btn.btn-primary.custom-btn:active {
 .team-member-image {
     width: auto;
     height: 225px;
+    object-fit: cover;
 }
 
 /* Carousel for images */
