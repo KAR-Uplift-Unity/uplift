@@ -77,6 +77,7 @@ public class EmailService {
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "UTF-8");
 
         try {
+            helper.setFrom(from);
             helper.setTo(to);
             helper.setSubject(subject);
             String htmlContent = templateEngine.process(templateName, context);
