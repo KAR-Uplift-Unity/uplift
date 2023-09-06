@@ -355,16 +355,20 @@ public class PostController {
 
         Post existingPost = postDao.getById(id);
 
-        if (imageUrls == null || imageUrls.isEmpty()) {
+
+        if ((imageUrls == null || imageUrls.isEmpty()) && existingPost.getImages().isEmpty()) {
             imageUrls = "/images/default-post-image.png";
         }
 
+
         String[] urls = imageUrls.split(",");
         for (String imageUrl : urls) {
-            Image image = new Image();
-            image.setImage(imageUrl);
-            image.setPost(existingPost);
-            imageDao.save(image);
+            if (!imageUrl.trim().isEmpty()) {
+                Image image = new Image();
+                image.setImage(imageUrl);
+                image.setPost(existingPost);
+                imageDao.save(image);
+            }
         }
 
 
