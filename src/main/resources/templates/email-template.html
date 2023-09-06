@@ -1,67 +1,41 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-  <title></title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
-        rel="stylesheet">
-  <style>
-    a.btn.btn-primary.custom-btn,
-    .btn.btn-primary.custom-btn:hover,
-    .btn.btn-primary.custom-btn:focus {
-      background-color: #EE9949;
-      border: none;
-      color: white;
-      border-radius: 8px;
-      width: 200px;
-      box-shadow: none;
-      outline: none;
-      height: 40px;
-    }
-  </style>
-</head>
 <body>
-<div class="mb-5" style="background-color: #FCECDC; height: 10vh; width: 100%">
-  <div class="container" style="height: 100%">
-    <div class="d-flex justify-content-center align-items-center" style="height: 100%">
-      <h1 class="text-center" style="font-family: 'DM Serif Display', serif;">UpliftUnity</h1>
+<div style="background-color: #FCECDC; height: 10vh; width: 100%; margin-bottom: 1.5rem;">
+    <div style="max-width: 1140px; margin: 0 auto; height: 100%;">
+        <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+            <h1 style="font-family: 'DM Serif Display', serif; text-align: center;">UpliftUnity</h1>
+        </div>
     </div>
-  </div>
 </div>
-<div class=".container-lg">
-  <div class="row">
-    <div class="col-sm-1 col-md-2">
-    </div>
-    <div class="col-sm-10 col-md-8">
-      <h4 class="mx-5">Dear <span th:text="${username}"></span>,</h4>
-      <p class="mx-5">Thank you for joining the UpliftUnity community! We are so glad you are here.</p>
-      <p class="mx-5">At UpliftUnity, we aim to foster understanding, empathy, and unity by providing a space to share stories, connect with others, and find support. We believe that by listening to each other&#39;s experiences, we can build bridges of compassion.</p>
-      <p class="mx-5">Now that you have joined, here are a few tips to get you started:</p>
-      <ul class="mx-5">
+<div style=" font-family: 'Poppins', Arial, Helvetica, 'Segoe UI', Roboto, sans-serif; line-height: 1.5; color: #444444">
+    <h3 style="margin-left: 3rem; margin-right: 3rem;">Dear <span th:text="${username}"></span>,</h3>
+    <p style="margin-left: 3rem; margin-right: 3rem;">Thank you for joining the UpliftUnity community! We are so
+        glad you are here.</p>
+    <p style="margin-left: 3rem; margin-right: 3rem;">At UpliftUnity, we aim to foster understanding, empathy,
+        and unity by providing a space to share stories, connect with others, and find support. We believe that
+        by listening to each other's experiences, we can build bridges of compassion.</p>
+    <p style="margin-left: 3rem; margin-right: 3rem;">Now that you have joined, here are a few tips to get you
+        started:</p>
+    <ul style="margin-left: 3rem; margin-right: 3rem;">
         <li>
-          <p>Read and interact - Dive into the stories shared by others, leave comments and likes to engage.</p>
+            <p>Read and interact - Dive into the stories shared by others, leave comments and likes to
+                engage.</p>
         </li>
         <li>
-          <p>Share your own story - When you feel ready, post about your own experiences to connect with others going through similar journeys.</p>
+            <p>Share your own story - When you feel ready, post about your own experiences to connect with
+                others going through similar journeys.</p>
         </li>
-      </ul>
-      <p class="mx-5">This is a community centered around support. If you need help navigating the platform, have any questions, or just want to share your thoughts, please don&#39;t hesitate to reach out.</p>
-      <p class="mx-5">We are so happy to have you as part of the UpliftUnity family!</p>
-      <p class="mx-5">Warm regards,</p>
-      <p class="mx-5">The UpliftUnity Team!</p>
-      <div class="m-5 d-flex justify-content-center">
-        <a class="btn btn-primary custom-btn text-white d-flex align-items-center
-            justify-content-center mt-3 mx-auto mx-lg-0 mission-button" href="">Explore UpliftUnity</a>
-      </div>
+    </ul>
+    <p style="margin-left: 3rem; margin-right: 3rem;">This is a community centered around support. If you need
+        help navigating the platform, have any questions, or just want to share your thoughts, please don't
+        hesitate to reach out.</p>
+    <p style="margin-left: 3rem; margin-right: 3rem;">We are so happy to have you as part of the UpliftUnity
+        family!</p>
+    <p style="margin-left: 3rem; margin-right: 3rem;">Warm regards,</p>
+    <p style="margin-left: 3rem; margin-right: 3rem;">The UpliftUnity Team!</p>
+    <div style="margin: 3rem; display: flex; justify-content: center;">
+        <a href="https://upliftunity.com/"
+           style="background-color: #EE9949; border: none; color: white; border-radius: 8px; width: 200px; box-shadow: none; outline: none; height: 40px; display: flex; align-items: center; justify-content: center; text-decoration: none">Explore
+            UpliftUnity</a>
     </div>
-    <div class="col-sm-1 col-md-2">
-    </div>
-  </div>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 </body>
-</html>
