@@ -81,12 +81,11 @@ public class EmailService {
             helper.setSubject(subject);
             String htmlContent = templateEngine.process(templateName, context);
             helper.setText(htmlContent, true);
+            mimeMessage.saveChanges();
             emailSender.send(mimeMessage);
         } catch (MessagingException e) {
             String error = e.toString();
             System.out.println("error = " + error);
-            error += e.getStackTrace();
-            System.out.println("error trace = " + error);
         }
     }
 }
