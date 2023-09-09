@@ -49,7 +49,7 @@ public class PostController {
         this.likeDao = likeDao;
     }
 
-    @RequestMapping("/posts")
+    @GetMapping("/posts")
     public String index(Model model) {
         List<Post> posts = postDao.findByArchiveFalseOrderByDateDesc();
         List<Post> postsFlag = new ArrayList<>();
@@ -61,7 +61,15 @@ public class PostController {
         for (Post post : posts) {
             if (!post.isFlagged()) {
                 likeCounts.put(post.getId(), post.getLikes().size());
-                commentCounts.put(post.getId(), post.getComment().size());
+                List<Comment> comments = commentDao.findByPostOrderByIdAsc(post);
+                long nonFlaggedCommentCount = 0;
+
+                for (Comment comment : comments) {
+                    if (!comment.isFlagged()) {
+                        nonFlaggedCommentCount++;
+                    }
+                }
+                commentCounts.put(post.getId(), (int) nonFlaggedCommentCount);
                 creationDates.put(post.getId(), post.getDate());
                 postsFlag.add(post);
             }

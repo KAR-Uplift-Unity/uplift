@@ -44,7 +44,7 @@
                             <div class="buttons d-flex justify-content-end">
                                 <a th:href="@{/posts/{id}/edit(id=${post.id})}"
                                    class="btn btn-outline-info w-50 mr-2 category-show">Edit</a>
-                                <button type="button" class="btn btn-outline-secondary w-50 archive-button" data-toggle="modal"
+                                <button type="button" class="btn btn-outline-danger w-50 archive-button" data-toggle="modal"
                                         th:attr="data-target='#archiveModal' + ${post.id}">Archive
                                 </button>
                             </div>
