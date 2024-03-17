@@ -9,18 +9,25 @@
 <div th:replace="~{partials/navbar :: navbar}"></div>
 <div class="content-wrapper">
     <div class="container mission-content">
-        <h2 class="text-center pt-4 pb-3 header-item">Meet The Team</h2>
-        <p class="text-center pb-3">During our time at Codeup's coding BootCamp, we crossed paths and felt
-            a shared purpose. This spark led to the creation of
-            UpliftUnity. Our aim was simple: to carve out a space where stories
-            could be heard, challenges shared, and helping hands extended.
-            We believe in the strength of community and the difference we can
-            make, one story at a time.
-        </p>
-
         <div class="row d-flex justify-content-center mb-4">
+            <h2 class="text-center header-item pt-5">Our Mission</h2>
+            <p class="text-center mb-5">UpliftUnity is a platform where every individual can discover stories,
+                share hardships, and connect with a supportive community. Users facing
+                challenges can share their experiences and link to their fundraising
+                campaigns, tapping into a community eager to provide assistance and
+                contribute to meaningful causes.</p>
+
+
+            <h2 class="text-center pt-1 pb-3 header-item">Meet The Team</h2>
+            <p class="text-center pb-3">During our time at Codeup's coding BootCamp, we crossed paths and felt
+                a shared purpose. This spark led to the creation of
+                UpliftUnity. Our aim was simple: to carve out a space where stories
+                could be heard, challenges shared, and helping hands extended.
+                We believe in the strength of community and the difference we can
+                make, one story at a time.
+            </p>
             <!-- Robert -->
-            <div class="col-md-3">
+            <div class="col-md-3 mb-4">
                 <div class="card">
                     <img src="/images/robert-img.jpeg" alt="Team Member 1" class="card-img-top team-member-image">
                     <div class="card-body">
@@ -39,7 +46,8 @@
             <!-- Aaron -->
             <div class="col-md-3">
                 <div class="card">
-                    <img src="/images/aaron-img.jpeg" alt="Team Member 2" class="card-img-top team-member-image aaron-image brighter">
+                    <img src="/images/aaron-img.jpeg" alt="Team Member 2"
+                         class="card-img-top team-member-image aaron-image brighter">
                     <div class="card-body">
                         <h5 class="card-title">Aaron Bond</h5>
                         <a href="https://www.linkedin.com/in/aaron-reid-bond/" target="_blank" class="text-dark me-3"><i
@@ -70,12 +78,6 @@
                 </div>
             </div>
         </div>
-        <h2 class="text-center pb-2 header-item">Our Mission</h2>
-        <p class="text-center mb-5">UpliftUnity is a platform where every individual can discover stories,
-            share hardships, and connect with a supportive community. Users facing
-            challenges can share their experiences and link to their fundraising
-            campaigns, tapping into a community eager to provide assistance and
-            contribute to meaningful causes.</p>
     </div>
 </div>
 <div th:replace="~{partials/footer :: footer}"></div>
